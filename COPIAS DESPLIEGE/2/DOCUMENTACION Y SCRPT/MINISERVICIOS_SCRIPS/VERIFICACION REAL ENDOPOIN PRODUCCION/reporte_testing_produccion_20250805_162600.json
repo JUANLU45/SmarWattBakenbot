@@ -1,0 +1,959 @@
+{
+  "total_endpoints": 24,
+  "successful": 5,
+  "failed": 19,
+  "errors": [
+    {
+      "endpoint": "/api/v1/chatbot/message",
+      "method": "POST",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/message/v2",
+      "method": "POST",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/cross-service",
+      "method": "POST",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/conversations",
+      "method": "GET",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/conversations/test-conv-123",
+      "method": "DELETE",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/energy/tariffs/recommendations",
+      "method": "GET",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/energy/tariffs/market-data",
+      "method": "GET",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/energy/admin/tariffs/add",
+      "method": "POST",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/energy/admin/tariffs/batch-add",
+      "method": "POST",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/energy/tariffs/compare",
+      "method": "POST",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/links/test",
+      "method": "POST",
+      "error": "HTTP 400"
+    },
+    {
+      "endpoint": "/api/v1/links/direct/test",
+      "method": "GET",
+      "error": "HTTP 404"
+    },
+    {
+      "endpoint": "/api/v1/analysis/sentiment",
+      "method": "POST",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/analysis/sentiment/internal",
+      "method": "POST",
+      "error": "HTTP 403"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/session/start",
+      "method": "POST",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/message",
+      "method": "POST",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/new-conversation",
+      "method": "POST",
+      "error": "HTTP 500"
+    },
+    {
+      "endpoint": "/api/v1/energy/consumption",
+      "method": "POST",
+      "error": "HTTP 500"
+    }
+  ],
+  "details": [
+    {
+      "endpoint": "/health",
+      "method": "GET",
+      "description": "Health check principal",
+      "success": true,
+      "result": {
+        "status_code": 200,
+        "headers": {
+          "content-type": "application/json",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "d4c627140a6d10b2b8e193293b6d5bea;o=1",
+          "date": "Tue, 05 Aug 2025 14:25:44 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "196",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 20613.451999999997,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/health",
+        "method": "GET",
+        "json": {
+          "enterprise_mode": true,
+          "environment": "production",
+          "service": "energy_ia_api_copy",
+          "status": "healthy",
+          "timestamp": "2025-08-05T16:25:44.529883+02:00",
+          "uptime_seconds": 0.443781,
+          "version": "2025.1.0"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:43.736695+00:00"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/message",
+      "method": "POST",
+      "description": "Mensaje chatbot",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "x-cloud-trace-context": "5b7d04631a93731e21de5c364cabfe46;o=1",
+          "date": "Tue, 05 Aug 2025 14:25:45 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "244",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 161.126,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/chatbot/message",
+        "method": "POST",
+        "json": {
+          "category": "server_error",
+          "error_code": 500,
+          "error_id": "5a532ee7",
+          "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+          "service": "energy_ia_api_copy",
+          "status": "error",
+          "timestamp": "2025-08-05T16:25:45.272353+02:00"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:44.404949+00:00"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/message/v2",
+      "method": "POST",
+      "description": "Mensaje chatbot v2",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "x-cloud-trace-context": "86df31aca259625c0f036c13004ac70e",
+          "date": "Tue, 05 Aug 2025 14:25:45 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "244",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 106.17,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/chatbot/message/v2",
+        "method": "POST",
+        "json": {
+          "category": "server_error",
+          "error_code": 500,
+          "error_id": "07618a87",
+          "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+          "service": "energy_ia_api_copy",
+          "status": "error",
+          "timestamp": "2025-08-05T16:25:45.898950+02:00"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:45.024987+00:00"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/cross-service",
+      "method": "POST",
+      "description": "Cross-service chatbot",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "x-cloud-trace-context": "e6ebaf3519c78cdd3a0e8df8f9d32bf1",
+          "date": "Tue, 05 Aug 2025 14:25:46 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "244",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 114.84,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/chatbot/cross-service",
+        "method": "POST",
+        "json": {
+          "category": "server_error",
+          "error_code": 500,
+          "error_id": "68d1c033",
+          "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+          "service": "energy_ia_api_copy",
+          "status": "error",
+          "timestamp": "2025-08-05T16:25:46.517974+02:00"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:45.648908+00:00"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/conversations",
+      "method": "GET",
+      "description": "Listar conversaciones",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "x-cloud-trace-context": "5e7c0769c04ad3d111b60d3a57a4fdb3",
+          "date": "Tue, 05 Aug 2025 14:25:47 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "244",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 200.74800000000002,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/chatbot/conversations",
+        "method": "GET",
+        "json": {
+          "category": "server_error",
+          "error_code": 500,
+          "error_id": "4b6019af",
+          "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+          "service": "energy_ia_api_copy",
+          "status": "error",
+          "timestamp": "2025-08-05T16:25:47.223974+02:00"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:46.360764+00:00"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/conversations/test-conv-123",
+      "method": "DELETE",
+      "description": "Eliminar conversación",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "x-cloud-trace-context": "13a74e9d086d35fd064b31cbacaa30ea",
+          "date": "Tue, 05 Aug 2025 14:25:47 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "244",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 133.525,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/chatbot/conversations/test-conv-123",
+        "method": "DELETE",
+        "json": {
+          "category": "server_error",
+          "error_code": 500,
+          "error_id": "8f6cc52d",
+          "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+          "service": "energy_ia_api_copy",
+          "status": "error",
+          "timestamp": "2025-08-05T16:25:47.874444+02:00"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:47.004142+00:00"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/health",
+      "method": "GET",
+      "description": "Health check chatbot",
+      "success": true,
+      "result": {
+        "status_code": 200,
+        "headers": {
+          "content-type": "application/json",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "3468e3f8b2b21be0d17bb877744b20f0",
+          "date": "Tue, 05 Aug 2025 14:25:49 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "261",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 1510.739,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/chatbot/health",
+        "method": "GET",
+        "json": {
+          "components": {
+            "bigquery": "operational",
+            "expert_bot_communication": "operational",
+            "generative_chat_service": "operational"
+          },
+          "issues": [],
+          "service": "energy_ia_api_copy_chatbot",
+          "status": "healthy",
+          "timestamp": "2025-08-05T16:25:49.903137+02:00",
+          "version": "2025.1.0"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:49.032869+00:00"
+    },
+    {
+      "endpoint": "/api/v1/energy/tariffs/recommendations",
+      "method": "GET",
+      "description": "Recomendaciones tarifas",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "x-cloud-trace-context": "78fc39ae7bceae439e3060f0069513c8",
+          "date": "Tue, 05 Aug 2025 14:25:50 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "244",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 143.91799999999998,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/energy/tariffs/recommendations",
+        "method": "GET",
+        "json": {
+          "category": "server_error",
+          "error_code": 500,
+          "error_id": "c9e87b86",
+          "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+          "service": "energy_ia_api_copy",
+          "status": "error",
+          "timestamp": "2025-08-05T16:25:50.528708+02:00"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:49.685625+00:00"
+    },
+    {
+      "endpoint": "/api/v1/energy/tariffs/market-data",
+      "method": "GET",
+      "description": "Datos mercado",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "x-cloud-trace-context": "8a81cbfcf614eece5a5941c4c74ad5af",
+          "date": "Tue, 05 Aug 2025 14:25:51 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "244",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 123.70100000000001,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/energy/tariffs/market-data",
+        "method": "GET",
+        "json": {
+          "category": "server_error",
+          "error_code": 500,
+          "error_id": "59f5f70d",
+          "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+          "service": "energy_ia_api_copy",
+          "status": "error",
+          "timestamp": "2025-08-05T16:25:51.201212+02:00"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:50.332569+00:00"
+    },
+    {
+      "endpoint": "/api/v1/energy/admin/tariffs/add",
+      "method": "POST",
+      "description": "Añadir tarifa admin",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "x-cloud-trace-context": "2fd80d0778d8e998d6c746950c581185",
+          "date": "Tue, 05 Aug 2025 14:25:51 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "244",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 134.52,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/energy/admin/tariffs/add",
+        "method": "POST",
+        "json": {
+          "category": "server_error",
+          "error_code": 500,
+          "error_id": "664bd85e",
+          "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+          "service": "energy_ia_api_copy",
+          "status": "error",
+          "timestamp": "2025-08-05T16:25:51.839425+02:00"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:50.971999+00:00"
+    },
+    {
+      "endpoint": "/api/v1/energy/admin/tariffs/batch-add",
+      "method": "POST",
+      "description": "Añadir tarifas lote",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "x-cloud-trace-context": "f93191f4c886974a9a0aae49c289d2fa",
+          "date": "Tue, 05 Aug 2025 14:25:52 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "244",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 148.27599999999998,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/energy/admin/tariffs/batch-add",
+        "method": "POST",
+        "json": {
+          "category": "server_error",
+          "error_code": 500,
+          "error_id": "1814962a",
+          "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+          "service": "energy_ia_api_copy",
+          "status": "error",
+          "timestamp": "2025-08-05T16:25:52.496884+02:00"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:51.633357+00:00"
+    },
+    {
+      "endpoint": "/api/v1/energy/tariffs/compare",
+      "method": "POST",
+      "description": "Comparar tarifas",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "x-cloud-trace-context": "275edb303fd28fd15510b54059c1bb42",
+          "date": "Tue, 05 Aug 2025 14:25:53 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "244",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 111.107,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/energy/tariffs/compare",
+        "method": "POST",
+        "json": {
+          "category": "server_error",
+          "error_code": 500,
+          "error_id": "dbfb387b",
+          "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+          "service": "energy_ia_api_copy",
+          "status": "error",
+          "timestamp": "2025-08-05T16:25:53.130791+02:00"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:52.258012+00:00"
+    },
+    {
+      "endpoint": "/api/v1/links/test",
+      "method": "POST",
+      "description": "Test enlaces",
+      "success": false,
+      "result": {
+        "status_code": 400,
+        "headers": {
+          "content-type": "application/json",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "c73eb7235b9792f1ed7eb45fdd6d24de",
+          "date": "Tue, 05 Aug 2025 14:25:53 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "61",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 118.864,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/links/test",
+        "method": "POST",
+        "json": {
+          "error": "Campo 'response_text' requerido",
+          "status": "error"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:52.895399+00:00"
+    },
+    {
+      "endpoint": "/api/v1/links/status",
+      "method": "GET",
+      "description": "Estado enlaces",
+      "success": true,
+      "result": {
+        "status_code": 200,
+        "headers": {
+          "content-type": "application/json",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "67531bf74ff9061f43e154af1a3f33f2",
+          "date": "Tue, 05 Aug 2025 14:25:54 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "188",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 194.906,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/links/status",
+        "method": "GET",
+        "json": {
+          "available_links": [
+            "blog",
+            "dashboard",
+            "calculator",
+            "contact",
+            "terms",
+            "privacy"
+          ],
+          "links_configured": 6,
+          "service_name": "EnterpriseLinkService",
+          "status": "active",
+          "version": "2025_enterprise"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:53.600252+00:00"
+    },
+    {
+      "endpoint": "/api/v1/links/direct/test",
+      "method": "GET",
+      "description": "Enlace directo test",
+      "success": false,
+      "result": {
+        "status_code": 404,
+        "headers": {
+          "content-type": "application/json",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-api-version": "2025.1.0",
+          "x-service-name": "energy_ia_api_copy",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "cb7283399b362acb1f639cc6fbde31ff",
+          "date": "Tue, 05 Aug 2025 14:25:55 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "155",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 174.05499999999998,
+        "url": "https://energy-ia-api-1010012211318.europe-west1.run.app/api/v1/links/direct/test",
+        "method": "GET",
+        "json": {
+          "available_types": [
+            "blog",
+            "dashboard",
+            "calculator",
+            "weather",
+            "contact",
+            "terms",
+            "privacy"
+          ],
+          "error": "Tipo de enlace 'test' no encontrado",
+          "status": "error"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:54.285514+00:00"
+    },
+    {
+      "endpoint": "/health",
+      "method": "GET",
+      "description": "Health check principal",
+      "success": true,
+      "result": {
+        "status_code": 200,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "683a8a2edd990884208f5254ae8ba555",
+          "date": "Tue, 05 Aug 2025 14:25:55 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "111",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 165.796,
+        "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/health",
+        "method": "GET",
+        "json": {
+          "mode": "production",
+          "status": "healthy",
+          "timestamp": "2025-08-05T14:25:55.844254",
+          "version": "2.0.0-enterprise"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:54.970293+00:00"
+    },
+    {
+      "endpoint": "/health/detailed",
+      "method": "GET",
+      "description": "Health check detallado",
+      "success": true,
+      "result": {
+        "status_code": 200,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "eb2fb0669a96fb36d60c284e5cff1dfa",
+          "date": "Tue, 05 Aug 2025 14:25:56 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "179",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 125.71,
+        "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/health/detailed",
+        "method": "GET",
+        "json": {
+          "config": "production",
+          "enterprise_mode": true,
+          "firebase_initialized": true,
+          "startup_time": "2025-08-05T14:24:57.271299",
+          "status": "healthy",
+          "timestamp": "2025-08-05T14:25:56.479156"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:55.604240+00:00"
+    },
+    {
+      "endpoint": "/api/v1/analysis/sentiment",
+      "method": "POST",
+      "description": "Análisis sentimiento",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "f1f8a4a38db46b6a04e426d6f5b6a673",
+          "date": "Tue, 05 Aug 2025 14:25:57 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "200",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 281.038,
+        "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/analysis/sentiment",
+        "method": "POST",
+        "json": {
+          "error": {
+            "category": "authentication",
+            "error_id": "10875d67-6300-46cd-b084-a7b5e649d576",
+            "level": "high",
+            "message": "Falta el token de autorización",
+            "timestamp": "2025-08-05T14:25:57.223579+00:00"
+          }
+        }
+      },
+      "timestamp": "2025-08-05T14:25:56.390377+00:00"
+    },
+    {
+      "endpoint": "/api/v1/analysis/sentiment/internal",
+      "method": "POST",
+      "description": "Análisis sentimiento interno",
+      "success": false,
+      "result": {
+        "status_code": 403,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "0caf4bb5c2bda3325f59f53d5bdea98d",
+          "date": "Tue, 05 Aug 2025 14:25:57 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "168",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 167.22600000000003,
+        "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/analysis/sentiment/internal",
+        "method": "POST",
+        "json": {
+          "error_type": "analysis_error",
+          "message": "Endpoint exclusivo para comunicación interna entre servicios",
+          "status": "error",
+          "timestamp": "2025-08-05T14:25:57.931806"
+        }
+      },
+      "timestamp": "2025-08-05T14:25:57.076088+00:00"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/session/start",
+      "method": "POST",
+      "description": "Iniciar sesión chat",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "79ed6d02e3f97ab4288163f76a07ecc1",
+          "date": "Tue, 05 Aug 2025 14:25:58 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "200",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 127.97900000000001,
+        "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/session/start",
+        "method": "POST",
+        "json": {
+          "error": {
+            "category": "authentication",
+            "error_id": "1d617d87-54a2-4feb-a0fa-75d3cd7967bc",
+            "level": "high",
+            "message": "Falta el token de autorización",
+            "timestamp": "2025-08-05T14:25:58.587279+00:00"
+          }
+        }
+      },
+      "timestamp": "2025-08-05T14:25:57.715521+00:00"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/message",
+      "method": "POST",
+      "description": "Mensaje chat",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "2c663cb2206b574be8198554c3023cc0",
+          "date": "Tue, 05 Aug 2025 14:25:59 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "200",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 224.687,
+        "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/message",
+        "method": "POST",
+        "json": {
+          "error": {
+            "category": "authentication",
+            "error_id": "c6ed3bd1-edb7-4855-8079-566bcde23a5f",
+            "level": "high",
+            "message": "Falta el token de autorización",
+            "timestamp": "2025-08-05T14:25:59.314925+00:00"
+          }
+        }
+      },
+      "timestamp": "2025-08-05T14:25:58.459210+00:00"
+    },
+    {
+      "endpoint": "/api/v1/chatbot/new-conversation",
+      "method": "POST",
+      "description": "Nueva conversación",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "bac054a929396f3a543bac475c5ab6e3;o=1",
+          "date": "Tue, 05 Aug 2025 14:26:00 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "200",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 175.626,
+        "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/new-conversation",
+        "method": "POST",
+        "json": {
+          "error": {
+            "category": "authentication",
+            "error_id": "4ac2bd0d-cbca-4358-96b9-66a39d09ac13",
+            "level": "high",
+            "message": "Falta el token de autorización",
+            "timestamp": "2025-08-05T14:26:00.001637+00:00"
+          }
+        }
+      },
+      "timestamp": "2025-08-05T14:25:59.148681+00:00"
+    },
+    {
+      "endpoint": "/api/v1/energy/consumption",
+      "method": "POST",
+      "description": "Subir factura consumo",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "24f8f5d2a3f8fb644c32032129a97ce5",
+          "date": "Tue, 05 Aug 2025 14:26:00 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "200",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 113.069,
+        "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/energy/consumption",
+        "method": "POST",
+        "json": {
+          "error": {
+            "category": "authentication",
+            "error_id": "57783be7-70d8-47f2-b753-f6a3eb707c0c",
+            "level": "high",
+            "message": "Falta el token de autorización",
+            "timestamp": "2025-08-05T14:26:00.650027+00:00"
+          }
+        }
+      },
+      "timestamp": "2025-08-05T14:25:59.776142+00:00"
+    },
+    {
+      "endpoint": "/api/v1/energy/consumption",
+      "method": "POST",
+      "description": "Upload factura PDF REAL",
+      "success": false,
+      "result": {
+        "status_code": 500,
+        "headers": {
+          "content-type": "application/json",
+          "access-control-allow-origin": "https://smarwatt.com",
+          "access-control-allow-credentials": "true",
+          "x-cloud-trace-context": "7a94f7b09566fb1b70aa9181545f0f96",
+          "date": "Tue, 05 Aug 2025 14:26:01 GMT",
+          "server": "Google Frontend",
+          "Content-Length": "200",
+          "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "response_time_ms": 242.501,
+        "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/energy/consumption",
+        "method": "POST",
+        "json": {
+          "error": {
+            "category": "authentication",
+            "error_id": "16a36f98-8405-49f5-81d4-cec51d50cd65",
+            "level": "high",
+            "message": "Falta el token de autorización",
+            "timestamp": "2025-08-05T14:26:01.411825+00:00"
+          }
+        }
+      },
+      "timestamp": "2025-08-05T14:26:00.538438+00:00"
+    }
+  ],
+  "start_time": "2025-08-05T14:25:23.110469+00:00",
+  "end_time": "2025-08-05T14:26:00.539990+00:00"
+}

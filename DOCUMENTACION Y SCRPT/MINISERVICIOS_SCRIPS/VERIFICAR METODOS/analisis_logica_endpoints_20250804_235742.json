@@ -1,0 +1,205 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-04T23:57:42.308564",
+    "total_endpoints_analizados": 8,
+    "metodos_ai_no_utilizados": 6,
+    "analyzer_version": "1.0.0-LOGICA-DIRECTA"
+  },
+  "analisis_por_microservicio": {
+    "energy_ia_api_COPY": {
+      "endpoints": [
+        {
+          "route": "/message",
+          "method": "POST",
+          "function": "send_chat_message()",
+          "logica_actual": [
+            "✅ Validar entrada",
+            "✅ Obtener contexto usuario (get_user_context_robust)",
+            "✅ Enviar mensaje con contexto",
+            "✅ Análizar sentiment del mensaje",
+            "✅ Registrar conversación (log_conversation)",
+            "✅ Registrar sentiment analysis (log_sentiment_analysis)"
+          ],
+          "metodos_ai_utilizados": [
+            "_analyze_message_sentiment",
+            "log_conversation",
+            "log_sentiment_analysis"
+          ],
+          "potencial_integracion": [
+            "_generate_recommended_actions - Para sugerir acciones basadas en el contexto",
+            "log_interaction - Para registrar interacciones completas",
+            "_engagement_level_to_score - Para medir engagement del usuario"
+          ]
+        },
+        {
+          "route": "/tariffs/recommendations",
+          "method": "GET",
+          "function": "get_tariff_recommendations_route()",
+          "logica_actual": [
+            "✅ Obtener perfil usuario",
+            "✅ Llamar servicio recomendador",
+            "✅ Devolver recomendaciones"
+          ],
+          "metodos_ai_utilizados": [
+            "get_tariff_recommendation (del VertexAI service)"
+          ],
+          "potencial_integracion": [
+            "_calculate_business_impact - Para calcular impacto económico de cambio",
+            "get_enterprise_performance_metrics - Para métricas empresariales"
+          ]
+        },
+        {
+          "route": "/tariffs/compare",
+          "method": "POST",
+          "function": "compare_tariffs()",
+          "logica_actual": [
+            "✅ Validar entrada",
+            "✅ Comparar tarifas",
+            "✅ Calcular diferencias"
+          ],
+          "metodos_ai_utilizados": [
+            "Lógica de comparación básica"
+          ],
+          "potencial_integracion": [
+            "_calculate_business_impact - Para impacto financiero real",
+            "_generate_recommended_actions - Para acciones específicas de cambio"
+          ]
+        },
+        {
+          "route": "/conversations",
+          "method": "GET",
+          "function": "get_user_conversations()",
+          "logica_actual": [
+            "✅ Obtener conversaciones usuario",
+            "✅ Filtrar por fechas",
+            "✅ Devolver historial"
+          ],
+          "metodos_ai_utilizados": [
+            "Consultas BigQuery básicas"
+          ],
+          "potencial_integracion": [
+            "_engagement_level_to_score - Para analizar engagement en historial",
+            "get_enterprise_performance_metrics - Para métricas de uso"
+          ]
+        }
+      ]
+    },
+    "expert_bot_api_COPY": {
+      "endpoints": [
+        {
+          "route": "/consumption/analyze",
+          "method": "POST",
+          "function": "analyze_consumption()",
+          "logica_actual": [
+            "✅ Recibir datos consumo",
+            "✅ Procesar análisis",
+            "✅ Devolver insights"
+          ],
+          "metodos_ai_utilizados": [
+            "Análisis ML de consumo"
+          ],
+          "potencial_integracion": [
+            "_calculate_business_impact - Para impacto económico del consumo",
+            "_generate_recommended_actions - Para acciones de optimización",
+            "get_enterprise_performance_metrics - Para benchmarking"
+          ]
+        },
+        {
+          "route": "/consumption/recommendations",
+          "method": "GET",
+          "function": "get_recommendations()",
+          "logica_actual": [
+            "✅ Obtener perfil consumo",
+            "✅ Generar recomendaciones",
+            "✅ Calcular ahorros potenciales"
+          ],
+          "metodos_ai_utilizados": [
+            "ML recommendation engine"
+          ],
+          "potencial_integracion": [
+            "_calculate_business_impact - Para cuantificar ahorros",
+            "_generate_recommended_actions - Para acciones específicas"
+          ]
+        },
+        {
+          "route": "/api/v1/analysis/sentiment",
+          "method": "POST",
+          "function": "analyze_sentiment()",
+          "logica_actual": [
+            "✅ Recibir texto",
+            "✅ Analizar sentiment",
+            "✅ Devolver score"
+          ],
+          "metodos_ai_utilizados": [
+            "Sentiment analysis ML"
+          ],
+          "potencial_integracion": [
+            "_engagement_level_to_score - Para complementar análisis sentiment",
+            "log_interaction - Para registrar análisis completos"
+          ]
+        },
+        {
+          "route": "/dashboard",
+          "method": "GET",
+          "function": "get_dashboard()",
+          "logica_actual": [
+            "✅ Obtener métricas usuario",
+            "✅ Compilar datos dashboard",
+            "✅ Devolver resumen"
+          ],
+          "metodos_ai_utilizados": [
+            "Agregación de datos básica"
+          ],
+          "potencial_integracion": [
+            "get_enterprise_performance_metrics - Para métricas avanzadas",
+            "_calculate_business_impact - Para KPIs financieros",
+            "_engagement_level_to_score - Para métricas de engagement"
+          ]
+        }
+      ]
+    }
+  },
+  "metodos_no_utilizados": [
+    "_generate_recommended_actions",
+    "log_interaction",
+    "_log_to_bigquery_ai_with_auto_schema",
+    "_engagement_level_to_score",
+    "get_enterprise_performance_metrics",
+    "_calculate_business_impact"
+  ],
+  "plan_integracion_prioritaria": {
+    "ALTA_PRIORIDAD": {
+      "_generate_recommended_actions": [
+        "/message (POST) - Para sugerir acciones basadas en contexto chat",
+        "/tariffs/compare (POST) - Para acciones específicas de cambio tarifario",
+        "/consumption/analyze (POST) - Para acciones de optimización energética"
+      ],
+      "_calculate_business_impact": [
+        "/tariffs/recommendations (GET) - Para cuantificar impacto económico",
+        "/tariffs/compare (POST) - Para mostrar ahorros reales",
+        "/consumption/recommendations (GET) - Para ROI de optimizaciones",
+        "/dashboard (GET) - Para KPIs financieros"
+      ],
+      "get_enterprise_performance_metrics": [
+        "/dashboard (GET) - Para métricas empresariales avanzadas",
+        "/conversations (GET) - Para analytics de conversaciones",
+        "/admin/system/metrics (GET) - Para métricas sistema"
+      ]
+    },
+    "MEDIA_PRIORIDAD": {
+      "_engagement_level_to_score": [
+        "/message (POST) - Para medir engagement en chat",
+        "/conversations (GET) - Para scoring del historial",
+        "/api/v1/analysis/sentiment (POST) - Para complementar sentiment"
+      ],
+      "log_interaction": [
+        "/message (POST) - Para logging completo de interacciones",
+        "/api/v1/analysis/sentiment (POST) - Para registrar análisis"
+      ],
+      "_log_to_bigquery_ai_with_auto_schema": [
+        "/message (POST) - Para logging avanzado con auto-schema",
+        "/consumption/analyze (POST) - Para almacenar análisis ML"
+      ]
+    }
+  }
+}

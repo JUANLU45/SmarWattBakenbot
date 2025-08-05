@@ -1,0 +1,1 @@
+{"query": "\n    SELECT \n        COUNT(*) as total_records,\n        MAX(date) as latest_date,\n        MIN(date) as earliest_date,\n        COUNT(DISTINCT date) as unique_dates,\n        AVG(pvpc_price_eur_mwh) as avg_price\n    FROM `smatwatt.smartwatt_data.market_electricity_tariffs`\n    WHERE date >= DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAYS)\n    ", "useLegacySql": false}

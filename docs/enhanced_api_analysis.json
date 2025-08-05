@@ -1,0 +1,3323 @@
+{
+  "energy_ia_api": {
+    "service_name": "Energy IA API",
+    "endpoints": [
+      {
+        "path": "/tariffs/recommendations",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_tariff_recommendations_route",
+        "file": "routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "expert_bot_url",
+              "consumption_data",
+              "all"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "expert_bot_url",
+              "details": "expert_bot_url"
+            },
+            {
+              "type": "required_field",
+              "field": "consumption_data",
+              "details": "consumption_data"
+            },
+            {
+              "type": "required_field",
+              "field": "all",
+              "details": "all"
+            }
+          ],
+          "services_used": {
+            "firebase": [
+              "Auth"
+            ],
+            "requests": [
+              "HTTP",
+              "requests."
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Obtener perfil de consumo del usuario via HTTP call a expert_bot_api",
+            "Validar que tenemos datos mínimos",
+            "Preparar datos para el motor de recomendaciones",
+            "Validar datos críticos",
+            "Obtener recomendación avanzada",
+            "user_id",
+            "expert_bot_url",
+            "response",
+            "consumption_data"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "AppError as e",
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": [
+              "❌ EXPERT_BOT_API_URL no configurada en producción"
+            ]
+          },
+          "response_structure": {
+            "return_patterns": [
+              "(",
+              "(",
+              "(",
+              "("
+            ],
+            "response_fields": [
+              "error",
+              "status",
+              "message",
+              "error_code",
+              "status",
+              "message",
+              "error_code"
+            ],
+            "status_codes": []
+          },
+          "business_logic": [
+            "Validar que tenemos datos mínimos",
+            "Preparar datos para el motor de recomendaciones",
+            "Validar datos críticos"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 7
+      },
+      {
+        "path": "/tariffs/market-data",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_market_data",
+        "file": "routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Estadísticas del mercado"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "(",
+              "("
+            ],
+            "response_fields": [],
+            "status_codes": []
+          },
+          "business_logic": [
+            "Estadísticas del mercado"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 2
+      },
+      {
+        "path": "/admin/tariffs/add",
+        "methods": [
+          "POST",
+          "OPTIONS"
+        ],
+        "function": "add_tariff_data",
+        "file": "routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "data"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "data",
+              "details": "data"
+            },
+            {
+              "type": "enum_validation",
+              "field": "field",
+              "details": "field"
+            },
+            {
+              "type": "custom_error",
+              "field": "Datos de tarifa requeridos",
+              "details": "Datos de tarifa requeridos"
+            }
+          ],
+          "services_used": {
+            "bigquery": [
+              "bq_client",
+              "bigquery",
+              "BigQuery"
+            ],
+            "firebase": [
+              "Auth"
+            ],
+            "requests": [
+              "HTTP"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Manejar petición OPTIONS para CORS",
+            "Validar campos requeridos",
+            "Preparar datos para inserción con CAMPOS EXACTOS de BigQuery",
+            "Insertar en BigQuery (misma tabla que el script)",
+            "VALIDACIÓN ANTIDUPLICADOS ROBUSTA (NO PARA EL SISTEMA JAMÁS)",
+            "Duplicado confirmado → Retornar error 409 pero NO parar sistema",
+            "HTTP 409 Conflict",
+            "Error en validación → CONTINUAR sin parar (MÁXIMA ROBUSTEZ)",
+            "return jsonify(",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as validation_error"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [
+              "return jsonify({\"status\": \"error\", \"message\": str(e)",
+              "return jsonify({\"status\": \"error\", \"message\": f\"Error interno: {str(e)"
+            ],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "response, 200",
+              "(",
+              "(",
+              "jsonify({\"status\": \"error\", \"message\": str(e)}), e.status_code",
+              "jsonify({\"status\": \"error\", \"message\": f\"Error interno: {str(e)}\"}), 500"
+            ],
+            "response_fields": [
+              "status",
+              "message"
+            ],
+            "status_codes": [
+              "500",
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Manejar petición OPTIONS para CORS",
+            "Validar campos requeridos",
+            "Preparar datos para inserción con CAMPOS EXACTOS de BigQuery",
+            "Insertar en BigQuery (misma tabla que el script)",
+            "Duplicado confirmado → Retornar error 409 pero NO parar sistema",
+            "HTTP 409 Conflict",
+            "Error en validación → CONTINUAR sin parar (MÁXIMA ROBUSTEZ)",
+            "Duplicado confirmado → Retornar error 409 pero NO parar sistema"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": [
+              "BQ_MARKET_TARIFFS_TABLE_ID"
+            ]
+          },
+          "external_calls": []
+        },
+        "complexity_score": 9
+      },
+      {
+        "path": "/admin/tariffs/batch-add",
+        "methods": [
+          "POST",
+          "OPTIONS"
+        ],
+        "function": "batch_add_tariffs",
+        "file": "routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "data",
+              "isinstance",
+              "all"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "data",
+              "details": "data"
+            },
+            {
+              "type": "required_field",
+              "field": "isinstance",
+              "details": "isinstance"
+            },
+            {
+              "type": "required_field",
+              "field": "all",
+              "details": "all"
+            },
+            {
+              "type": "type_validation",
+              "field": "tariffs",
+              "details": "('tariffs', 'list')"
+            },
+            {
+              "type": "custom_error",
+              "field": "Lista de tarifas requerida",
+              "details": "Lista de tarifas requerida"
+            },
+            {
+              "type": "custom_error",
+              "field": "Lista de tarifas debe contener al menos una tarifa",
+              "details": "Lista de tarifas debe contener al menos una tarifa"
+            }
+          ],
+          "services_used": {
+            "bigquery": [
+              "bq_client",
+              "bigquery",
+              "BigQuery"
+            ],
+            "firebase": [
+              "Auth"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Manejar petición OPTIONS para CORS",
+            "Procesar cada tarifa",
+            "Validar campos básicos",
+            "Preparar datos con CAMPOS EXACTOS de BigQuery",
+            "Insertar en BigQuery si hay tarifas válidas",
+            "VALIDACIÓN ANTIDUPLICADOS BATCH ROBUSTA",
+            "Error validación → CONTINUAR con la tarifa (ROBUSTO)",
+            "Incluir por robustez",
+            "Insertar solo tarifas validadas (o todas si falla validación)",
+            "Log estadísticas robustas"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e",
+              "Exception as val_error"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "response, 200",
+              "(",
+              "("
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Manejar petición OPTIONS para CORS",
+            "Procesar cada tarifa",
+            "Validar campos básicos",
+            "Preparar datos con CAMPOS EXACTOS de BigQuery",
+            "Insertar en BigQuery si hay tarifas válidas",
+            "Error validación → CONTINUAR con la tarifa (ROBUSTO)",
+            "Incluir por robustez",
+            "Insertar solo tarifas validadas (o todas si falla validación)"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": [
+              "BQ_MARKET_TARIFFS_TABLE_ID"
+            ]
+          },
+          "external_calls": []
+        },
+        "complexity_score": 10
+      },
+      {
+        "path": "/tariffs/compare",
+        "methods": [
+          "POST",
+          "OPTIONS"
+        ],
+        "function": "compare_tariffs",
+        "file": "routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "data",
+              "isinstance",
+              "selected_tariffs"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "data",
+              "details": "data"
+            },
+            {
+              "type": "required_field",
+              "field": "isinstance",
+              "details": "isinstance"
+            },
+            {
+              "type": "length_validation",
+              "field": "selected_tariffs",
+              "details": "selected_tariffs"
+            },
+            {
+              "type": "type_validation",
+              "field": "tariff_ids",
+              "details": "('tariff_ids', 'list')"
+            },
+            {
+              "type": "custom_error",
+              "field": "IDs de tarifas requeridos",
+              "details": "IDs de tarifas requeridos"
+            },
+            {
+              "type": "custom_error",
+              "field": "Se requieren al menos 2 tarifas para comparar",
+              "details": "Se requieren al menos 2 tarifas para comparar"
+            },
+            {
+              "type": "custom_error",
+              "field": "No se encontraron suficientes tarifas para comparar",
+              "details": "No se encontraron suficientes tarifas para comparar"
+            }
+          ],
+          "services_used": {
+            "firebase": [
+              "Auth"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Manejar petición OPTIONS para CORS",
+            "Obtener perfil del usuario",
+            "Obtener tarifas específicas",
+            "Filtrar tarifas solicitadas",
+            "Obtener perfil de consumo (simulado para comparación)",
+            "Comparar tarifas",
+            "Ordenar por mejor opción",
+            "user_id",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "AppError as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [
+              "return jsonify({\"status\": \"error\", \"message\": str(e)"
+            ],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "response, 200",
+              "(",
+              "jsonify({\"status\": \"error\", \"message\": str(e)}), e.status_code",
+              "("
+            ],
+            "response_fields": [
+              "status",
+              "message"
+            ],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Manejar petición OPTIONS para CORS",
+            "Obtener perfil del usuario",
+            "Obtener tarifas específicas",
+            "Filtrar tarifas solicitadas",
+            "Obtener perfil de consumo (simulado para comparación)",
+            "Comparar tarifas",
+            "Ordenar por mejor opción",
+            "calculate_annual_cost("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 10
+      },
+      {
+        "path": "/message",
+        "methods": [
+          "POST"
+        ],
+        "function": "send_chat_message",
+        "file": "chatbot_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "json_data"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "json_data",
+              "details": "json_data"
+            },
+            {
+              "type": "custom_error",
+              "field": "Petición inválida. Se requiere el campo ",
+              "details": "Petición inválida. Se requiere el campo "
+            }
+          ],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Validar datos de entrada",
+            "Obtener servicio de chat con manejo de errores",
+            "Obtener contexto del usuario de forma robusta",
+            "Usar contexto mínimo como fallback",
+            "Enviar mensaje con contexto",
+            "Calcular tiempo de respuesta",
+            "Obtener análisis de sentiment del chat service",
+            "Fallback básico si no hay análisis disponible",
+            "Registrar conversación",
+            "TAMBIÉN registrar sentiment analysis"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as init_error",
+              "Exception as context_error",
+              "Exception"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(result), 200",
+              "(",
+              "("
+            ],
+            "response_fields": [
+              "status",
+              "message",
+              "error_code",
+              "status",
+              "message",
+              "error_code"
+            ],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Validar datos de entrada",
+            "Obtener servicio de chat con manejo de errores",
+            "Obtener contexto del usuario de forma robusta",
+            "Usar contexto mínimo como fallback",
+            "Enviar mensaje con contexto",
+            "Calcular tiempo de respuesta",
+            "Obtener análisis de sentiment del chat service",
+            "Fallback básico si no hay análisis disponible"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 4
+      },
+      {
+        "path": "/message/v2",
+        "methods": [
+          "POST"
+        ],
+        "function": "send_chat_message_v2",
+        "file": "chatbot_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "json_data",
+              "user_context"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "json_data",
+              "details": "json_data"
+            },
+            {
+              "type": "required_field",
+              "field": "user_context",
+              "details": "user_context"
+            },
+            {
+              "type": "custom_error",
+              "field": "Petición inválida. Se requiere el campo ",
+              "details": "Petición inválida. Se requiere el campo "
+            }
+          ],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Contexto directo",
+            "Obtener servicio de chat",
+            "Si no hay contexto directo, obtenerlo",
+            "Enviar mensaje con contexto",
+            "Metadata de respuesta",
+            "chat_history",
+            "user_context",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(result), 200",
+              "("
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Contexto directo",
+            "Obtener servicio de chat",
+            "Si no hay contexto directo, obtenerlo",
+            "Enviar mensaje con contexto",
+            "Metadata de respuesta"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 5
+      },
+      {
+        "path": "/cross-service",
+        "methods": [
+          "POST"
+        ],
+        "function": "cross_service_communication",
+        "file": "chatbot_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "json_data"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "json_data",
+              "details": "json_data"
+            },
+            {
+              "type": "custom_error",
+              "field": "Mensaje requerido para comunicación entre servicios",
+              "details": "Mensaje requerido para comunicación entre servicios"
+            }
+          ],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Obtener servicio de chat",
+            "Procesar mensaje según el servicio origen",
+            "Mensaje desde expert-bot-api",
+            "Comunicación con expert-bot-api",
+            "user_id",
+            "source_service"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "(",
+              "("
+            ],
+            "response_fields": [
+              "status",
+              "data",
+              "source_service",
+              "timestamp"
+            ],
+            "status_codes": []
+          },
+          "business_logic": [
+            "Obtener servicio de chat",
+            "Procesar mensaje según el servicio origen",
+            "Mensaje desde expert-bot-api",
+            "Comunicación con expert-bot-api",
+            "Mensaje desde expert-bot-api"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 4
+      },
+      {
+        "path": "/conversations",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_user_conversations",
+        "file": "chatbot_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [
+              "limit",
+              "page"
+            ],
+            "headers": [],
+            "validation_rules": [
+              "user_id"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "user_id",
+              "details": "user_id"
+            },
+            {
+              "type": "custom_error",
+              "field": "Usuario no autenticado",
+              "details": "Usuario no autenticado"
+            },
+            {
+              "type": "custom_error",
+              "field": "Límite debe estar entre 1 y 100",
+              "details": "Límite debe estar entre 1 y 100"
+            },
+            {
+              "type": "custom_error",
+              "field": "Página debe ser mayor a 0",
+              "details": "Página debe ser mayor a 0"
+            },
+            {
+              "type": "custom_error",
+              "field": "Error obteniendo conversaciones",
+              "details": "Error obteniendo conversaciones"
+            }
+          ],
+          "services_used": {
+            "bigquery": [
+              "bq_client",
+              "bigquery",
+              "BigQuery"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Validar parámetros de paginación",
+            "Validar configuración de BigQuery",
+            "Inicializar cliente BigQuery con manejo robusto",
+            "Query empresarial con validación",
+            "user_id",
+            "limit",
+            "page"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "KeyError as config_error",
+              "Exception as bq_error",
+              "Exception as query_error",
+              "Exception as row_error"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "("
+            ],
+            "response_fields": [],
+            "status_codes": []
+          },
+          "business_logic": [
+            "Validar parámetros de paginación",
+            "Validar configuración de BigQuery",
+            "Inicializar cliente BigQuery con manejo robusto",
+            "Query empresarial con validación"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": [
+              "BQ_CONVERSATIONS_TABLE_ID"
+            ]
+          },
+          "external_calls": []
+        },
+        "complexity_score": 9
+      },
+      {
+        "path": "/conversations/<conversation_id>",
+        "methods": [
+          "DELETE"
+        ],
+        "function": "delete_conversation",
+        "file": "chatbot_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "user_id",
+              "conversation_id"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "user_id",
+              "details": "user_id"
+            },
+            {
+              "type": "required_field",
+              "field": "conversation_id",
+              "details": "conversation_id"
+            },
+            {
+              "type": "custom_error",
+              "field": "Usuario no autenticado",
+              "details": "Usuario no autenticado"
+            },
+            {
+              "type": "custom_error",
+              "field": "ID de conversación requerido",
+              "details": "ID de conversación requerido"
+            },
+            {
+              "type": "custom_error",
+              "field": "Conversación no encontrada o ya eliminada",
+              "details": "Conversación no encontrada o ya eliminada"
+            },
+            {
+              "type": "custom_error",
+              "field": "Error eliminando conversación",
+              "details": "Error eliminando conversación"
+            }
+          ],
+          "services_used": {
+            "bigquery": [
+              "bq_client",
+              "bigquery",
+              "BigQuery"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Validar conversation_id",
+            "Validar configuración BigQuery",
+            "Inicializar cliente BigQuery",
+            "Marcar conversación como eliminada en BigQuery",
+            "user_id"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "KeyError as config_error",
+              "Exception as bq_error",
+              "AppError"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "("
+            ],
+            "response_fields": [],
+            "status_codes": []
+          },
+          "business_logic": [
+            "Validar conversation_id",
+            "Validar configuración BigQuery",
+            "Inicializar cliente BigQuery",
+            "Marcar conversación como eliminada en BigQuery"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": [
+              "BQ_CONVERSATIONS_TABLE_ID"
+            ]
+          },
+          "external_calls": []
+        },
+        "complexity_score": 10
+      },
+      {
+        "path": "/health",
+        "methods": [
+          "GET"
+        ],
+        "function": "chatbot_health_check",
+        "file": "chatbot_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "test_url"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "test_url",
+              "details": "test_url"
+            }
+          ],
+          "services_used": {
+            "bigquery": [
+              "bq_client",
+              "bigquery",
+              "BigQuery"
+            ],
+            "requests": [
+              "requests."
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Verificar servicio de chat",
+            "Verificar BigQuery",
+            "Verificar comunicación con expert-bot",
+            "Determinar estado final",
+            "test_url",
+            "response"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e",
+              "Exception as e",
+              "Exception as e"
+            ],
+            "custom_exceptions": [],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "(",
+              "("
+            ],
+            "response_fields": [
+              "status",
+              "error",
+              "timestamp"
+            ],
+            "status_codes": []
+          },
+          "business_logic": [
+            "Verificar servicio de chat",
+            "Verificar BigQuery",
+            "Verificar comunicación con expert-bot",
+            "Determinar estado final",
+            "chat_service.get_enterprise_metrics("
+          ],
+          "database_operations": {
+            "queries": [
+              "SELECT 1 as test_value"
+            ],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 6
+      },
+      {
+        "path": "/api/v1/links/test",
+        "methods": [
+          "POST"
+        ],
+        "function": "test_links_system",
+        "file": "links_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "data",
+              "response_text"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "data",
+              "details": "data"
+            },
+            {
+              "type": "required_field",
+              "field": "response_text",
+              "details": "response_text"
+            }
+          ],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Obtener servicio de enlaces",
+            "Procesar texto",
+            "Obtener estado del servicio",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [],
+            "error_responses": [
+              "return jsonify({\"error\": f\"Error interno: {str(e)"
+            ],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "(",
+              "(",
+              "(",
+              "jsonify({\"error\": f\"Error interno: {str(e)}\", \"status\": \"error\"}), 500"
+            ],
+            "response_fields": [
+              "error",
+              "status",
+              "error",
+              "status",
+              "original_response",
+              "enhanced_response",
+              "links_added",
+              "character_diff",
+              "service_status",
+              "status"
+            ],
+            "status_codes": [
+              "500"
+            ]
+          },
+          "business_logic": [
+            "Obtener servicio de enlaces",
+            "Procesar texto",
+            "Obtener estado del servicio",
+            "links_service.analyze_and_enhance_response(",
+            "links_service.get_enterprise_status("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 4
+      },
+      {
+        "path": "/api/v1/links/status",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_links_status",
+        "file": "links_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "return jsonify(",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [],
+            "error_responses": [
+              "return jsonify({\"error\": f\"Error interno: {str(e)"
+            ],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(service_status), 200",
+              "jsonify({\"error\": f\"Error interno: {str(e)}\", \"status\": \"error\"}), 500"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "500",
+              "200"
+            ]
+          },
+          "business_logic": [
+            "links_service.get_enterprise_status("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 2
+      },
+      {
+        "path": "/api/v1/links/direct/<link_type>",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_direct_link",
+        "file": "links_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [],
+            "error_responses": [
+              "return jsonify({\"error\": f\"Error interno: {str(e)"
+            ],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "(",
+              "(",
+              "jsonify({\"error\": f\"Error interno: {str(e)}\", \"status\": \"error\"}), 500"
+            ],
+            "response_fields": [
+              "link_type",
+              "url",
+              "status"
+            ],
+            "status_codes": [
+              "500"
+            ]
+          },
+          "business_logic": [
+            "links_service.get_direct_link("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 2
+      }
+    ],
+    "common_services": [],
+    "error_patterns": [],
+    "business_patterns": []
+  },
+  "expert_bot_api": {
+    "service_name": "Expert Bot API",
+    "endpoints": [
+      {
+        "path": "/session/start",
+        "methods": [
+          "POST",
+          "OPTIONS"
+        ],
+        "function": "start_chat_session",
+        "file": "routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "firebase": [
+              "Auth"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Manejar petición OPTIONS para CORS",
+            "chat_service",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": [
+              "Error iniciando sesión de chat: %s"
+            ]
+          },
+          "response_structure": {
+            "return_patterns": [
+              "response, 200",
+              "jsonify(session_data), 200"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Manejar petición OPTIONS para CORS",
+            "chat_service.start_session("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 3
+      },
+      {
+        "path": "/message",
+        "methods": [
+          "POST",
+          "OPTIONS"
+        ],
+        "function": "post_message",
+        "file": "routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "json_data",
+              "conversation_id"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "json_data",
+              "details": "json_data"
+            },
+            {
+              "type": "required_field",
+              "field": "conversation_id",
+              "details": "conversation_id"
+            },
+            {
+              "type": "custom_error",
+              "field": "Petición inválida. El campo ",
+              "details": "Petición inválida. El campo "
+            },
+            {
+              "type": "custom_error",
+              "field": "Error interno procesando mensaje: %s",
+              "details": "Error interno procesando mensaje: %s"
+            }
+          ],
+          "services_used": {
+            "firebase": [
+              "Auth"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Manejar petición OPTIONS para CORS",
+            "Validación empresarial robusta",
+            "Acepta tanto conversation_id como session_id para compatibilidad",
+            "conversation_id",
+            "chat_service",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "AppError"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": [
+              "Error procesando mensaje: %s"
+            ]
+          },
+          "response_structure": {
+            "return_patterns": [
+              "response, 200",
+              "jsonify(bot_response), 200"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Manejar petición OPTIONS para CORS",
+            "Validación empresarial robusta",
+            "Acepta tanto conversation_id como session_id para compatibilidad",
+            "chat_service.process_user_message(",
+            "process_user_message("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 7
+      },
+      {
+        "path": "/new-conversation",
+        "methods": [
+          "POST",
+          "OPTIONS"
+        ],
+        "function": "create_new_conversation",
+        "file": "routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "firebase": [
+              "Auth"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Manejar petición OPTIONS para CORS",
+            "Obtener conversation_id actual (opcional)",
+            "user_id",
+            "current_conversation_id",
+            "chat_service",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": [
+              "Error creando nueva conversación: %s"
+            ]
+          },
+          "response_structure": {
+            "return_patterns": [
+              "response, 200",
+              "jsonify(new_session_data), 200"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Manejar petición OPTIONS para CORS",
+            "Obtener conversation_id actual (opcional)",
+            "chat_service.create_new_conversation("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 3
+      },
+      {
+        "path": "/conversation/history",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_conversation_history",
+        "file": "routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [
+              "page",
+              "limit"
+            ],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [
+            {
+              "type": "custom_error",
+              "field": "Error interno recuperando historial: %s",
+              "details": "Error interno recuperando historial: %s"
+            }
+          ],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Parámetros de paginación",
+            "Validar límites empresariales",
+            "Historial recuperado correctamente para usuario: %s",
+            "user_id",
+            "page",
+            "limit",
+            "chat_service"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": [
+              "Error recuperando historial: %s"
+            ]
+          },
+          "response_structure": {
+            "return_patterns": [
+              "("
+            ],
+            "response_fields": [
+              "status",
+              "data",
+              "page",
+              "limit",
+              "timestamp"
+            ],
+            "status_codes": []
+          },
+          "business_logic": [
+            "Parámetros de paginación",
+            "Validar límites empresariales",
+            "chat_service.get_conversation_history("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 3
+      },
+      {
+        "path": "/conversation/<conversation_id>",
+        "methods": [
+          "DELETE",
+          "OPTIONS"
+        ],
+        "function": "delete_conversation",
+        "file": "routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [
+            {
+              "type": "custom_error",
+              "field": "Error interno borrando conversación: %s",
+              "details": "Error interno borrando conversación: %s"
+            }
+          ],
+          "services_used": {
+            "firebase": [
+              "Auth"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Manejar petición OPTIONS para CORS",
+            "user_id",
+            "chat_service"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": [
+              "Error borrando conversación %s: %s"
+            ]
+          },
+          "response_structure": {
+            "return_patterns": [
+              "response, 200",
+              "("
+            ],
+            "response_fields": [
+              "status",
+              "message",
+              "conversation_id",
+              "timestamp"
+            ],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Manejar petición OPTIONS para CORS",
+            "chat_service.delete_conversation("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 4
+      },
+      {
+        "path": "/conversation/feedback",
+        "methods": [
+          "POST",
+          "OPTIONS"
+        ],
+        "function": "submit_conversation_feedback",
+        "file": "routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "json_data",
+              "isinstance"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "json_data",
+              "details": "json_data"
+            },
+            {
+              "type": "required_field",
+              "field": "isinstance",
+              "details": "isinstance"
+            },
+            {
+              "type": "type_validation",
+              "field": "rating",
+              "details": "('rating', 'int')"
+            },
+            {
+              "type": "custom_error",
+              "field": "Rating debe ser un número entero entre 1 y 5",
+              "details": "Rating debe ser un número entero entre 1 y 5"
+            },
+            {
+              "type": "custom_error",
+              "field": "Error interno procesando feedback: %s",
+              "details": "Error interno procesando feedback: %s"
+            }
+          ],
+          "services_used": {
+            "firebase": [
+              "Auth"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Manejar petición OPTIONS para CORS",
+            "Validación empresarial robusta",
+            "Validar rating",
+            "user_id",
+            "comment",
+            "chat_service"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "AppError"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": [
+              "Error procesando feedback: %s"
+            ]
+          },
+          "response_structure": {
+            "return_patterns": [
+              "response, 200",
+              "("
+            ],
+            "response_fields": [
+              "status",
+              "message",
+              "conversation_id",
+              "timestamp"
+            ],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Manejar petición OPTIONS para CORS",
+            "Validación empresarial robusta",
+            "Validar rating",
+            "chat_service.submit_conversation_feedback("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 8
+      },
+      {
+        "path": "/metrics",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_user_metrics",
+        "file": "routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [
+            {
+              "type": "custom_error",
+              "field": "Error interno obteniendo métricas: %s",
+              "details": "Error interno obteniendo métricas: %s"
+            }
+          ],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Obteniendo métricas para usuario: %s",
+            "Métricas obtenidas correctamente para usuario: %s",
+            "user_id",
+            "chat_service"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": [
+              "Error obteniendo métricas: %s"
+            ]
+          },
+          "response_structure": {
+            "return_patterns": [
+              "("
+            ],
+            "response_fields": [
+              "status",
+              "data",
+              "timestamp"
+            ],
+            "status_codes": []
+          },
+          "business_logic": [
+            "chat_service.get_user_analytics("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 3
+      },
+      {
+        "path": "/consumption",
+        "methods": [
+          "POST"
+        ],
+        "function": "upload_consumption_data",
+        "file": "energy_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Inicializar servicios empresariales",
+            "Procesar factura con aprendizaje automático",
+            "Aprendizaje automático empresarial",
+            "Personalizar respuesta de éxito con nombre del usuario",
+            "NUNCA devolver errores técnicos crudos al usuario",
+            "SIEMPRE ofrecer alternativas amables y útiles",
+            "user_name",
+            "service",
+            "ai_learning",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "(ValueError, IOError, RuntimeError) as e"
+            ],
+            "custom_exceptions": [],
+            "error_responses": [],
+            "logging_errors": [
+              "Error procesando factura para usuario %s: %s"
+            ]
+          },
+          "response_structure": {
+            "return_patterns": [
+              "(",
+              "(",
+              "jsonify(result), 200",
+              "("
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Inicializar servicios empresariales",
+            "Procesar factura con aprendizaje automático",
+            "Aprendizaje automático empresarial",
+            "Personalizar respuesta de éxito con nombre del usuario",
+            "NUNCA devolver errores técnicos crudos al usuario",
+            "SIEMPRE ofrecer alternativas amables y útiles",
+            "process_and_store_invoice(",
+            "process_invoice_upload_patterns("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 2
+      },
+      {
+        "path": "/dashboard",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_dashboard_data",
+        "file": "energy_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Personalizar mensaje de bienvenida",
+            "NUNCA fallar - siempre devolver datos útiles",
+            "Siempre 200 porque damos valor",
+            "user_name",
+            "service",
+            "return jsonify(",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "(ValueError, IOError, RuntimeError) as e"
+            ],
+            "custom_exceptions": [],
+            "error_responses": [],
+            "logging_errors": [
+              "Error obteniendo dashboard para usuario %s: %s"
+            ]
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(dashboard_data), 200",
+              "jsonify(fallback_dashboard), 200  # Siempre 200 porque damos valor"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Personalizar mensaje de bienvenida",
+            "NUNCA fallar - siempre devolver datos útiles",
+            "Siempre 200 porque damos valor"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 2
+      },
+      {
+        "path": "/users/profile",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_user_profile",
+        "file": "energy_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "service",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "(ValueError, IOError, RuntimeError) as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify({\"status\": \"success\", \"data\": profile_data}), 200"
+            ],
+            "response_fields": [
+              "status",
+              "data"
+            ],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 2
+      },
+      {
+        "path": "/manual-data",
+        "methods": [
+          "POST"
+        ],
+        "function": "add_manual_energy_data",
+        "file": "energy_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "data",
+              "data"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "data",
+              "details": "data"
+            },
+            {
+              "type": "required_field",
+              "field": "data",
+              "details": "data"
+            },
+            {
+              "type": "custom_error",
+              "field": "Datos requeridos en formato JSON.",
+              "details": "Datos requeridos en formato JSON."
+            }
+          ],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Validación inteligente: solo verificar campos críticos mínimos",
+            "Estructurar datos como si vinieran del OCR MEJORADO",
+            "Campos críticos (obligatorios)",
+            "Campos importantes (opcionales con defaults inteligentes)",
+            "Default español típico",
+            "NUEVOS CAMPOS OPCIONALES (sin romper nada)",
+            "Default valle",
+            "Default llano",
+            "Metadatos de entrada manual",
+            "Máxima confianza en datos manuales"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "ValueError as ve"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "("
+            ],
+            "response_fields": [
+              "status",
+              "message",
+              "data_completeness",
+              "recommendations_available",
+              "next_action"
+            ],
+            "status_codes": []
+          },
+          "business_logic": [
+            "Validación inteligente: solo verificar campos críticos mínimos",
+            "Estructurar datos como si vinieran del OCR MEJORADO",
+            "Campos críticos (obligatorios)",
+            "Campos importantes (opcionales con defaults inteligentes)",
+            "Default español típico",
+            "NUEVOS CAMPOS OPCIONALES (sin romper nada)",
+            "Default valle",
+            "Default llano"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 5
+      },
+      {
+        "path": "/consumption/update",
+        "methods": [
+          "PUT"
+        ],
+        "function": "update_consumption_data",
+        "file": "energy_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "data"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "data",
+              "details": "data"
+            },
+            {
+              "type": "custom_error",
+              "field": "Datos requeridos en formato JSON.",
+              "details": "Datos requeridos en formato JSON."
+            }
+          ],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Validar y actualizar datos",
+            "Aprendizaje automático para actualizaciones",
+            "service",
+            "ai_learning"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "("
+            ],
+            "response_fields": [
+              "status",
+              "message",
+              "data",
+              "timestamp"
+            ],
+            "status_codes": []
+          },
+          "business_logic": [
+            "Validar y actualizar datos",
+            "Aprendizaje automático para actualizaciones",
+            "process_consumption_update_patterns("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 4
+      },
+      {
+        "path": "/consumption/history",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_consumption_history",
+        "file": "energy_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [
+              "months",
+              "page",
+              "limit"
+            ],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Parámetros de consulta",
+            "Validar límites",
+            "months",
+            "page",
+            "limit",
+            "service"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "("
+            ],
+            "response_fields": [
+              "status",
+              "data",
+              "page",
+              "limit",
+              "months",
+              "timestamp"
+            ],
+            "status_codes": []
+          },
+          "business_logic": [
+            "Parámetros de consulta",
+            "Validar límites"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 2
+      },
+      {
+        "path": "/consumption/analyze",
+        "methods": [
+          "POST"
+        ],
+        "function": "analyze_consumption",
+        "file": "energy_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Análisis empresarial avanzado",
+            "Enriquecer con aprendizaje automático",
+            "service",
+            "ai_learning",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(result), 200"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Análisis empresarial avanzado",
+            "Enriquecer con aprendizaje automático"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 2
+      },
+      {
+        "path": "/consumption/recommendations",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_consumption_recommendations",
+        "file": "energy_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Obtener recomendaciones base",
+            "Enriquecer con IA",
+            "service",
+            "ai_learning",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(result), 200"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Obtener recomendaciones base",
+            "Enriquecer con IA"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 2
+      },
+      {
+        "path": "/consumption/compare",
+        "methods": [
+          "POST"
+        ],
+        "function": "compare_tariffs",
+        "file": "energy_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Comparación de tarifas",
+            "Enriquecer con aprendizaje automático",
+            "service",
+            "ai_learning",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(result), 200"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Comparación de tarifas",
+            "Enriquecer con aprendizaje automático"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 2
+      },
+      {
+        "path": "/consumption/title",
+        "methods": [
+          "PUT"
+        ],
+        "function": "update_consumption_title",
+        "file": "energy_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "data"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "data",
+              "details": "data"
+            },
+            {
+              "type": "custom_error",
+              "field": "Se requieren ",
+              "details": "Se requieren "
+            }
+          ],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "service"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "("
+            ],
+            "response_fields": [
+              "status",
+              "message",
+              "consumption_id",
+              "new_title",
+              "timestamp"
+            ],
+            "status_codes": []
+          },
+          "business_logic": [],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 4
+      },
+      {
+        "path": "/api/v1/analysis/sentiment",
+        "methods": [
+          "POST",
+          "OPTIONS"
+        ],
+        "function": "analyze_sentiment",
+        "file": "analysis_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "json_data",
+              "json_data",
+              "message_text",
+              "message_text"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "json_data",
+              "details": "json_data"
+            },
+            {
+              "type": "required_field",
+              "field": "json_data",
+              "details": "json_data"
+            },
+            {
+              "type": "required_field",
+              "field": "message_text",
+              "details": "message_text"
+            },
+            {
+              "type": "length_validation",
+              "field": "message_text",
+              "details": "message_text"
+            },
+            {
+              "type": "custom_error",
+              "field": "Petición inválida. Se requieren datos JSON.",
+              "details": "Petición inválida. Se requieren datos JSON."
+            },
+            {
+              "type": "custom_error",
+              "field": "El mensaje no puede estar vacío.",
+              "details": "El mensaje no puede estar vacío."
+            },
+            {
+              "type": "custom_error",
+              "field": "El mensaje no puede exceder 5000 caracteres.",
+              "details": "El mensaje no puede exceder 5000 caracteres."
+            }
+          ],
+          "services_used": {
+            "firebase": [
+              "Auth"
+            ],
+            "requests": [
+              "HTTP"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Manejar petición OPTIONS para CORS",
+            "Validación empresarial robusta",
+            "Validar longitud del mensaje",
+            "Extraer parámetros opcionales",
+            "Inicializar servicio de AI Learning",
+            "Realizar análisis de sentiment empresarial",
+            "Preparar respuesta empresarial",
+            "conversation_id",
+            "user_id",
+            "ai_learning_service"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "AppError"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "response, 200",
+              "jsonify(response_data), 200"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Manejar petición OPTIONS para CORS",
+            "Validación empresarial robusta",
+            "Validar longitud del mensaje",
+            "Extraer parámetros opcionales",
+            "Inicializar servicio de AI Learning",
+            "Realizar análisis de sentiment empresarial",
+            "Preparar respuesta empresarial",
+            "ai_learning_service.analyze_sentiment_enterprise("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 10
+      },
+      {
+        "path": "/user/tasks",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_user_task_dashboard",
+        "file": "async_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [
+              "status",
+              "task_type",
+              "limit"
+            ],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [
+            {
+              "type": "custom_error",
+              "field": "Error interno generando dashboard de tareas",
+              "details": "Error interno generando dashboard de tareas"
+            }
+          ],
+          "services_used": {
+            "bigquery": [
+              "bigquery",
+              "BigQuery"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Obtener parámetros de filtro",
+            "Máximo 100 tareas",
+            "Obtener todas las tareas del usuario desde BigQuery",
+            "Procesar tareas para el dashboard",
+            "Agregar descripción amigable para el usuario",
+            "Agregar tiempo estimado restante para tareas en progreso",
+            "Actualizar resumen",
+            "Calcular métricas del resumen",
+            "Obtener estadísticas de productividad personal",
+            "user_id"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "AppError"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(response_data), 200"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Obtener parámetros de filtro",
+            "Máximo 100 tareas",
+            "Obtener todas las tareas del usuario desde BigQuery",
+            "Procesar tareas para el dashboard",
+            "Agregar descripción amigable para el usuario",
+            "Agregar tiempo estimado restante para tareas en progreso",
+            "Actualizar resumen",
+            "Calcular métricas del resumen"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 4
+      },
+      {
+        "path": "/user/tasks",
+        "methods": [
+          "POST"
+        ],
+        "function": "create_user_task",
+        "file": "async_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "data",
+              "task_request"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "data",
+              "details": "data"
+            },
+            {
+              "type": "custom_error",
+              "field": "Datos JSON requeridos",
+              "details": "Datos JSON requeridos"
+            },
+            {
+              "type": "custom_error",
+              "field": "Error interno creando tarea",
+              "details": "Error interno creando tarea"
+            }
+          ],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Validar datos de entrada",
+            "Validación empresarial estricta",
+            "Crear tarea empresarial",
+            "Obtener estado inicial de la tarea",
+            "user_id",
+            "callback_url",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "AppError"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(response_data), 201"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "201"
+            ]
+          },
+          "business_logic": [
+            "Validar datos de entrada",
+            "Validación empresarial estricta",
+            "Crear tarea empresarial",
+            "Obtener estado inicial de la tarea"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 5
+      },
+      {
+        "path": "/user/tasks/<task_id>",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_user_task_status",
+        "file": "async_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "results"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "results",
+              "details": "results"
+            },
+            {
+              "type": "custom_error",
+              "field": "Tarea no encontrada",
+              "details": "Tarea no encontrada"
+            },
+            {
+              "type": "custom_error",
+              "field": "Error interno obteniendo estado de tarea",
+              "details": "Error interno obteniendo estado de tarea"
+            }
+          ],
+          "services_used": {
+            "bigquery": [
+              "bigquery"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Verificar que la tarea pertenece al usuario",
+            "user_id",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "AppError"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(response_data), 200"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Verificar que la tarea pertenece al usuario",
+            "calculate_task_progress("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 6
+      },
+      {
+        "path": "/admin/system/metrics",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_admin_system_metrics",
+        "file": "async_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [
+              "time_range",
+              "include_details"
+            ],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [
+            {
+              "type": "custom_error",
+              "field": "Error interno generando métricas del sistema",
+              "details": "Error interno generando métricas del sistema"
+            }
+          ],
+          "services_used": {
+            "bigquery": [
+              "bigquery"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Obtener parámetros de filtro",
+            "Obtener métricas del sistema en tiempo real",
+            "Calcular rango de tiempo",
+            "Query para métricas históricas de tareas",
+            "Query para métricas de workers",
+            "Ejecutar queries en paralelo",
+            "Procesar métricas de tareas",
+            "Procesar métricas de workers",
+            "Calcular alertas y recomendaciones",
+            "Calcular tendencias y patrones"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "AppError"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(response_data), 200"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Obtener parámetros de filtro",
+            "Obtener métricas del sistema en tiempo real",
+            "Calcular rango de tiempo",
+            "Query para métricas históricas de tareas",
+            "Query para métricas de workers",
+            "Ejecutar queries en paralelo",
+            "Procesar métricas de tareas",
+            "Procesar métricas de workers"
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 4
+      },
+      {
+        "path": "/admin/tasks/management",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_admin_task_management",
+        "file": "async_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [
+              "status",
+              "task_type",
+              "user_id",
+              "priority",
+              "limit",
+              "offset"
+            ],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [
+            {
+              "type": "custom_error",
+              "field": "Error interno generando panel de gestión",
+              "details": "Error interno generando panel de gestión"
+            }
+          ],
+          "services_used": {
+            "bigquery": [
+              "bigquery"
+            ],
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Obtener parámetros de filtro",
+            "Máximo 1000 tareas",
+            "Construir query dinámico con filtros",
+            "Query principal para tareas",
+            "Query para contar total de tareas (para paginación)",
+            "Procesar tareas para el panel administrativo",
+            "Estadísticas agregadas para el panel",
+            "admin_user",
+            "status",
+            "task_type"
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "AppError"
+            ],
+            "custom_exceptions": [
+              "AppError"
+            ],
+            "error_responses": [],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(response_data), 200"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "200"
+            ]
+          },
+          "business_logic": [
+            "Obtener parámetros de filtro",
+            "Máximo 1000 tareas",
+            "Construir query dinámico con filtros",
+            "Query principal para tareas",
+            "Query para contar total de tareas (para paginación)",
+            "Procesar tareas para el panel administrativo",
+            "Estadísticas agregadas para el panel",
+            "calculate_task_cost("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 4
+      },
+      {
+        "path": "/links/test",
+        "methods": [
+          "POST"
+        ],
+        "function": "test_links_system",
+        "file": "links_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": [
+              "data",
+              "response_text"
+            ]
+          },
+          "validations": [
+            {
+              "type": "required_field",
+              "field": "data",
+              "details": "data"
+            },
+            {
+              "type": "required_field",
+              "field": "response_text",
+              "details": "response_text"
+            }
+          ],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "Obtener servicio de enlaces",
+            "Procesar texto",
+            "Obtener estado del servicio",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [],
+            "error_responses": [
+              "return jsonify({\"error\": f\"Error interno: {str(e)"
+            ],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "(",
+              "(",
+              "(",
+              "jsonify({\"error\": f\"Error interno: {str(e)}\", \"status\": \"error\"}), 500"
+            ],
+            "response_fields": [
+              "error",
+              "status",
+              "error",
+              "status",
+              "original_response",
+              "enhanced_response",
+              "links_added",
+              "character_diff",
+              "service_status",
+              "status"
+            ],
+            "status_codes": [
+              "500"
+            ]
+          },
+          "business_logic": [
+            "Obtener servicio de enlaces",
+            "Procesar texto",
+            "Obtener estado del servicio",
+            "links_service.analyze_and_enhance_response(",
+            "links_service.get_enterprise_status("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 4
+      },
+      {
+        "path": "/links/status",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_links_status",
+        "file": "links_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "return jsonify(",
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [],
+            "error_responses": [
+              "return jsonify({\"error\": f\"Error interno: {str(e)"
+            ],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "jsonify(service_status), 200",
+              "jsonify({\"error\": f\"Error interno: {str(e)}\", \"status\": \"error\"}), 500"
+            ],
+            "response_fields": [],
+            "status_codes": [
+              "500",
+              "200"
+            ]
+          },
+          "business_logic": [
+            "links_service.get_enterprise_status("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 2
+      },
+      {
+        "path": "/links/direct/<link_type>",
+        "methods": [
+          "GET"
+        ],
+        "function": "get_direct_link",
+        "file": "links_routes.py",
+        "logic": {
+          "parameters": {
+            "request_data": [],
+            "path_parameters": [],
+            "query_parameters": [],
+            "headers": [],
+            "validation_rules": []
+          },
+          "validations": [],
+          "services_used": {
+            "logging": [
+              "logger"
+            ]
+          },
+          "data_flow": [
+            "return jsonify("
+          ],
+          "error_handling": {
+            "try_catch_blocks": [
+              "Exception as e"
+            ],
+            "custom_exceptions": [],
+            "error_responses": [
+              "return jsonify({\"error\": f\"Error interno: {str(e)"
+            ],
+            "logging_errors": []
+          },
+          "response_structure": {
+            "return_patterns": [
+              "(",
+              "(",
+              "jsonify({\"error\": f\"Error interno: {str(e)}\", \"status\": \"error\"}), 500"
+            ],
+            "response_fields": [
+              "link_type",
+              "url",
+              "status"
+            ],
+            "status_codes": [
+              "500"
+            ]
+          },
+          "business_logic": [
+            "links_service.get_direct_link("
+          ],
+          "database_operations": {
+            "queries": [],
+            "inserts": [],
+            "updates": [],
+            "tables_accessed": []
+          },
+          "external_calls": []
+        },
+        "complexity_score": 2
+      }
+    ],
+    "common_services": [],
+    "error_patterns": [],
+    "business_patterns": []
+  },
+  "summary": {
+    "total_endpoints": 0,
+    "services_used": [],
+    "common_patterns": []
+  }
+}

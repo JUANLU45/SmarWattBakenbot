@@ -1,0 +1,247 @@
+
+  .venv\Lib\site-packages\typing_extensions.py:2266:              ...
+  .venv\Lib\site-packages\typing_extensions.py:2267:
+> .venv\Lib\site-packages\typing_extensions.py:2268:          query("SELECT * FROM table")  # ok
+> .venv\Lib\site-packages\typing_extensions.py:2269:          query(f"SELECT * FROM {input()}")  # not ok
+  .venv\Lib\site-packages\typing_extensions.py:2270:
+  .venv\Lib\site-packages\typing_extensions.py:2271:        See PEP 675 for details.
+  .venv\Lib\site-packages\typing_extensions.py:2272:
+  .venv\Lib\site-packages\typing_extensions.py:2273:        """
+  .venv\Lib\site-packages\typing_extensions.py:2274:        raise TypeError(f"{self} is not subscriptable")
+  .venv\Lib\site-packages\google\cloud\bigquery\client.py:4118:            extra_params=params,
+  .venv\Lib\site-packages\google\cloud\bigquery\client.py:4119:            table=table,
+> .venv\Lib\site-packages\google\cloud\bigquery\client.py:4120:            # Pass in selected_fields separately from schema so that full
+  .venv\Lib\site-packages\google\cloud\bigquery\client.py:4121:            # tables can be fetched without a column filter.
+  .venv\Lib\site-packages\google\cloud\bigquery\client.py:4122:            selected_fields=selected_fields,
+  .venv\Lib\site-packages\google\cloud\bigquery\client.py:4123:            total_rows=getattr(table, "num_rows", None),
+  .venv\Lib\site-packages\google\cloud\bigquery\client.py:4124:            project=table.project,
+  .venv\Lib\site-packages\google\cloud\bigquery\client.py:4125:            location=table.location,
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:336:        to filter rows by partition. Use
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:337:        :class:`google.cloud.bigquery_storage.types.ReadSession.TableModifiers`
+> .venv\Lib\site-packages\google\cloud\bigquery\table.py:338:        to select a specific snapshot to read from.
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:339:
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:340:        Returns:
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:341:            str: A reference to this table in the BigQuery Storage API.
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:342:        """
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:343:
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:1780:            call the BigQuery Storage API to fetch rows.
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:1781:        selected_fields (Optional[Sequence[google.cloud.bigquery.schema.SchemaField]]):
+> .venv\Lib\site-packages\google\cloud\bigquery\table.py:1782:            A subset of columns to select from this table.
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:1783:        total_rows (Optional[int]):
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:1784:            Total number of rows in the table.
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:1785:        first_page_response (Optional[dict]):
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:1786:            API response for the first page of results. These are returned when
+  .venv\Lib\site-packages\google\cloud\bigquery\table.py:1787:            the first page is requested.
+  .venv\Lib\site-packages\google\cloud\firestore_admin_v1\types\database.py:204:                Not used.
+  .venv\Lib\site-packages\google\cloud\firestore_admin_v1\types\database.py:205:            POINT_IN_TIME_RECOVERY_ENABLED (1):
+> .venv\Lib\site-packages\google\cloud\firestore_admin_v1\types\database.py:206:                Reads are supported on selected versions of the data from
+  .venv\Lib\site-packages\google\cloud\firestore_admin_v1\types\database.py:207:                within the past 7 days:
+  .venv\Lib\site-packages\google\cloud\firestore_admin_v1\types\database.py:208:
+  .venv\Lib\site-packages\google\cloud\firestore_admin_v1\types\database.py:209:                -  Reads against any timestamp within the past hour
+  .venv\Lib\site-packages\google\cloud\firestore_admin_v1\types\database.py:210:                -  Reads against 1-minute snapshots beyond 1 hour and within
+  .venv\Lib\site-packages\google\cloud\firestore_admin_v1\types\database.py:211:                   7 days
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\async_client.py:1271:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\async_client.py:1272:           -- Return the number of documents in table given a filter.
+> .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\async_client.py:1273:           SELECT COUNT(*) FROM ( SELECT * FROM k where a = true );
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\async_client.py:1274:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\async_client.py:1275:        .. code-block:: python
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\async_client.py:1276:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\async_client.py:1277:            # This snippet has been automatically generated and should be regarded as a
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\async_client.py:1278:            # code template only.
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py:1654:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py:1655:           -- Return the number of documents in table given a filter.
+> .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py:1656:           SELECT COUNT(*) FROM ( SELECT * FROM k where a = true );
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py:1657:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py:1658:        .. code-block:: python
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py:1659:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py:1660:            # This snippet has been automatically generated and should be regarded as a
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\client.py:1661:            # code template only.
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc_asyncio.py:611:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc_asyncio.py:612:           -- Return the number of documents in table given a filter.
+> .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc_asyncio.py:613:           SELECT COUNT(*) FROM ( SELECT * FROM k where a = true );
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc_asyncio.py:614:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc_asyncio.py:615:        Returns:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc_asyncio.py:616:            Callable[[~.RunAggregationQueryRequest],
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc_asyncio.py:617:                    Awaitable[~.RunAggregationQueryResponse]]:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc_asyncio.py:618:                A function that, when called, will call the underlying RPC
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc.py:594:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc.py:595:           -- Return the number of documents in table given a filter.
+> .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc.py:596:           SELECT COUNT(*) FROM ( SELECT * FROM k where a = true );
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc.py:597:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc.py:598:        Returns:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc.py:599:            Callable[[~.RunAggregationQueryRequest],
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc.py:600:                    ~.RunAggregationQueryResponse]:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\services\firestore\transports\grpc.py:601:                A function that, when called, will call the underlying RPC
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:95:            ::
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:96:
+> .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:97:               SELECT * FROM k WHERE a = 1 AND b > 2 ORDER BY b ASC, __name__ ASC;
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:98:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:99:            This query's results are ordered by
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:100:            ``(b ASC, __name__ ASC)``.
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:101:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:102:            Cursors can reference either the full ordering or a prefix
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:775:                    ::
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:776:
+> .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:777:                       AGGREGATE COUNT_UP_TO(1000) OVER ( SELECT * FROM k );
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:778:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:779:                    Requires:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:780:
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:781:                    -  Must be greater than zero when present.
+  .venv\Lib\site-packages\google\cloud\firestore_v1\types\query.py:782:            """
+  .venv\Lib\site-packages\importlib_metadata\__init__.py:338:    def select(self, **params) -> EntryPoints:
+  .venv\Lib\site-packages\importlib_metadata\__init__.py:339:        """
+> .venv\Lib\site-packages\importlib_metadata\__init__.py:340:        Select entry points from self that match the
+  .venv\Lib\site-packages\importlib_metadata\__init__.py:341:        given parameters (typically group and/or name).
+  .venv\Lib\site-packages\importlib_metadata\__init__.py:342:        """
+  .venv\Lib\site-packages\importlib_metadata\__init__.py:343:        return EntryPoints(ep for ep in self if py39.ep_matches(ep, **params))
+  .venv\Lib\site-packages\importlib_metadata\__init__.py:344:
+  .venv\Lib\site-packages\importlib_metadata\__init__.py:345:    @property
+  .venv\Lib\site-packages\jinja2\environment.py:1056:        if not names:
+  .venv\Lib\site-packages\jinja2\environment.py:1057:            raise TemplatesNotFound(
+> .venv\Lib\site-packages\jinja2\environment.py:1058:                message="Tried to select from an empty list of templates."
+  .venv\Lib\site-packages\jinja2\environment.py:1059:            )
+  .venv\Lib\site-packages\jinja2\environment.py:1060:
+  .venv\Lib\site-packages\jinja2\environment.py:1061:        for name in names:
+  .venv\Lib\site-packages\jinja2\environment.py:1062:            if isinstance(name, Template):
+  .venv\Lib\site-packages\jinja2\environment.py:1063:                return name
+  .venv\Lib\site-packages\opentelemetry\semconv\_incubating\attributes\db_attributes.py:220:Examples:
+  .venv\Lib\site-packages\opentelemetry\semconv\_incubating\attributes\db_attributes.py:221:
+> .venv\Lib\site-packages\opentelemetry\semconv\_incubating\attributes\db_attributes.py:222:- For a query `SELECT * FROM users where username =  %s` with the parameter `"jdoe"`,
+  .venv\Lib\site-packages\opentelemetry\semconv\_incubating\attributes\db_attributes.py:223:  the attribute `db.query.parameter.0` SHOULD be set to `"jdoe"`.
+  .venv\Lib\site-packages\opentelemetry\semconv\_incubating\attributes\db_attributes.py:224:
+> .venv\Lib\site-packages\opentelemetry\semconv\_incubating\attributes\db_attributes.py:225:- For a query `"SELECT * FROM users WHERE username = %(username)s;` with parameter
+  .venv\Lib\site-packages\opentelemetry\semconv\_incubating\attributes\db_attributes.py:226:  `username = "jdoe"`, the attribute `db.query.parameter.username` SHOULD be set to `"jdoe"`.
+  .venv\Lib\site-packages\opentelemetry\semconv\_incubating\attributes\db_attributes.py:227:"""
+  .venv\Lib\site-packages\opentelemetry\semconv\_incubating\attributes\db_attributes.py:228:
+  .venv\Lib\site-packages\opentelemetry\semconv\_incubating\attributes\db_attributes.py:229:DB_QUERY_SUMMARY: Final = "db.query.summary"
+  .venv\Lib\site-packages\opentelemetry\semconv\_incubating\attributes\db_attributes.py:230:"""
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:118:    the state of installed distributions when this function is called.
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:119:    """
+> .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:120:    return select_backend().Environment.from_paths(paths)
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:121:
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:122:
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:123:def get_directory_distribution(directory: str) -> BaseDistribution:
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:124:    """Get the distribution metadata representation in the specified directory.
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:125:
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:127:    the given on-disk ``.dist-info`` directory.
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:128:    """
+> .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:129:    return select_backend().Distribution.from_directory(directory)
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:130:
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:131:
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:132:def get_wheel_distribution(wheel: Wheel, canonical_name: str) -> BaseDistribution:
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:133:    """Get the representation of the specified wheel's distribution metadata.
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:134:
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:138:    :param canonical_name: Normalized project name of the given wheel.
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:139:    """
+> .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:140:    return select_backend().Distribution.from_wheel(wheel, canonical_name)
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:141:
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:142:
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:143:def get_metadata_distribution(
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:144:    metadata_contents: bytes,
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:145:    filename: str,
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:156:    :param canonical_name: Normalized project name of the given dist.
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:157:    """
+> .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:158:    return select_backend().Distribution.from_metadata_file_contents(
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:159:        metadata_contents,
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:160:        filename,
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:161:        canonical_name,
+  .venv\Lib\site-packages\pip\_internal\metadata\__init__.py:162:    )
+  .venv\Lib\site-packages\pip\_vendor\typing_extensions.py:2463:              ...
+  .venv\Lib\site-packages\pip\_vendor\typing_extensions.py:2464:
+> .venv\Lib\site-packages\pip\_vendor\typing_extensions.py:2465:          query("SELECT * FROM table")  # ok
+> .venv\Lib\site-packages\pip\_vendor\typing_extensions.py:2466:          query(f"SELECT * FROM {input()}")  # not ok
+  .venv\Lib\site-packages\pip\_vendor\typing_extensions.py:2467:
+  .venv\Lib\site-packages\pip\_vendor\typing_extensions.py:2468:        See PEP 675 for details.
+  .venv\Lib\site-packages\pip\_vendor\typing_extensions.py:2469:
+  .venv\Lib\site-packages\pip\_vendor\typing_extensions.py:2470:        """
+  .venv\Lib\site-packages\pip\_vendor\typing_extensions.py:2471:        raise TypeError(f"{self} is not subscriptable")
+  .venv\Lib\site-packages\pip\_vendor\distlib\manifest.py:247:    def _include_pattern(self, pattern, anchor=True, prefix=None,
+  .venv\Lib\site-packages\pip\_vendor\distlib\manifest.py:248:                         is_regex=False):
+> .venv\Lib\site-packages\pip\_vendor\distlib\manifest.py:249:        """Select strings (presumably filenames) from 'self.files' that
+  .venv\Lib\site-packages\pip\_vendor\distlib\manifest.py:250:        match 'pattern', a Unix-style wildcard (glob) pattern.
+  .venv\Lib\site-packages\pip\_vendor\distlib\manifest.py:251:
+  .venv\Lib\site-packages\pip\_vendor\distlib\manifest.py:252:        Patterns are not quite the same as implemented by the 'fnmatch'
+  .venv\Lib\site-packages\pip\_vendor\distlib\manifest.py:253:        module: '*' and '?'  match non-special characters, where "special"
+  .venv\Lib\site-packages\pip\_vendor\distlib\manifest.py:254:        is platform-dependent: slash on Unix; colon, slash, and backslash on
+  .venv\Lib\site-packages\pip\_vendor\requests\adapters.py:399:        This looks at the PreparedRequest, the user-specified verify value,
+  .venv\Lib\site-packages\pip\_vendor\requests\adapters.py:400:        and the value of the cert parameter to determine what PoolKey values
+> .venv\Lib\site-packages\pip\_vendor\requests\adapters.py:401:        to use to select a connection from a given urllib3 Connection Pool.
+  .venv\Lib\site-packages\pip\_vendor\requests\adapters.py:402:
+  .venv\Lib\site-packages\pip\_vendor\requests\adapters.py:403:        The SSL related pool key arguments are not consistently set. As of
+  .venv\Lib\site-packages\pip\_vendor\requests\adapters.py:404:        this writing, use the following to determine what keys may be in that
+  .venv\Lib\site-packages\pip\_vendor\requests\adapters.py:405:        dictionary:
+  .venv\Lib\site-packages\pip\_vendor\requests\adapters.py:406:
+  .venv\Lib\site-packages\requests\adapters.py:399:        This looks at the PreparedRequest, the user-specified verify value,
+  .venv\Lib\site-packages\requests\adapters.py:400:        and the value of the cert parameter to determine what PoolKey values
+> .venv\Lib\site-packages\requests\adapters.py:401:        to use to select a connection from a given urllib3 Connection Pool.
+  .venv\Lib\site-packages\requests\adapters.py:402:
+  .venv\Lib\site-packages\requests\adapters.py:403:        The SSL related pool key arguments are not consistently set. As of
+  .venv\Lib\site-packages\requests\adapters.py:404:        this writing, use the following to determine what keys may be in that
+  .venv\Lib\site-packages\requests\adapters.py:405:        dictionary:
+  .venv\Lib\site-packages\requests\adapters.py:406:
+  .venv\Lib\site-packages\setuptools\_distutils\filelist.py:230:        is_regex: bool = False,
+  .venv\Lib\site-packages\setuptools\_distutils\filelist.py:231:    ) -> bool:
+> .venv\Lib\site-packages\setuptools\_distutils\filelist.py:232:        """Select strings (presumably filenames) from 'self.files' that
+  .venv\Lib\site-packages\setuptools\_distutils\filelist.py:233:        match 'pattern', a Unix-style wildcard (glob) pattern.  Patterns
+  .venv\Lib\site-packages\setuptools\_distutils\filelist.py:234:        are not quite the same as implemented by the 'fnmatch' module: '*'
+  .venv\Lib\site-packages\setuptools\_distutils\filelist.py:235:        and '?'  match non-special characters, where "special" is platform-
+  .venv\Lib\site-packages\setuptools\_distutils\filelist.py:236:        dependent: slash on Unix; colon, slash, and backslash on
+  .venv\Lib\site-packages\setuptools\_distutils\filelist.py:237:        DOS/Windows; and colon on Mac OS.
+  .venv\Lib\site-packages\setuptools\_vendor\typing_extensions.py:2102:              ...
+  .venv\Lib\site-packages\setuptools\_vendor\typing_extensions.py:2103:
+> .venv\Lib\site-packages\setuptools\_vendor\typing_extensions.py:2104:          query("SELECT * FROM table")  # ok
+> .venv\Lib\site-packages\setuptools\_vendor\typing_extensions.py:2105:          query(f"SELECT * FROM {input()}")  # not ok
+  .venv\Lib\site-packages\setuptools\_vendor\typing_extensions.py:2106:
+  .venv\Lib\site-packages\setuptools\_vendor\typing_extensions.py:2107:        See PEP 675 for details.
+  .venv\Lib\site-packages\setuptools\_vendor\typing_extensions.py:2108:
+  .venv\Lib\site-packages\setuptools\_vendor\typing_extensions.py:2109:        """
+  .venv\Lib\site-packages\setuptools\_vendor\typing_extensions.py:2110:        raise TypeError(f"{self} is not subscriptable")
+  .venv\Lib\site-packages\setuptools\_vendor\importlib_metadata\__init__.py:277:    def select(self, **params) -> EntryPoints:
+  .venv\Lib\site-packages\setuptools\_vendor\importlib_metadata\__init__.py:278:        """
+> .venv\Lib\site-packages\setuptools\_vendor\importlib_metadata\__init__.py:279:        Select entry points from self that match the
+  .venv\Lib\site-packages\setuptools\_vendor\importlib_metadata\__init__.py:280:        given parameters (typically group and/or name).
+  .venv\Lib\site-packages\setuptools\_vendor\importlib_metadata\__init__.py:281:        """
+  .venv\Lib\site-packages\setuptools\_vendor\importlib_metadata\__init__.py:282:        return EntryPoints(ep for ep in self if py39.ep_matches(ep, **params))
+  .venv\Lib\site-packages\setuptools\_vendor\importlib_metadata\__init__.py:283:
+  .venv\Lib\site-packages\setuptools\_vendor\importlib_metadata\__init__.py:284:    @property
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:618:        ('a', 2, 'd', 3)
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:619:
+> .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:620:    This equivalent to taking a random selection from
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:621:    ``itertools.product(*args, **kwarg)``.
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:622:
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:623:    """
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:624:    pools = [tuple(pool) for pool in args] * repeat
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:625:    return tuple(choice(pool) for pool in pools)
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:635:        (3, 4, 0, 1, 2)
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:636:
+> .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:637:    This equivalent to taking a random selection from
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:638:    ``itertools.permutations(iterable, r)``.
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:639:
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:640:    """
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:641:    pool = tuple(iterable)
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:642:    r = len(pool) if r is None else r
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:650:        (2, 3, 4)
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:651:
+> .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:652:    This equivalent to taking a random selection from
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:653:    ``itertools.combinations(iterable, r)``.
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:654:
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:655:    """
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:656:    pool = tuple(iterable)
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:657:    n = len(pool)
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:667:        (0, 0, 1, 2, 2)
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:668:
+> .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:669:    This equivalent to taking a random selection from
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:670:    ``itertools.combinations_with_replacement(iterable, r)``.
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:671:
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:672:    """
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:673:    pool = tuple(iterable)
+  .venv\Lib\site-packages\setuptools\_vendor\more_itertools\recipes.py:674:    n = len(pool)
+  .venv\Lib\site-packages\urllib3\contrib\pyopenssl.py:521:            except OpenSSL.SSL.WantReadError as e:
+  .venv\Lib\site-packages\urllib3\contrib\pyopenssl.py:522:                if not util.wait_for_read(sock, sock.gettimeout()):
+> .venv\Lib\site-packages\urllib3\contrib\pyopenssl.py:523:                    raise timeout("select timed out") from e
+  .venv\Lib\site-packages\urllib3\contrib\pyopenssl.py:524:                continue
+  .venv\Lib\site-packages\urllib3\contrib\pyopenssl.py:525:            except OpenSSL.SSL.Error as e:
+  .venv\Lib\site-packages\urllib3\contrib\pyopenssl.py:526:                raise ssl.SSLError(f"bad handshake: {e!r}") from e
+  .venv\Lib\site-packages\urllib3\contrib\pyopenssl.py:527:            break
+  .venv\Lib\site-packages\urllib3\contrib\pyopenssl.py:528:
+

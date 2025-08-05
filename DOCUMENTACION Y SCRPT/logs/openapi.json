@@ -1,0 +1,1998 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "SmarWatt Microservices API",
+    "description": "API completa para análisis energético y chatbot inteligente",
+    "version": "2.0.0",
+    "contact": {
+      "name": "SmarWatt Team",
+      "email": "dev@smarwatt.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Energy IA API Development"
+    },
+    {
+      "url": "http://localhost:5001",
+      "description": "Expert Bot API Development"
+    }
+  ],
+  "paths": {
+    "/tariffs/recommendations": {
+      "get": {
+        "summary": "GET /tariffs/recommendations",
+        "description": "Endpoint principal - Recomendación de tarifas EXTRA empresarial",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/tariffs/market-data": {
+      "get": {
+        "summary": "GET /tariffs/market-data",
+        "description": "Endpoint para obtener datos del mercado de tarifas",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/admin/tariffs/add": {
+      "post": {
+        "summary": "POST /admin/tariffs/add",
+        "description": "Endpoint ADMIN para agregar datos de tarifas directamente",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "summary": "OPTIONS /admin/tariffs/add",
+        "description": "Endpoint ADMIN para agregar datos de tarifas directamente",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/admin/tariffs/batch-add": {
+      "post": {
+        "summary": "POST /admin/tariffs/batch-add",
+        "description": "Endpoint ADMIN para agregar múltiples tarifas en lote",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "summary": "OPTIONS /admin/tariffs/batch-add",
+        "description": "Endpoint ADMIN para agregar múltiples tarifas en lote",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/tariffs/compare": {
+      "post": {
+        "summary": "POST /tariffs/compare",
+        "description": "Endpoint para comparar tarifas específicas",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "summary": "OPTIONS /tariffs/compare",
+        "description": "Endpoint para comparar tarifas específicas",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/message": {
+      "post": {
+        "summary": "POST /message",
+        "description": "Endpoint que recibe cada mensaje del usuario y orquesta la respuesta.\n    IDÉNTICO AL ORIGINAL - PROHIBIDO CAMBIAR",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "summary": "OPTIONS /message",
+        "description": "Endpoint que recibe cada mensaje del usuario y orquesta la respuesta.\n    IDÉNTICO AL ORIGINAL - PROHIBIDO CAMBIAR",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/message/v2": {
+      "post": {
+        "summary": "POST /message/v2",
+        "description": "Endpoint mejorado con contexto directo desde expert-bot",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cross-service": {
+      "post": {
+        "summary": "POST /cross-service",
+        "description": "Endpoint para comunicación directa entre servicios",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations": {
+      "get": {
+        "summary": "GET /conversations",
+        "description": "Endpoint para obtener conversaciones del usuario con robustez empresarial",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/conversations/<conversation_id>": {
+      "delete": {
+        "summary": "DELETE /conversations/<conversation_id>",
+        "description": "Endpoint para borrar conversación específica empresarial",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "GET /health",
+        "description": "Health check empresarial completo del chatbot",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/api/v1/links/test": {
+      "post": {
+        "summary": "POST /api/v1/links/test",
+        "description": "🔗 Endpoint de prueba para sistema de enlaces inteligentes\n\n    Body:\n    {\n        \"response_text\": \"Tu mensaje de prueba aquí\"\n    }\n\n    Returns:\n    {\n        \"original_response\": \"texto original\",\n        \"enhanced_response\": \"texto con enlaces\",\n        \"links_added\": true/false,\n        \"service_status\": {...}\n    }",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/links/status": {
+      "get": {
+        "summary": "GET /api/v1/links/status",
+        "description": "📊 Obtener estado del servicio de enlaces empresarial\n\n    Returns:\n    {\n        \"service_status\": {...},\n        \"available_links\": [...],\n        \"version\": \"...\"\n    }",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/api/v1/links/direct/<link_type>": {
+      "get": {
+        "summary": "GET /api/v1/links/direct/<link_type>",
+        "description": "🔗 Obtener enlace directo por tipo\n\n    Args:\n        link_type: blog, dashboard, calculator, weather, contact, terms, privacy\n\n    Returns:\n    {\n        \"link_type\": \"...\",\n        \"url\": \"...\",\n        \"status\": \"success\"\n    }",
+        "tags": [
+          "Energy IA API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/session/start": {
+      "post": {
+        "summary": "POST /session/start",
+        "description": "Endpoint para iniciar el chat, como espera el frontend.\n    IDÉNTICO AL ORIGINAL - PROHIBIDO CAMBIAR",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "summary": "OPTIONS /session/start",
+        "description": "Endpoint para iniciar el chat, como espera el frontend.\n    IDÉNTICO AL ORIGINAL - PROHIBIDO CAMBIAR",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/new-conversation": {
+      "post": {
+        "summary": "POST /new-conversation",
+        "description": "ENDPOINT EMPRESARIAL: Crear nueva conversación guardando la actual.\n    Funcionalidad para botón \"Nueva Conversación\" del frontend.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "summary": "OPTIONS /new-conversation",
+        "description": "ENDPOINT EMPRESARIAL: Crear nueva conversación guardando la actual.\n    Funcionalidad para botón \"Nueva Conversación\" del frontend.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/conversation/history": {
+      "get": {
+        "summary": "GET /conversation/history",
+        "description": "NUEVO ENDPOINT EMPRESARIAL: Recuperar historial de conversaciones del usuario.\n    Funcionalidad solicitada para nivel empresarial.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/conversation/<conversation_id>": {
+      "delete": {
+        "summary": "DELETE /conversation/<conversation_id>",
+        "description": "NUEVO ENDPOINT EMPRESARIAL: Borrar conversación específica.\n    Funcionalidad solicitada para nivel empresarial.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      },
+      "options": {
+        "summary": "OPTIONS /conversation/<conversation_id>",
+        "description": "NUEVO ENDPOINT EMPRESARIAL: Borrar conversación específica.\n    Funcionalidad solicitada para nivel empresarial.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/conversation/feedback": {
+      "post": {
+        "summary": "POST /conversation/feedback",
+        "description": "NUEVO ENDPOINT EMPRESARIAL: Enviar feedback de conversación.\n    Funcionalidad para aprendizaje automático empresarial.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "summary": "OPTIONS /conversation/feedback",
+        "description": "NUEVO ENDPOINT EMPRESARIAL: Enviar feedback de conversación.\n    Funcionalidad para aprendizaje automático empresarial.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "summary": "GET /metrics",
+        "description": "NUEVO ENDPOINT EMPRESARIAL: Obtener métricas de usuario.\n    Funcionalidad para análisis y monitorización empresarial.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/consumption": {
+      "post": {
+        "summary": "POST /consumption",
+        "description": "Endpoint ULTRA-ROBUSTO para subir facturas de consumo.\n    NUNCA falla y SIEMPRE ofrece alternativas amables al usuario.\n    Garantiza máximo valor y experiencia perfecta.\n\n    IDÉNTICO AL ORIGINAL - PROHIBIDO CAMBIAR",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard": {
+      "get": {
+        "summary": "GET /dashboard",
+        "description": "Endpoint ULTRA-ROBUSTO para obtener datos del panel.\n    NUNCA falla y SIEMPRE proporciona datos útiles al usuario.\n\n    IDÉNTICO AL ORIGINAL - PROHIBIDO CAMBIAR",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "summary": "GET /users/profile",
+        "description": "Endpoint para obtener el perfil de usuario con datos de consumo.\n    Usado por energy_ia_api para obtener datos del usuario.\n\n    IDÉNTICO AL ORIGINAL - PROHIBIDO CAMBIAR",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/manual-data": {
+      "post": {
+        "summary": "POST /manual-data",
+        "description": "NUEVO ENDPOINT REAL: Permite entrada manual cuando OCR falla o es incompleto.\n    Da VALOR INMEDIATO al usuario que no puede usar OCR por cualquier motivo.\n\n    IDÉNTICO AL ORIGINAL - PROHIBIDO CAMBIAR",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/consumption/update": {
+      "put": {
+        "summary": "PUT /consumption/update",
+        "description": "NUEVO ENDPOINT EMPRESARIAL: Actualizar datos de consumo existentes.\n    Permite actualizar datos sin subir nueva factura.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/consumption/history": {
+      "get": {
+        "summary": "GET /consumption/history",
+        "description": "NUEVO ENDPOINT EMPRESARIAL: Obtener historial de consumos del usuario.\n    Funcionalidad empresarial para análisis de patrones.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/consumption/analyze": {
+      "post": {
+        "summary": "POST /consumption/analyze",
+        "description": "NUEVO ENDPOINT EMPRESARIAL: Análisis avanzado de consumo con IA.\n    Proporciona insights inteligentes sobre patrones de consumo.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/consumption/recommendations": {
+      "get": {
+        "summary": "GET /consumption/recommendations",
+        "description": "NUEVO ENDPOINT EMPRESARIAL: Obtener recomendaciones personalizadas.\n    Basadas en IA y aprendizaje automático.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/consumption/compare": {
+      "post": {
+        "summary": "POST /consumption/compare",
+        "description": "NUEVO ENDPOINT EMPRESARIAL: Comparar tarifas eléctricas.\n    Análisis inteligente de tarifas con recomendaciones personalizadas.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/consumption/title": {
+      "put": {
+        "summary": "PUT /consumption/title",
+        "description": "NUEVO ENDPOINT EMPRESARIAL: Cambiar título de conversación energética.\n    Permite personalizar títulos para mejor organización.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/analysis/sentiment": {
+      "post": {
+        "summary": "POST /api/v1/analysis/sentiment",
+        "description": "Endpoint empresarial para análisis de sentiment avanzado.\n    Expone el método analyze_sentiment_enterprise vía HTTP para microservicios independientes.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "summary": "OPTIONS /api/v1/analysis/sentiment",
+        "description": "Endpoint empresarial para análisis de sentiment avanzado.\n    Expone el método analyze_sentiment_enterprise vía HTTP para microservicios independientes.",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/user/tasks": {
+      "get": {
+        "summary": "GET /user/tasks",
+        "description": "🏢 DASHBOARD DE TAREAS ASÍNCRONAS PARA USUARIO\n\n    VALOR ALTO PARA EL USUARIO:\n    ✅ Estado en tiempo real de sus tareas (facturas, análisis, reportes)\n    ✅ Progreso visual de procesamiento ML y análisis de datos\n    ✅ Historial personalizado de tareas completadas\n    ✅ Tiempo estimado de finalización\n    ✅ Notificaciones de tareas completadas o fallidas\n    ✅ Métricas personales de productividad\n    ✅ Acceso a resultados de tareas completadas",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      },
+      "post": {
+        "summary": "POST /user/tasks",
+        "description": "🏢 CREAR TAREA ASÍNCRONA PARA USUARIO\n\n    Permite al usuario crear tareas de alto valor como:\n    ✅ Procesamiento de facturas energéticas\n    ✅ Análisis de datos de consumo personalizados\n    ✅ Generación de reportes de ahorro\n    ✅ Actualización de perfil energético\n    ✅ Análisis de rendimiento personalizado",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/tasks/<task_id>": {
+      "get": {
+        "summary": "GET /user/tasks/<task_id>",
+        "description": "🏢 Obtener estado detallado de tarea específica del usuario",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/admin/system/metrics": {
+      "get": {
+        "summary": "GET /admin/system/metrics",
+        "description": "🏢 MÉTRICAS EMPRESARIALES COMPLETAS PARA ADMINISTRADORES\n\n    VALOR ALTO PARA ADMINISTRADORES:\n    ✅ Dashboard completo de rendimiento del sistema\n    ✅ Métricas de workers y throughput en tiempo real\n    ✅ Análisis de carga y optimización de recursos\n    ✅ Estadísticas de fallos y reintentos por tipo de tarea\n    ✅ Tendencias de uso y patrones de demanda\n    ✅ Alertas de rendimiento y recomendaciones\n    ✅ Métricas de SLA y tiempos de respuesta\n    ✅ Análisis de usuarios más activos y patrones de uso",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/admin/tasks/management": {
+      "get": {
+        "summary": "GET /admin/tasks/management",
+        "description": "🏢 GESTIÓN AVANZADA DE TAREAS PARA ADMINISTRADORES\n\n    VALOR ADMINISTRATIVO ALTO:\n    ✅ Vista completa de todas las tareas del sistema\n    ✅ Capacidad de filtrar por usuario, estado, tipo, fecha\n    ✅ Herramientas de gestión: cancelar, reintentar, repriorizar\n    ✅ Análisis de patrones de fallo y optimización\n    ✅ Gestión de carga de trabajo y balanceo\n    ✅ Estadísticas por usuario y departamento",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/links/test": {
+      "post": {
+        "summary": "POST /links/test",
+        "description": "🔗 Endpoint de prueba para sistema de enlaces inteligentes\n\n    Body:\n    {\n        \"response_text\": \"Tu mensaje de prueba aquí\"\n    }\n\n    Returns:\n    {\n        \"original_response\": \"texto original\",\n        \"enhanced_response\": \"texto con enlaces\",\n        \"links_added\": true/false,\n        \"service_status\": {...}\n    }",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Mensaje de ejemplo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/links/status": {
+      "get": {
+        "summary": "GET /links/status",
+        "description": "📊 Obtener estado del servicio de enlaces empresarial\n\n    Returns:\n    {\n        \"service_status\": {...},\n        \"available_links\": [...],\n        \"version\": \"...\"\n    }",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/links/direct/<link_type>": {
+      "get": {
+        "summary": "GET /links/direct/<link_type>",
+        "description": "🔗 Obtener enlace directo por tipo\n\n    Args:\n        link_type: blog, dashboard, calculator, weather, contact, terms, privacy\n\n    Returns:\n    {\n        \"link_type\": \"...\",\n        \"url\": \"...\",\n        \"status\": \"success\"\n    }",
+        "tags": [
+          "Expert Bot API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error en la petición"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Token JWT de autenticación de Firebase"
+      }
+    }
+  }
+}

@@ -1,0 +1,106 @@
+[
+  {
+    "user_id": "perfil_madrid_familia_001",
+    "profile": {
+      "kwh_consumidos": 320.5,
+      "potencia_contratada_kw": 5.75,
+      "comercializadora": "Iberdrola",
+      "home_type": "apartment",
+      "num_inhabitants": 4,
+      "post_code_prefix": "28",
+      "provincia": "Madrid",
+      "tariff_name_from_invoice": "Tarifa 2.0TD"
+    }
+  },
+  {
+    "user_id": "perfil_barcelona_individual_002",
+    "profile": {
+      "kwh_consumidos": 180.2,
+      "potencia_contratada_kw": 3.45,
+      "comercializadora": "Endesa",
+      "home_type": "apartment",
+      "num_inhabitants": 1,
+      "post_code_prefix": "08",
+      "provincia": "Barcelona",
+      "tariff_name_from_invoice": "Tarifa PVPC"
+    }
+  },
+  {
+    "user_id": "perfil_valencia_pareja_003",
+    "profile": {
+      "kwh_consumidos": 250.8,
+      "potencia_contratada_kw": 4.6,
+      "comercializadora": "Naturgy",
+      "home_type": "house",
+      "num_inhabitants": 2,
+      "post_code_prefix": "46",
+      "provincia": "Valencia",
+      "tariff_name_from_invoice": "Tarifa 2.0TD"
+    }
+  },
+  {
+    "user_id": "perfil_sevilla_familia_grande_004",
+    "profile": {
+      "kwh_consumidos": 420.1,
+      "potencia_contratada_kw": 9.2,
+      "comercializadora": "EDP",
+      "home_type": "chalet",
+      "num_inhabitants": 5,
+      "post_code_prefix": "41",
+      "provincia": "Sevilla",
+      "tariff_name_from_invoice": "Tarifa 3.0TD"
+    }
+  },
+  {
+    "user_id": "perfil_madrid_senior_005",
+    "profile": {
+      "kwh_consumidos": 160.5,
+      "potencia_contratada_kw": 3.45,
+      "comercializadora": "Iberdrola",
+      "home_type": "apartment",
+      "num_inhabitants": 2,
+      "post_code_prefix": "28",
+      "provincia": "Madrid",
+      "tariff_name_from_invoice": "Tarifa PVPC"
+    }
+  },
+  {
+    "user_id": "perfil_barcelona_profesional_006",
+    "profile": {
+      "kwh_consumidos": 290.3,
+      "potencia_contratada_kw": 6.9,
+      "comercializadora": "Endesa",
+      "home_type": "house",
+      "num_inhabitants": 3,
+      "post_code_prefix": "08",
+      "provincia": "Barcelona",
+      "tariff_name_from_invoice": "Tarifa 2.0TD"
+    }
+  },
+  {
+    "user_id": "perfil_valencia_estudiante_007",
+    "profile": {
+      "kwh_consumidos": 145.7,
+      "potencia_contratada_kw": 3.45,
+      "comercializadora": "Naturgy",
+      "home_type": "apartment",
+      "num_inhabitants": 1,
+      "post_code_prefix": "46",
+      "provincia": "Valencia",
+      "tariff_name_from_invoice": "Tarifa PVPC"
+    }
+  },
+  {
+    "user_id": "perfil_sevilla_empresario_008",
+    "profile": {
+      "kwh_consumidos": 380.9,
+      "potencia_contratada_kw": 11.5,
+      "comercializadora": "EDP",
+      "home_type": "chalet",
+      "num_inhabitants": 4,
+      "post_code_prefix": "41",
+      "provincia": "Sevilla",
+      "tariff_name_from_invoice": "Tarifa 3.0TD"
+    }
+  }
+]

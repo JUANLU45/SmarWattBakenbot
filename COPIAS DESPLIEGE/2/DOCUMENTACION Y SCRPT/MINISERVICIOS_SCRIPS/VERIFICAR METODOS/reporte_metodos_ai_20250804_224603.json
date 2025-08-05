@@ -1,0 +1,818 @@
+{
+  "metodos_utilizados": {
+    "analyze_sentiment_enterprise": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\analysis_routes.py",
+        "linea": 53,
+        "contexto": "Expone el método analyze_sentiment_enterprise vía HTTP para microservicios independientes.",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\analysis_routes.py",
+        "linea": 115,
+        "contexto": "sentiment_analysis = ai_learning_service.analyze_sentiment_enterprise(",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1052,
+        "contexto": "sentiment_analysis = self.analyze_sentiment_enterprise(",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\chat_service.py",
+        "linea": 322,
+        "contexto": "self.ai_learning_service.analyze_sentiment_enterprise(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "generate_smart_recommendations": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\energy_routes.py",
+        "linea": 527,
+        "contexto": "ai_recommendations = ai_learning.generate_smart_recommendations(user_id)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "process_invoice_upload_patterns": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\energy_routes.py",
+        "linea": 118,
+        "contexto": "ai_learning.process_invoice_upload_patterns(user_id, file.filename, result)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "process_manual_data_patterns": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\energy_routes.py",
+        "linea": 356,
+        "contexto": "ai_learning.process_manual_data_patterns(user_id, manual_invoice_data)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "process_consumption_update_patterns": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\energy_routes.py",
+        "linea": 411,
+        "contexto": "ai_learning.process_consumption_update_patterns(user_id, data)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "generate_consumption_insights": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\energy_routes.py",
+        "linea": 493,
+        "contexto": "ai_insights = ai_learning.generate_consumption_insights(user_id, analysis)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "enhance_tariff_comparison": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\energy_routes.py",
+        "linea": 562,
+        "contexto": "ai_comparison = ai_learning.enhance_tariff_comparison(user_id, comparison)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_initialize_enterprise_services": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\energy_service.py",
+        "linea": 81,
+        "contexto": "self._initialize_enterprise_services()",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 106,
+        "contexto": "self._initialize_enterprise_services()",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+        "linea": 141,
+        "contexto": "self._initialize_enterprise_services()",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\chat_service.py",
+        "linea": 104,
+        "contexto": "self._initialize_enterprise_services()",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\energy_service.py",
+        "linea": 81,
+        "contexto": "self._initialize_enterprise_services()",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_calculate_efficiency_score": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\energy_service.py",
+        "linea": 2158,
+        "contexto": "efficiency_score = self._calculate_efficiency_score(invoice_data)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 856,
+        "contexto": "efficiency_score = self._calculate_efficiency_score(user_message)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\energy_service.py",
+        "linea": 2550,
+        "contexto": "efficiency_score = self._calculate_efficiency_score(invoice_data)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_ensure_enterprise_ai_tables_exist": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 169,
+        "contexto": "self._ensure_enterprise_ai_tables_exist()",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_create_table_if_not_exists": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 233,
+        "contexto": "self._create_table_if_not_exists(table_name, schema)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_log_to_bigquery_enterprise": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 778,
+        "contexto": "self._log_to_bigquery_enterprise(",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1285,
+        "contexto": "self._log_to_bigquery_enterprise(",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2096,
+        "contexto": "self._log_to_bigquery_enterprise(",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2278,
+        "contexto": "self._log_to_bigquery_enterprise(\"ai_model_updates\", [model_updates])",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\chat_service.py",
+        "linea": 239,
+        "contexto": "return self._log_to_bigquery_enterprise(table_id, rows)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\chat_service.py",
+        "linea": 248,
+        "contexto": "return self._log_to_bigquery_enterprise(table_id, rows)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\chat_service.py",
+        "linea": 299,
+        "contexto": "self._log_to_bigquery_enterprise(self.bq_conversations_table_id, [row])",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\chat_service.py",
+        "linea": 357,
+        "contexto": "return self._log_to_bigquery_enterprise(self.bq_feedback_table_id, [row])",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_calculate_enterprise_sentiment": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 353,
+        "contexto": "self._calculate_enterprise_sentiment(message_text)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_analyze_context_multipliers": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 481,
+        "contexto": "context_multipliers = self._analyze_context_multipliers(message_text)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_calculate_confidence_score": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 510,
+        "contexto": "confidence = self._calculate_confidence_score(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_extract_emotional_indicators": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 515,
+        "contexto": "emotional_indicators = self._extract_emotional_indicators(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_analyze_risk_factors": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 357,
+        "contexto": "risk_factors = self._analyze_risk_factors(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_calculate_engagement_level": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 362,
+        "contexto": "engagement_level = self._calculate_engagement_level(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_generate_enterprise_personalization_hints": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 367,
+        "contexto": "personalization_hints = self._generate_enterprise_personalization_hints(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_log_sentiment_analysis_async": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 384,
+        "contexto": "self._log_sentiment_analysis_async(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "detect_enterprise_user_patterns": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1059,
+        "contexto": "patterns = self.detect_enterprise_user_patterns(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_detect_enterprise_communication_pattern": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 813,
+        "contexto": "comm_pattern = self._detect_enterprise_communication_pattern(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_detect_enterprise_content_preferences": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 820,
+        "contexto": "content_pattern = self._detect_enterprise_content_preferences(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_detect_enterprise_expertise_level": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 827,
+        "contexto": "expertise_pattern = self._detect_enterprise_expertise_level(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_detect_enterprise_value_seeking": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 834,
+        "contexto": "value_pattern = self._detect_enterprise_value_seeking(conversation_data)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "process_enterprise_interaction": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1451,
+        "contexto": "return self.process_enterprise_interaction(kwargs)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2408,
+        "contexto": "\"\"\"🔧 Wrapper para process_enterprise_interaction - Subida de facturas\"\"\"",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2418,
+        "contexto": "return self.process_enterprise_interaction(learning_data)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2423,
+        "contexto": "\"\"\"🔧 Wrapper para process_enterprise_interaction - Datos manuales\"\"\"",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2432,
+        "contexto": "return self.process_enterprise_interaction(learning_data)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2437,
+        "contexto": "\"\"\"🔧 Wrapper para process_enterprise_interaction - Actualización consumo\"\"\"",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2446,
+        "contexto": "return self.process_enterprise_interaction(learning_data)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\chat_service.py",
+        "linea": 1476,
+        "contexto": "self.ai_learning_service.process_enterprise_interaction(learning_data)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "energy_ia_api_COPY\\app\\services\\generative_chat_service.py",
+        "linea": 300,
+        "contexto": "# enterprise_analysis = self._process_enterprise_interaction_http(_learning_data)",
+        "microservicio": "energy_ia_api"
+      }
+    ],
+    "_calculate_formality_score": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 854,
+        "contexto": "formal_score = self._calculate_formality_score(user_message)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_calculate_technical_score": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 855,
+        "contexto": "technical_score = self._calculate_technical_score(user_message)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_update_enterprise_performance_metrics": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1083,
+        "contexto": "self._update_enterprise_performance_metrics(processing_time, True)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1096,
+        "contexto": "self._update_enterprise_performance_metrics(0, False)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_log_patterns_async": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 839,
+        "contexto": "self._log_patterns_async(user_id, patterns)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_calculate_pattern_roi": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1271,
+        "contexto": "\"roi_score\": self._calculate_pattern_roi(pattern),",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_analyze_enterprise_topics": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 890,
+        "contexto": "topic_scores = self._analyze_enterprise_topics(user_message)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_get_enterprise_user_patterns": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1016,
+        "contexto": "enterprise_patterns = self._get_enterprise_user_patterns(user_id)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_get_enterprise_sentiment_profile": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1020,
+        "contexto": "sentiment_profile = self._get_enterprise_sentiment_profile(user_id)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_generate_enterprise_predictions": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1069,
+        "contexto": "predictions = self._generate_enterprise_predictions(",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2451,
+        "contexto": "\"\"\"🔧 Wrapper para _generate_enterprise_predictions - Insights de consumo\"\"\"",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2469,
+        "contexto": "predictions = self._generate_enterprise_predictions(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_calculate_user_business_value": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1621,
+        "contexto": "\"predicted_value\": self._calculate_user_business_value(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_predict_next_user_action": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1562,
+        "contexto": "\"predicted_value\": self._predict_next_user_action(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_predict_user_satisfaction": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1580,
+        "contexto": "\"predicted_value\": self._predict_user_satisfaction(sentiment_analysis),",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_get_enterprise_predictions": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1024,
+        "contexto": "predictions = self._get_enterprise_predictions(user_id)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_generate_fallback_predictions": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1777,
+        "contexto": "return self._generate_fallback_predictions(user_id)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1783,
+        "contexto": "return self._generate_fallback_predictions(user_id)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_generate_enterprise_personalization": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 367,
+        "contexto": "personalization_hints = self._generate_enterprise_personalization_hints(",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1028,
+        "contexto": "personalization = self._generate_enterprise_personalization(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_determine_communication_style_enterprise": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1852,
+        "contexto": "\"communication_style\": self._determine_communication_style_enterprise(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_determine_content_depth": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1855,
+        "contexto": "\"content_depth\": self._determine_content_depth(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_determine_response_tone": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1858,
+        "contexto": "\"response_tone\": self._determine_response_tone(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_determine_urgency_level": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1861,
+        "contexto": "\"urgency_level\": self._determine_urgency_level(patterns, predictions),",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_generate_enterprise_recommendations": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1879,
+        "contexto": "\"enterprise_recommendations\": self._generate_enterprise_recommendations(",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2477,
+        "contexto": "\"\"\"🔧 Wrapper para _generate_enterprise_recommendations - Comparación tarifas\"\"\"",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2485,
+        "contexto": "recommendations = self._generate_enterprise_recommendations(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_calculate_enterprise_value_score": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1034,
+        "contexto": "value_score = self._calculate_enterprise_value_score()",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_calculate_enterprise_business_metrics": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1074,
+        "contexto": "business_metrics = self._calculate_enterprise_business_metrics(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_log_enterprise_business_metrics": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1079,
+        "contexto": "self._log_enterprise_business_metrics(business_metrics)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_analyze_depth_preference": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 891,
+        "contexto": "depth_preference = self._analyze_depth_preference(user_message)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_analyze_format_preference": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 892,
+        "contexto": "format_preference = self._analyze_format_preference(user_message)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_count_data_requests": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 898,
+        "contexto": "\"data_driven_requests\": self._count_data_requests(user_message),",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_analyze_solution_orientation": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 899,
+        "contexto": "\"solution_orientation\": self._analyze_solution_orientation(user_message),",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_determine_communication_style": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 862,
+        "contexto": "\"communication_style\": self._determine_communication_style(",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1852,
+        "contexto": "\"communication_style\": self._determine_communication_style_enterprise(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_analyze_question_pattern": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 866,
+        "contexto": "\"question_pattern\": self._analyze_question_pattern(user_message),",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_calculate_communication_business_impact": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 870,
+        "contexto": "business_impact = self._calculate_communication_business_impact(pattern_data)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_predict_next_communication_action": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 871,
+        "contexto": "next_action = self._predict_next_communication_action(pattern_data)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_calculate_content_business_impact": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 903,
+        "contexto": "business_impact = self._calculate_content_business_impact(pattern_data)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_predict_next_content_action": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 904,
+        "contexto": "next_action = self._predict_next_content_action(pattern_data)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_analyze_enterprise_feedback": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1109,
+        "contexto": "feedback_analysis = self._analyze_enterprise_feedback(rating, feedback_text)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_update_enterprise_learning_models": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1112,
+        "contexto": "self._update_enterprise_learning_models(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_extract_conversation_patterns": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2253,
+        "contexto": "conversation_patterns = self._extract_conversation_patterns(conversation_id)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_generate_enterprise_feedback_insights": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1117,
+        "contexto": "insights = self._generate_enterprise_feedback_insights(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_determine_user_experience_level": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2296,
+        "contexto": "user_experience_level = self._determine_user_experience_level(user_id)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_calculate_feedback_business_impact": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2312,
+        "contexto": "\"business_impact\": self._calculate_feedback_business_impact(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_generate_personalization_updates": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2315,
+        "contexto": "\"personalization_updates\": self._generate_personalization_updates(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_suggest_model_adjustments": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2318,
+        "contexto": "\"model_adjustments\": self._suggest_model_adjustments(feedback_analysis),",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "_log_async": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 789,
+        "contexto": "AILearningService._executor.submit(_log_async)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 1292,
+        "contexto": "AILearningService._executor.submit(_log_async)",
+        "microservicio": "expert_bot_api"
+      },
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+        "linea": 2103,
+        "contexto": "AILearningService._executor.submit(_log_async)",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "enhance_user_context_with_learning": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\chat_service.py",
+        "linea": 720,
+        "contexto": "self.ai_learning_service.enhance_user_context_with_learning(",
+        "microservicio": "expert_bot_api"
+      }
+    ],
+    "process_feedback_learning": [
+      {
+        "archivo": "expert_bot_api_COPY\\app\\services\\chat_service.py",
+        "linea": 1372,
+        "contexto": "self.ai_learning_service.process_feedback_learning(",
+        "microservicio": "expert_bot_api"
+      }
+    ]
+  },
+  "metodos_sin_uso": [
+    "_generate_recommended_actions",
+    "log_interaction",
+    "_log_to_bigquery_ai_with_auto_schema",
+    "_engagement_level_to_score",
+    "get_enterprise_performance_metrics",
+    "_calculate_business_impact"
+  ],
+  "estadisticas": {
+    "total_metodos": 76,
+    "metodos_utilizados": 70,
+    "metodos_sin_uso": 6,
+    "porcentaje_uso": 92.11,
+    "porcentaje_sin_uso": 7.89
+  },
+  "archivos_analizados": [
+    "expert_bot_api_COPY\\app\\analysis_routes.py",
+    "expert_bot_api_COPY\\app\\async_routes.py",
+    "expert_bot_api_COPY\\app\\config.py",
+    "expert_bot_api_COPY\\app\\energy_routes.py",
+    "expert_bot_api_COPY\\app\\energy_service.py",
+    "expert_bot_api_COPY\\app\\routes.py",
+    "expert_bot_api_COPY\\app\\tariff_recommender.py",
+    "expert_bot_api_COPY\\app\\__init__.py",
+    "expert_bot_api_COPY\\app\\services\\ai_confidence_calculator.py",
+    "expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+    "expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+    "expert_bot_api_COPY\\app\\services\\cache_service.py",
+    "expert_bot_api_COPY\\app\\services\\chat_service.py",
+    "expert_bot_api_COPY\\app\\services\\energy_ia_client.py",
+    "expert_bot_api_COPY\\app\\services\\energy_service.py",
+    "energy_ia_api_COPY\\app\\chatbot_routes.py",
+    "energy_ia_api_COPY\\app\\config.py",
+    "energy_ia_api_COPY\\app\\links_routes.py",
+    "energy_ia_api_COPY\\app\\routes.py",
+    "energy_ia_api_COPY\\app\\__init__.py",
+    "energy_ia_api_COPY\\app\\services\\enterprise_links_service.py",
+    "energy_ia_api_COPY\\app\\services\\generative_chat_service.py",
+    "energy_ia_api_COPY\\app\\services\\vertex_ai_service.py"
+  ],
+  "errores": [],
+  "metadata": {
+    "fecha_generacion": "2025-08-04T22:46:03.104331",
+    "version_script": "1.0.0",
+    "total_archivos_analizados": 23,
+    "microservicios_analizados": [
+      "expert_bot_api",
+      "energy_ia_api"
+    ]
+  }
+}

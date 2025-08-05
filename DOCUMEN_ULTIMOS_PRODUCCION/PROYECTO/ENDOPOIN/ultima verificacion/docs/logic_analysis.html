@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmarWatt - Análisis de Lógica de Endpoints</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #2E7D32; border-bottom: 3px solid #4CAF50; padding-bottom: 10px; }
+        h2 { color: #1976D2; margin-top: 30px; }
+        h3 { color: #795548; }
+        .endpoint { background: #f9f9f9; padding: 20px; margin: 15px 0; border-radius: 8px; border-left: 5px solid #4CAF50; }
+        .complexity { display: inline-block; padding: 4px 12px; border-radius: 15px; color: white; font-weight: bold; }
+        .complexity-low { background: #4CAF50; }
+        .complexity-medium { background: #FF9800; }
+        .complexity-high { background: #F44336; }
+        .logic-section { margin: 15px 0; }
+        .logic-title { font-weight: bold; color: #1976D2; margin-bottom: 8px; }
+        .logic-list { background: white; padding: 10px; border-radius: 4px; }
+        .method-tag { display: inline-block; padding: 2px 8px; margin: 2px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+        .method-get { background: #4CAF50; color: white; }
+        .method-post { background: #2196F3; color: white; }
+        .method-put { background: #FF9800; color: white; }
+        .method-delete { background: #F44336; color: white; }
+        pre { background: #263238; color: #ECEFF1; padding: 15px; border-radius: 4px; overflow-x: auto; }
+        .service-tag { display: inline-block; padding: 2px 6px; margin: 2px; background: #E3F2FD; color: #1976D2; border-radius: 3px; font-size: 11px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 SmarWatt - Análisis de Lógica de Endpoints</h1>
+        <p><strong>Análisis automático de lógica interna de endpoints</strong> - Generado automáticamente</p>
+
+        <h2>🔧 Energy IA API</h2>
+        <p><strong>Total de endpoints analizados:</strong> 14</p>
+
+        <div class="endpoint">
+            <h3>/tariffs/recommendations <span class="complexity complexity-high">Complejidad: Alta (7/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_tariff_recommendations_route</code> | <strong>Archivo:</strong> routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> expert_bot_url, consumption_data, all<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Firebase:</strong> <span class="service-tag">Auth</span><br><strong>Requests:</strong> <span class="service-tag">HTTP</span><span class="service-tag">requests.</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> expert_bot_url<br>• <strong>required_field:</strong> consumption_data<br>• <strong>required_field:</strong> all<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Validar que tenemos datos mínimos<br>• Preparar datos para el motor de recomendaciones<br>• Validar datos críticos<br></div></div></div>
+        <div class="endpoint">
+            <h3>/tariffs/market-data <span class="complexity complexity-low">Complejidad: Baja (2/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_market_data</code> | <strong>Archivo:</strong> routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Estadísticas del mercado<br></div></div></div>
+        <div class="endpoint">
+            <h3>/admin/tariffs/add <span class="complexity complexity-high">Complejidad: Alta (9/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span><span class="method-tag method-options">OPTIONS</span></p>
+            <p><strong>Función:</strong> <code>add_tariff_data</code> | <strong>Archivo:</strong> routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> data<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Bigquery:</strong> <span class="service-tag">bq_client</span><span class="service-tag">bigquery</span><span class="service-tag">BigQuery</span><br><strong>Firebase:</strong> <span class="service-tag">Auth</span><br><strong>Requests:</strong> <span class="service-tag">HTTP</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> data<br>• <strong>enum_validation:</strong> field<br>• <strong>custom_error:</strong> Datos de tarifa requeridos<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Manejar petición OPTIONS para CORS<br>• Validar campos requeridos<br>• Preparar datos para inserción con CAMPOS EXACTOS de BigQuery<br>• Insertar en BigQuery (misma tabla que el script)<br>• Duplicado confirmado → Retornar error 409 pero NO parar sistema<br></div></div></div>
+        <div class="endpoint">
+            <h3>/admin/tariffs/batch-add <span class="complexity complexity-high">Complejidad: Alta (10/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span><span class="method-tag method-options">OPTIONS</span></p>
+            <p><strong>Función:</strong> <code>batch_add_tariffs</code> | <strong>Archivo:</strong> routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> data, isinstance, all<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Bigquery:</strong> <span class="service-tag">bq_client</span><span class="service-tag">bigquery</span><span class="service-tag">BigQuery</span><br><strong>Firebase:</strong> <span class="service-tag">Auth</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> data<br>• <strong>required_field:</strong> isinstance<br>• <strong>required_field:</strong> all<br>• <strong>type_validation:</strong> tariffs<br>• <strong>custom_error:</strong> Lista de tarifas requerida<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Manejar petición OPTIONS para CORS<br>• Procesar cada tarifa<br>• Validar campos básicos<br>• Preparar datos con CAMPOS EXACTOS de BigQuery<br>• Insertar en BigQuery si hay tarifas válidas<br></div></div></div>
+        <div class="endpoint">
+            <h3>/tariffs/compare <span class="complexity complexity-high">Complejidad: Alta (10/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span><span class="method-tag method-options">OPTIONS</span></p>
+            <p><strong>Función:</strong> <code>compare_tariffs</code> | <strong>Archivo:</strong> routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> data, isinstance, selected_tariffs<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Firebase:</strong> <span class="service-tag">Auth</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> data<br>• <strong>required_field:</strong> isinstance<br>• <strong>length_validation:</strong> selected_tariffs<br>• <strong>type_validation:</strong> tariff_ids<br>• <strong>custom_error:</strong> IDs de tarifas requeridos<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Manejar petición OPTIONS para CORS<br>• Obtener perfil del usuario<br>• Obtener tarifas específicas<br>• Filtrar tarifas solicitadas<br>• Obtener perfil de consumo (simulado para comparación)<br></div></div></div>
+        <div class="endpoint">
+            <h3>/message <span class="complexity complexity-medium">Complejidad: Media (4/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span></p>
+            <p><strong>Función:</strong> <code>send_chat_message</code> | <strong>Archivo:</strong> chatbot_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> json_data<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> json_data<br>• <strong>custom_error:</strong> Petición inválida. Se requiere el campo <br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Validar datos de entrada<br>• Obtener servicio de chat con manejo de errores<br>• Obtener contexto del usuario de forma robusta<br>• Usar contexto mínimo como fallback<br>• Enviar mensaje con contexto<br></div></div></div>
+        <div class="endpoint">
+            <h3>/message/v2 <span class="complexity complexity-medium">Complejidad: Media (5/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span></p>
+            <p><strong>Función:</strong> <code>send_chat_message_v2</code> | <strong>Archivo:</strong> chatbot_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> json_data, user_context<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> json_data<br>• <strong>required_field:</strong> user_context<br>• <strong>custom_error:</strong> Petición inválida. Se requiere el campo <br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Contexto directo<br>• Obtener servicio de chat<br>• Si no hay contexto directo, obtenerlo<br>• Enviar mensaje con contexto<br>• Metadata de respuesta<br></div></div></div>
+        <div class="endpoint">
+            <h3>/cross-service <span class="complexity complexity-medium">Complejidad: Media (4/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span></p>
+            <p><strong>Función:</strong> <code>cross_service_communication</code> | <strong>Archivo:</strong> chatbot_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> json_data<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> json_data<br>• <strong>custom_error:</strong> Mensaje requerido para comunicación entre servicios<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Obtener servicio de chat<br>• Procesar mensaje según el servicio origen<br>• Mensaje desde expert-bot-api<br>• Comunicación con expert-bot-api<br>• Mensaje desde expert-bot-api<br></div></div></div>
+        <div class="endpoint">
+            <h3>/conversations <span class="complexity complexity-high">Complejidad: Alta (9/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_user_conversations</code> | <strong>Archivo:</strong> chatbot_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Query Parameters:</strong> limit, page<br><strong>Validation Rules:</strong> user_id<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Bigquery:</strong> <span class="service-tag">bq_client</span><span class="service-tag">bigquery</span><span class="service-tag">BigQuery</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> user_id<br>• <strong>custom_error:</strong> Usuario no autenticado<br>• <strong>custom_error:</strong> Límite debe estar entre 1 y 100<br>• <strong>custom_error:</strong> Página debe ser mayor a 0<br>• <strong>custom_error:</strong> Error obteniendo conversaciones<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Validar parámetros de paginación<br>• Validar configuración de BigQuery<br>• Inicializar cliente BigQuery con manejo robusto<br>• Query empresarial con validación<br></div></div></div>
+        <div class="endpoint">
+            <h3>/conversations/<conversation_id> <span class="complexity complexity-high">Complejidad: Alta (10/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-delete">DELETE</span></p>
+            <p><strong>Función:</strong> <code>delete_conversation</code> | <strong>Archivo:</strong> chatbot_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> user_id, conversation_id<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Bigquery:</strong> <span class="service-tag">bq_client</span><span class="service-tag">bigquery</span><span class="service-tag">BigQuery</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> user_id<br>• <strong>required_field:</strong> conversation_id<br>• <strong>custom_error:</strong> Usuario no autenticado<br>• <strong>custom_error:</strong> ID de conversación requerido<br>• <strong>custom_error:</strong> Conversación no encontrada o ya eliminada<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Validar conversation_id<br>• Validar configuración BigQuery<br>• Inicializar cliente BigQuery<br>• Marcar conversación como eliminada en BigQuery<br></div></div></div>
+        <div class="endpoint">
+            <h3>/health <span class="complexity complexity-medium">Complejidad: Media (6/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>chatbot_health_check</code> | <strong>Archivo:</strong> chatbot_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> test_url<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Bigquery:</strong> <span class="service-tag">bq_client</span><span class="service-tag">bigquery</span><span class="service-tag">BigQuery</span><br><strong>Requests:</strong> <span class="service-tag">requests.</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> test_url<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Verificar servicio de chat<br>• Verificar BigQuery<br>• Verificar comunicación con expert-bot<br>• Determinar estado final<br>• chat_service.get_enterprise_metrics(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/api/v1/links/test <span class="complexity complexity-medium">Complejidad: Media (4/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span></p>
+            <p><strong>Función:</strong> <code>test_links_system</code> | <strong>Archivo:</strong> links_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> data, response_text<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> data<br>• <strong>required_field:</strong> response_text<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Obtener servicio de enlaces<br>• Procesar texto<br>• Obtener estado del servicio<br>• links_service.analyze_and_enhance_response(<br>• links_service.get_enterprise_status(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/api/v1/links/status <span class="complexity complexity-low">Complejidad: Baja (2/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_links_status</code> | <strong>Archivo:</strong> links_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• links_service.get_enterprise_status(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/api/v1/links/direct/<link_type> <span class="complexity complexity-low">Complejidad: Baja (2/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_direct_link</code> | <strong>Archivo:</strong> links_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• links_service.get_direct_link(<br></div></div></div>
+        <h2>🔧 Expert Bot API</h2>
+        <p><strong>Total de endpoints analizados:</strong> 26</p>
+
+        <div class="endpoint">
+            <h3>/session/start <span class="complexity complexity-low">Complejidad: Baja (3/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span><span class="method-tag method-options">OPTIONS</span></p>
+            <p><strong>Función:</strong> <code>start_chat_session</code> | <strong>Archivo:</strong> routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Firebase:</strong> <span class="service-tag">Auth</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Manejar petición OPTIONS para CORS<br>• chat_service.start_session(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/message <span class="complexity complexity-high">Complejidad: Alta (7/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span><span class="method-tag method-options">OPTIONS</span></p>
+            <p><strong>Función:</strong> <code>post_message</code> | <strong>Archivo:</strong> routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> json_data, conversation_id<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Firebase:</strong> <span class="service-tag">Auth</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> json_data<br>• <strong>required_field:</strong> conversation_id<br>• <strong>custom_error:</strong> Petición inválida. El campo <br>• <strong>custom_error:</strong> Error interno procesando mensaje: %s<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Manejar petición OPTIONS para CORS<br>• Validación empresarial robusta<br>• Acepta tanto conversation_id como session_id para compatibilidad<br>• chat_service.process_user_message(<br>• process_user_message(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/new-conversation <span class="complexity complexity-low">Complejidad: Baja (3/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span><span class="method-tag method-options">OPTIONS</span></p>
+            <p><strong>Función:</strong> <code>create_new_conversation</code> | <strong>Archivo:</strong> routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Firebase:</strong> <span class="service-tag">Auth</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Manejar petición OPTIONS para CORS<br>• Obtener conversation_id actual (opcional)<br>• chat_service.create_new_conversation(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/conversation/history <span class="complexity complexity-low">Complejidad: Baja (3/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_conversation_history</code> | <strong>Archivo:</strong> routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Query Parameters:</strong> page, limit<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>custom_error:</strong> Error interno recuperando historial: %s<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Parámetros de paginación<br>• Validar límites empresariales<br>• chat_service.get_conversation_history(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/conversation/<conversation_id> <span class="complexity complexity-medium">Complejidad: Media (4/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-delete">DELETE</span><span class="method-tag method-options">OPTIONS</span></p>
+            <p><strong>Función:</strong> <code>delete_conversation</code> | <strong>Archivo:</strong> routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Firebase:</strong> <span class="service-tag">Auth</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>custom_error:</strong> Error interno borrando conversación: %s<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Manejar petición OPTIONS para CORS<br>• chat_service.delete_conversation(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/conversation/feedback <span class="complexity complexity-high">Complejidad: Alta (8/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span><span class="method-tag method-options">OPTIONS</span></p>
+            <p><strong>Función:</strong> <code>submit_conversation_feedback</code> | <strong>Archivo:</strong> routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> json_data, isinstance<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Firebase:</strong> <span class="service-tag">Auth</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> json_data<br>• <strong>required_field:</strong> isinstance<br>• <strong>type_validation:</strong> rating<br>• <strong>custom_error:</strong> Rating debe ser un número entero entre 1 y 5<br>• <strong>custom_error:</strong> Error interno procesando feedback: %s<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Manejar petición OPTIONS para CORS<br>• Validación empresarial robusta<br>• Validar rating<br>• chat_service.submit_conversation_feedback(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/metrics <span class="complexity complexity-low">Complejidad: Baja (3/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_user_metrics</code> | <strong>Archivo:</strong> routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>custom_error:</strong> Error interno obteniendo métricas: %s<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• chat_service.get_user_analytics(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/consumption <span class="complexity complexity-low">Complejidad: Baja (2/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span></p>
+            <p><strong>Función:</strong> <code>upload_consumption_data</code> | <strong>Archivo:</strong> energy_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Inicializar servicios empresariales<br>• Procesar factura con aprendizaje automático<br>• Aprendizaje automático empresarial<br>• Personalizar respuesta de éxito con nombre del usuario<br>• NUNCA devolver errores técnicos crudos al usuario<br></div></div></div>
+        <div class="endpoint">
+            <h3>/dashboard <span class="complexity complexity-low">Complejidad: Baja (2/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_dashboard_data</code> | <strong>Archivo:</strong> energy_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Personalizar mensaje de bienvenida<br>• NUNCA fallar - siempre devolver datos útiles<br>• Siempre 200 porque damos valor<br></div></div></div>
+        <div class="endpoint">
+            <h3>/users/profile <span class="complexity complexity-low">Complejidad: Baja (2/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_user_profile</code> | <strong>Archivo:</strong> energy_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div></div>
+        <div class="endpoint">
+            <h3>/manual-data <span class="complexity complexity-medium">Complejidad: Media (5/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span></p>
+            <p><strong>Función:</strong> <code>add_manual_energy_data</code> | <strong>Archivo:</strong> energy_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> data, data<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> data<br>• <strong>required_field:</strong> data<br>• <strong>custom_error:</strong> Datos requeridos en formato JSON.<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Validación inteligente: solo verificar campos críticos mínimos<br>• Estructurar datos como si vinieran del OCR MEJORADO<br>• Campos críticos (obligatorios)<br>• Campos importantes (opcionales con defaults inteligentes)<br>• Default español típico<br></div></div></div>
+        <div class="endpoint">
+            <h3>/consumption/update <span class="complexity complexity-medium">Complejidad: Media (4/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-put">PUT</span></p>
+            <p><strong>Función:</strong> <code>update_consumption_data</code> | <strong>Archivo:</strong> energy_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> data<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> data<br>• <strong>custom_error:</strong> Datos requeridos en formato JSON.<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Validar y actualizar datos<br>• Aprendizaje automático para actualizaciones<br>• process_consumption_update_patterns(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/consumption/history <span class="complexity complexity-low">Complejidad: Baja (2/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_consumption_history</code> | <strong>Archivo:</strong> energy_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Query Parameters:</strong> months, page, limit<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Parámetros de consulta<br>• Validar límites<br></div></div></div>
+        <div class="endpoint">
+            <h3>/consumption/analyze <span class="complexity complexity-low">Complejidad: Baja (2/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span></p>
+            <p><strong>Función:</strong> <code>analyze_consumption</code> | <strong>Archivo:</strong> energy_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Análisis empresarial avanzado<br>• Enriquecer con aprendizaje automático<br></div></div></div>
+        <div class="endpoint">
+            <h3>/consumption/recommendations <span class="complexity complexity-low">Complejidad: Baja (2/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_consumption_recommendations</code> | <strong>Archivo:</strong> energy_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Obtener recomendaciones base<br>• Enriquecer con IA<br></div></div></div>
+        <div class="endpoint">
+            <h3>/consumption/compare <span class="complexity complexity-low">Complejidad: Baja (2/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span></p>
+            <p><strong>Función:</strong> <code>compare_tariffs</code> | <strong>Archivo:</strong> energy_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Comparación de tarifas<br>• Enriquecer con aprendizaje automático<br></div></div></div>
+        <div class="endpoint">
+            <h3>/consumption/title <span class="complexity complexity-medium">Complejidad: Media (4/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-put">PUT</span></p>
+            <p><strong>Función:</strong> <code>update_consumption_title</code> | <strong>Archivo:</strong> energy_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> data<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> data<br>• <strong>custom_error:</strong> Se requieren <br></div></div></div>
+        <div class="endpoint">
+            <h3>/api/v1/analysis/sentiment <span class="complexity complexity-high">Complejidad: Alta (10/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span><span class="method-tag method-options">OPTIONS</span></p>
+            <p><strong>Función:</strong> <code>analyze_sentiment</code> | <strong>Archivo:</strong> analysis_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> json_data, json_data, message_text, message_text<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Firebase:</strong> <span class="service-tag">Auth</span><br><strong>Requests:</strong> <span class="service-tag">HTTP</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> json_data<br>• <strong>required_field:</strong> json_data<br>• <strong>required_field:</strong> message_text<br>• <strong>length_validation:</strong> message_text<br>• <strong>custom_error:</strong> Petición inválida. Se requieren datos JSON.<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Manejar petición OPTIONS para CORS<br>• Validación empresarial robusta<br>• Validar longitud del mensaje<br>• Extraer parámetros opcionales<br>• Inicializar servicio de AI Learning<br></div></div></div>
+        <div class="endpoint">
+            <h3>/user/tasks <span class="complexity complexity-medium">Complejidad: Media (4/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_user_task_dashboard</code> | <strong>Archivo:</strong> async_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Query Parameters:</strong> status, task_type, limit<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Bigquery:</strong> <span class="service-tag">bigquery</span><span class="service-tag">BigQuery</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>custom_error:</strong> Error interno generando dashboard de tareas<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Obtener parámetros de filtro<br>• Máximo 100 tareas<br>• Obtener todas las tareas del usuario desde BigQuery<br>• Procesar tareas para el dashboard<br>• Agregar descripción amigable para el usuario<br></div></div></div>
+        <div class="endpoint">
+            <h3>/user/tasks <span class="complexity complexity-medium">Complejidad: Media (5/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span></p>
+            <p><strong>Función:</strong> <code>create_user_task</code> | <strong>Archivo:</strong> async_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> data, task_request<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> data<br>• <strong>custom_error:</strong> Datos JSON requeridos<br>• <strong>custom_error:</strong> Error interno creando tarea<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Validar datos de entrada<br>• Validación empresarial estricta<br>• Crear tarea empresarial<br>• Obtener estado inicial de la tarea<br></div></div></div>
+        <div class="endpoint">
+            <h3>/user/tasks/<task_id> <span class="complexity complexity-medium">Complejidad: Media (6/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_user_task_status</code> | <strong>Archivo:</strong> async_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> results<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Bigquery:</strong> <span class="service-tag">bigquery</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> results<br>• <strong>custom_error:</strong> Tarea no encontrada<br>• <strong>custom_error:</strong> Error interno obteniendo estado de tarea<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Verificar que la tarea pertenece al usuario<br>• calculate_task_progress(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/admin/system/metrics <span class="complexity complexity-medium">Complejidad: Media (4/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_admin_system_metrics</code> | <strong>Archivo:</strong> async_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Query Parameters:</strong> time_range, include_details<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Bigquery:</strong> <span class="service-tag">bigquery</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>custom_error:</strong> Error interno generando métricas del sistema<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Obtener parámetros de filtro<br>• Obtener métricas del sistema en tiempo real<br>• Calcular rango de tiempo<br>• Query para métricas históricas de tareas<br>• Query para métricas de workers<br></div></div></div>
+        <div class="endpoint">
+            <h3>/admin/tasks/management <span class="complexity complexity-medium">Complejidad: Media (4/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_admin_task_management</code> | <strong>Archivo:</strong> async_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Query Parameters:</strong> status, task_type, user_id, priority, limit, offset<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Bigquery:</strong> <span class="service-tag">bigquery</span><br><strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>custom_error:</strong> Error interno generando panel de gestión<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Obtener parámetros de filtro<br>• Máximo 1000 tareas<br>• Construir query dinámico con filtros<br>• Query principal para tareas<br>• Query para contar total de tareas (para paginación)<br></div></div></div>
+        <div class="endpoint">
+            <h3>/links/test <span class="complexity complexity-medium">Complejidad: Media (4/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-post">POST</span></p>
+            <p><strong>Función:</strong> <code>test_links_system</code> | <strong>Archivo:</strong> links_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">📝 Parámetros:</div>
+                <div class="logic-list">
+<strong>Validation Rules:</strong> data, response_text<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">✅ Validaciones:</div>
+                <div class="logic-list">
+• <strong>required_field:</strong> data<br>• <strong>required_field:</strong> response_text<br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• Obtener servicio de enlaces<br>• Procesar texto<br>• Obtener estado del servicio<br>• links_service.analyze_and_enhance_response(<br>• links_service.get_enterprise_status(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/links/status <span class="complexity complexity-low">Complejidad: Baja (2/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_links_status</code> | <strong>Archivo:</strong> links_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• links_service.get_enterprise_status(<br></div></div></div>
+        <div class="endpoint">
+            <h3>/links/direct/<link_type> <span class="complexity complexity-low">Complejidad: Baja (2/10)</span></h3>
+            <p><strong>Métodos:</strong> <span class="method-tag method-get">GET</span></p>
+            <p><strong>Función:</strong> <code>get_direct_link</code> | <strong>Archivo:</strong> links_routes.py</p>
+
+            <div class="logic-section">
+                <div class="logic-title">🔧 Servicios Utilizados:</div>
+                <div class="logic-list">
+<strong>Logging:</strong> <span class="service-tag">logger</span><br></div></div>
+            <div class="logic-section">
+                <div class="logic-title">💼 Lógica de Negocio:</div>
+                <div class="logic-list">
+• links_service.get_direct_link(<br></div></div></div>
+    </div>
+</body>
+</html>

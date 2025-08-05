@@ -1,0 +1,16 @@
+# expert_bot_api_COPY/requirements-ml.txt
+# 🏢 DEPENDENCIAS DE MACHINE LEARNING - SOLO PARA ANÁLISIS ML
+
+# === MACHINE LEARNING ===
+scikit-learn>=1.3.0
+pandas>=2.0.0
+numpy>=1.24.0
+
+# === PROCESAMIENTO DE IMÁGENES ===
+Pillow>=10.0.0
+opencv-python>=4.8.0
+
+# === ENTERPRISE EXTRAS (CLOUD) ===
+boto3>=1.28.0
+kubernetes>=27.2.0
+newrelic>=8.9.0

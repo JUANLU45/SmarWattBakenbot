@@ -1,0 +1,27 @@
+{
+  "timestamp": "<Logger MicroservicesVerification (INFO)>",
+  "project_id": "smarwatt-pro",
+  "dataset_id": "smarwatt_energy_data",
+  "table_id": "market_electricity_tariffs",
+  "verification_results": {
+    "bigquery_schema": false,
+    "microservice_queries": false,
+    "configuration": true,
+    "overall_status": false
+  },
+  "expected_schema": {
+    "provider_name": "STRING",
+    "tariff_name": "STRING",
+    "tariff_type": "STRING",
+    "tariff_id": "STRING",
+    "fixed_monthly_fee": "FLOAT",
+    "kwh_price_flat": "FLOAT",
+    "kwh_price_peak": "FLOAT",
+    "kwh_price_valley": "FLOAT",
+    "power_price_per_kw_per_month": "FLOAT",
+    "is_pvpc": "BOOLEAN",
+    "is_active": "BOOLEAN",
+    "update_timestamp": "TIMESTAMP"
+  },
+  "microservice_count": 2
+}

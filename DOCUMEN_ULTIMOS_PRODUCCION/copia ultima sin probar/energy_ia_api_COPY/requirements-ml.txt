@@ -1,0 +1,33 @@
+# energy_ia_api_COPY/requirements-ml.txt
+# 🏢 DEPENDENCIAS DE MACHINE LEARNING - PARA VERTEX AI Y MODELOS
+
+# === MACHINE LEARNING FRAMEWORKS ===
+tensorflow>=2.13.0
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.33.0
+huggingface-hub>=0.16.0
+
+# === NUMERICAL COMPUTING ===
+numpy>=1.24.0
+scipy>=1.11.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+
+# === DEEP LEARNING ESPECÍFICO ===
+keras>=2.13.0
+xgboost>=1.7.0
+lightgbm>=4.0.0
+
+# === PROCESAMIENTO DE TEXTO ===
+nltk>=3.8.0
+spacy>=3.6.0
+textblob>=0.17.0
+
+# === PROCESAMIENTO DE IMÁGENES ===
+Pillow>=10.0.0
+opencv-python>=4.8.0
+
+# === VERTEX AI ESPECÍFICO ===
+google-cloud-aiplatform>=1.35.0
+google-cloud-pipeline-components>=2.4.0

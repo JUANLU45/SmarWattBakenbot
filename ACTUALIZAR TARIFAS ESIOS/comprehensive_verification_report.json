@@ -1,0 +1,34 @@
+{
+  "timestamp": "MicroservicesVerificationWithCredentials",
+  "project_id": "smatwatt",
+  "dataset_id": "smarwatt_energy_data",
+  "table_id": "market_electricity_tariffs",
+  "credentials_path": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\DOCUMENTACION Y SCRPT\\MINISERVICIOS_SCRIPS\\ESCRIP ADMIN\\firebase-adminsdk-fbsvc-key.json",
+  "verification_results": {
+    "credentials_access": true,
+    "schema_compatibility": true,
+    "sql_syntax": false,
+    "overall_status": false
+  },
+  "schema_details": {
+    "fields_count": 12,
+    "expected_fields": [
+      "provider_name",
+      "tariff_name",
+      "tariff_type",
+      "tariff_id",
+      "fixed_monthly_fee",
+      "kwh_price_flat",
+      "kwh_price_peak",
+      "kwh_price_valley",
+      "power_price_per_kw_per_month",
+      "is_pvpc",
+      "is_active",
+      "update_timestamp"
+    ],
+    "microservices_verified": [
+      "energy_ia_api",
+      "vertex_ai_service"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+# 🏢 DEPENDENCIAS VERIFICADAS MILIMÉTRICAMENTE - ENERGY IA API COPY - CORREGIDO
+# ✅ VERSIONES REALES Y COMPATIBLES PARA PRODUCCIÓN
+
+# === FLASK FRAMEWORK CORE ===
+Flask==3.0.3
+Flask-Cors==5.0.0
+
+# === SERVIDOR PRODUCCIÓN ===
+gunicorn==22.0.0
+
+# === GOOGLE CLOUD PLATFORM - VERIFICADO EN CÓDIGO ===
+google-cloud-aiplatform==1.61.0
+google-cloud-bigquery==3.25.0
+google-auth==2.34.0
+
+# === FIREBASE - VERIFICADO EN __init__.py ===
+firebase-admin==6.5.0
+
+# === GOOGLE GENERATIVE AI - VERIFICADO EN generative_chat_service.py ===
+google-generativeai==0.8.3
+
+# === AUTENTICACIÓN JWT - VERIFICADO EN chatbot_routes.py ===
+PyJWT==2.9.0
+
+# === MACHINE LEARNING - VERSIONES REALES COMPATIBLES ===
+numpy==2.0.2
+pandas==2.2.3
+scikit-learn==1.5.2
+scipy==1.14.1
+scikit-learn-extra==0.3.0
+imbalanced-learn==0.12.4
+optuna==4.0.0
+hyperopt==0.2.7
+shap==0.46.0
+lime==0.2.0.1
+
+# === DEEP LEARNING FRAMEWORKS - VERSIONES REALES ===
+tensorflow-cpu==2.17.0
+torch==2.4.1
+torchvision==0.19.1
+transformers==4.45.2
+huggingface-hub==0.25.2
+keras==3.5.0
+xgboost==2.1.1
+lightgbm==4.5.0
+
+# === PROCESAMIENTO DE TEXTO ===
+nltk==3.9.1
+spacy==3.7.6
+textblob==0.18.0
+
+# === PROCESAMIENTO DE IMÁGENES ===
+Pillow==10.4.0
+opencv-python-headless==4.10.0.84
+
+# === VERTEX AI ESPECÍFICO - VERSIONES EXACTAS VERIFICADAS ===
+google-cloud-pipeline-components==2.20.1
+kfp==2.6.0
+
+# === UTILIDADES VERIFICADAS ===
+python-dotenv==1.0.1
+requests==2.32.3
+aiohttp==3.10.8

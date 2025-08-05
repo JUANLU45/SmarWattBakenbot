@@ -1,0 +1,209 @@
+{
+  "timestamp": "2025-07-21T13:34:49.169245+00:00",
+  "services": {
+    "expert_bot_api": {
+      "url": "https://expert-bot-api-1010012211318.europe-west1.run.app",
+      "health": {
+        "service": "expert_bot_api",
+        "url": "https://expert-bot-api-1010012211318.europe-west1.run.app",
+        "status": "✅ HEALTHY",
+        "response_time": 10.328896522521973,
+        "error": null
+      },
+      "endpoints": [
+        {
+          "path": "/health",
+          "method": "GET",
+          "description": "Health check básico",
+          "requires_auth": false,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/health",
+          "status": "✅ SUCCESS",
+          "http_code": 200,
+          "response_time": 0.055121421813964844,
+          "error": null,
+          "response_sample": {
+            "mode": "production",
+            "status": "healthy",
+            "timestamp": "2025-07-21T13:35:00.072370",
+            "version": "2.0.0-enterprise"
+          }
+        },
+        {
+          "path": "/health/detailed",
+          "method": "GET",
+          "description": "Health check detallado",
+          "requires_auth": false,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/health/detailed",
+          "status": "✅ SUCCESS",
+          "http_code": 200,
+          "response_time": 0.07956314086914062,
+          "error": null,
+          "response_sample": {
+            "config": "production",
+            "enterprise_mode": true,
+            "firebase_initialized": true,
+            "startup_time": "2025-07-21T13:34:59.749909",
+            "status": "healthy",
+            "timestamp": "2025-07-21T13:35:00.140109"
+          }
+        },
+        {
+          "path": "/api/v1/chat/session/start",
+          "method": "POST",
+          "description": "Iniciar sesión de chat",
+          "requires_auth": true,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chat/session/start",
+          "status": "🔍 NOT_FOUND",
+          "http_code": 404,
+          "response_time": 0.09800004959106445,
+          "error": "Endpoint no encontrado",
+          "response_sample": null
+        },
+        {
+          "path": "/api/v1/chat/message",
+          "method": "POST",
+          "description": "Enviar mensaje al chat",
+          "requires_auth": true,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chat/message",
+          "status": "🔍 NOT_FOUND",
+          "http_code": 404,
+          "response_time": 0.06532859802246094,
+          "error": "Endpoint no encontrado",
+          "response_sample": null
+        },
+        {
+          "path": "/api/v1/chat/conversation/history",
+          "method": "GET",
+          "description": "Historial de conversaciones",
+          "requires_auth": true,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chat/conversation/history",
+          "status": "🔍 NOT_FOUND",
+          "http_code": 404,
+          "response_time": 0.05288290977478027,
+          "error": "Endpoint no encontrado",
+          "response_sample": null
+        },
+        {
+          "path": "/api/v1/chat/metrics",
+          "method": "GET",
+          "description": "Métricas de chat",
+          "requires_auth": true,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chat/metrics",
+          "status": "🔍 NOT_FOUND",
+          "http_code": 404,
+          "response_time": 0.11517691612243652,
+          "error": "Endpoint no encontrado",
+          "response_sample": null
+        },
+        {
+          "path": "/api/v1/energy/consumption",
+          "method": "POST",
+          "description": "Registrar consumo",
+          "requires_auth": true,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/energy/consumption",
+          "status": "❌ ERROR",
+          "http_code": 400,
+          "response_time": 0.3188307285308838,
+          "error": "HTTP 400: {\"alternative_action\":{\"description\":\"Tambi\\u00e9n puedes introducir tus datos manualmente\",\"endpoin",
+          "response_sample": null
+        },
+        {
+          "path": "/api/v1/energy/dashboard",
+          "method": "GET",
+          "description": "Dashboard de energía",
+          "requires_auth": true,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/energy/dashboard",
+          "status": "✅ SUCCESS",
+          "http_code": 200,
+          "response_time": 0.8597428798675537,
+          "error": null,
+          "response_sample": {
+            "uploaded_documents": [],
+            "user_id": "test_user_20250721_153502"
+          }
+        },
+        {
+          "path": "/api/v1/energy/users/profile",
+          "method": "GET",
+          "description": "Perfil de usuario",
+          "requires_auth": true,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/energy/users/profile",
+          "status": "✅ SUCCESS",
+          "http_code": 200,
+          "response_time": 0.668938398361206,
+          "error": null,
+          "response_sample": {
+            "data": {
+              "uploaded_documents": [],
+              "user_id": "test_user_20250721_153503"
+            },
+            "status": "success"
+          }
+        },
+        {
+          "path": "/api/v1/energy/consumption/history",
+          "method": "GET",
+          "description": "Historial de consumo",
+          "requires_auth": true,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/energy/consumption/history",
+          "status": "❌ ERROR",
+          "http_code": 500,
+          "response_time": 1.087214708328247,
+          "error": "HTTP 500: {\"error\":{\"category\":\"authentication\",\"error_id\":\"f870a1b4-b372-4847-bd9d-f573afe3728f\",\"level\":\"hig",
+          "response_sample": null
+        },
+        {
+          "path": "/api/v1/energy/consumption/recommendations",
+          "method": "GET",
+          "description": "Recomendaciones",
+          "requires_auth": true,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/energy/consumption/recommendations",
+          "status": "❌ ERROR",
+          "http_code": 500,
+          "response_time": 1.3145787715911865,
+          "error": "HTTP 500: {\"error\":{\"category\":\"authentication\",\"error_id\":\"dbc09037-ed45-4b15-bf92-7008b177a7f7\",\"level\":\"hig",
+          "response_sample": null
+        },
+        {
+          "path": "/api/v1/links/test",
+          "method": "POST",
+          "description": "Test de conectividad",
+          "requires_auth": false,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/links/test",
+          "status": "❌ ERROR",
+          "http_code": 400,
+          "response_time": 0.04933905601501465,
+          "error": "HTTP 400: {\"error\":\"Campo 'response_text' requerido\",\"status\":\"error\"}\n",
+          "response_sample": null
+        },
+        {
+          "path": "/api/v1/links/status",
+          "method": "GET",
+          "description": "Estado de conexiones",
+          "requires_auth": false,
+          "url": "https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/links/status",
+          "status": "✅ SUCCESS",
+          "http_code": 200,
+          "response_time": 0.05257248878479004,
+          "error": null,
+          "response_sample": "{'available_links': ['blog', 'dashboard', 'calculator', 'weather', 'contact', 'terms', 'privacy'], 'links_configured': 7, 'service_name': 'EnterpriseLinkService', 'status': 'active', 'version': '2025_..."
+        }
+      ]
+    },
+    "energy_ia_api": {
+      "url": "N/A",
+      "health": {
+        "status": "❌ UNREACHABLE",
+        "error": "No disponible"
+      },
+      "endpoints": []
+    }
+  },
+  "summary": {
+    "total_endpoints": 13,
+    "success_count": 5,
+    "error_count": 4,
+    "not_found_count": 4,
+    "auth_required_count": 0
+  }
+}

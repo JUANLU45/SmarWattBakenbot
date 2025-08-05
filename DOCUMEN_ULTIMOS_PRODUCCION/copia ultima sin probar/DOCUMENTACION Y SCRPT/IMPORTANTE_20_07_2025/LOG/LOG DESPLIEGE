@@ -1,0 +1,552 @@
+o search the help text of gcloud commands, run:
+  gcloud help -- SEARCH_TERMS        
+PS C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\expert_bot_api_COPY> gcloud run services logs read expert-bot-api --region=europe-west1 --limit=50
+2025-07-23 08:45:03 [2025-07-23 08:45:03 +0000] [3] [INFO] Starting gunicorn 23.0.0
+2025-07-23 08:45:03 [2025-07-23 08:45:03 +0000] [3] [INFO] Listening at: http://0.0.0.0:8081 (3)
+2025-07-23 08:45:03 [2025-07-23 08:45:03 +0000] [3] [INFO] Using worker: sync
+2025-07-23 08:45:03 [2025-07-23 08:45:03 +0000] [7] [INFO] Booting worker with pid: 7
+2025-07-23 08:45:03 2025-07-23 08:45:03,729 - expert_bot_api - INFO - Request: OPTIONS /api/v1/energy/dashboard - IP: 169.254.169.126
+2025-07-23 08:45:03 2025-07-23 08:45:03,729 - expert_bot_api.energy_routes - INFO - Acceso an?nimo a energy endpoint: expert_energy_routes.get_dashboard_data
+2025-07-23 08:45:03 169.254.169.126 - - [23/Jul/2025:08:45:03 +0000] "OPTIONS /api/v1/energy/dashboard?period=week HTTP/1.1" 200 0 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23 08:45:03 [2025-07-23 08:45:03 +0000] [8] [INFO] Booting worker with pid: 8
+2025-07-23 08:45:17 [2025-07-23 08:45:03 +0000] [9] [INFO] Booting worker with pid: 9
+2025-07-23 08:45:34 [2025-07-23 08:45:27 +0000] [10] [INFO] Booting worker with pid: 10
+2025-07-23 08:45:36 OPTIONS 200 https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/session/start
+2025-07-23 08:45:36 2025-07-23 08:45:36,029 - expert_bot_api - INFO - Request: OPTIONS /api/v1/chatbot/session/start - IP: 169.254.169.126
+2025-07-23 08:45:36 2025-07-23 08:45:36,029 - expert_bot_api.routes - INFO - Acceso an?nimo a chat_routes.start_chat_session
+2025-07-23 08:45:36 169.254.169.126 - - [23/Jul/2025:08:45:36 +0000] "OPTIONS /api/v1/chatbot/session/start HTTP/1.1" 200 0 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23 08:45:36 POST 200 https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/session/start
+2025-07-23 08:45:36 2025-07-23 08:45:36,094 - expert_bot_api - INFO - Request: POST /api/v1/chatbot/session/start - IP: 169.254.169.126
+2025-07-23 08:45:36 2025-07-23 08:45:36,094 - expert_bot_api.routes - INFO - Acceso an?nimo a chat_routes.start_chat_session
+2025-07-23 08:45:36 2025-07-23 08:45:36,427 - expert_bot_api.routes - INFO - Iniciando sesi?n de chat para usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2    
+2025-07-23 08:45:36 2025-07-23 08:45:36,429 - app.services.enterprise_links_service - INFO - ? Enterprise Link Service inicializado correctamente   
+2025-07-23 08:45:36 2025-07-23 08:45:36,429 - app.services.enterprise_links_service - INFO - ? EnterpriseLinkService singleton inicializado
+2025-07-23 08:45:36 2025-07-23 08:45:36,436 - root - INFO - ? Cliente BigQuery inicializado correctamente - Intento 1
+2025-07-23 08:45:36 2025-07-23 08:45:36,441 - root - INFO - ? Cliente BigQuery AI inicializado - Intento 1     
+2025-07-23 08:45:36 2025-07-23 08:45:36,630 - root - INFO - ? Tabla AI empresarial ai_sentiment_analysis ya existe
+2025-07-23 08:45:36 2025-07-23 08:45:36,783 - root - INFO - ? Tabla AI empresarial ai_user_patterns ya existe  
+2025-07-23 08:45:36 2025-07-23 08:45:36,909 - root - INFO - ? Tabla AI empresarial ai_predictions ya existe    
+2025-07-23 08:45:36 2025-07-23 08:45:36,994 - root - INFO - ? Tabla AI empresarial ai_business_metrics ya existe
+2025-07-23 08:45:36 2025-07-23 08:45:36,995 - root - INFO - ? AILearningService Empresarial inicializado correctamente
+2025-07-23 08:45:36 2025-07-23 08:45:36,995 - root - INFO - ? Sistema de Aprendizaje Autom?tico Empresarial inicializado
+2025-07-23 08:45:37 2025-07-23 08:45:37,328 - root - ERROR - Errores en inserci?n BigQuery - Intento 1: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]     
+2025-07-23 08:45:38 2025-07-23 08:45:38,528 - root - ERROR - Errores en inserci?n BigQuery - Intento 2: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]     
+2025-07-23 08:45:39 2025-07-23 08:45:39,569 - root - ERROR - Errores en inserci?n BigQuery - Intento 3: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]     
+2025-07-23 08:45:39 2025-07-23 08:45:39,569 - root - INFO - ? Sesi?n empresarial iniciada - ID: 1d834a54-f2e8-4c05-865a-f82016e428f3 - Usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2
+2025-07-23 08:45:39 2025-07-23 08:45:39,569 - expert_bot_api.routes - INFO - Sesi?n de chat iniciada correctamente para usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2
+2025-07-23 08:45:39 169.254.169.126 - - [23/Jul/2025:08:45:39 +0000] "POST /api/v1/chatbot/session/start HTTP/1.1" 200 219 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23 08:47:04 OPTIONS 200 https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/new-conversation
+2025-07-23 08:47:04 2025-07-23 08:47:04,182 - expert_bot_api - INFO - Request: OPTIONS /api/v1/chatbot/new-conversation - IP: 169.254.169.126       
+2025-07-23 08:47:04 2025-07-23 08:47:04,182 - expert_bot_api.routes - INFO - Acceso an?nimo a chat_routes.create_new_conversation
+2025-07-23 08:47:04 169.254.169.126 - - [23/Jul/2025:08:47:04 +0000] "OPTIONS /api/v1/chatbot/new-conversation HTTP/1.1" 200 0 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23 08:47:04 POST 500 https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/new-conversation
+2025-07-23 08:47:04 2025-07-23 08:47:04,238 - expert_bot_api - INFO - Request: POST /api/v1/chatbot/new-conversation - IP: 169.254.169.126
+2025-07-23 08:47:04 2025-07-23 08:47:04,238 - expert_bot_api.routes - INFO - Acceso an?nimo a chat_routes.create_new_conversation
+2025-07-23 08:47:04 2025-07-23 08:47:04,571 - expert_bot_api.routes - INFO - Creando nueva conversaci?n para usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2, conversaci?n actual: None
+2025-07-23 08:47:04 2025-07-23 08:47:04,675 - root - ERROR - Errores en inserci?n BigQuery - Intento 1: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]     
+2025-07-23 08:47:05 2025-07-23 08:47:05,782 - root - ERROR - Errores en inserci?n BigQuery - Intento 2: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]     
+2025-07-23 08:47:06 2025-07-23 08:47:06,839 - root - ERROR - Errores en inserci?n BigQuery - Intento 3: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]     
+2025-07-23 08:47:06 2025-07-23 08:47:06,839 - expert_bot_api.routes - ERROR - Error creando nueva conversaci?n: name 'logger' is not defined        
+2025-07-23 08:47:06 2025-07-23 08:47:06,840 - root - ERROR - Error en decorador token_required: Error interno creando nueva conversaci?n: name 'logger' is not defined
+2025-07-23 08:47:06 2025-07-23 08:47:06,850 - utils.error_handlers - ERROR - {"error_id": "d6ac4a6e-7497-4996-bc0b-51c832a7ee2f", "timestamp": "2025-07-23T08:47:06.840527+00:00", "level": "high", "category": "authentication", "message": "Error de autenticaci\u00f3n", "user_id": "56bE1dNrjef8kO0Erg1qKQytKAq2", "endpoint": "chat_routes.create_new_conversation", "method": "POST", "ip_address": "169.254.169.126"}
+2025-07-23 08:47:06 169.254.169.126 - - [23/Jul/2025:08:47:06 +0000] "POST /api/v1/chatbot/new-conversation HTTP/1.1" 500 192 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+PS C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\expert_bot_api_COPY> expert-bot-api --region=europe-west1 --limit=50
+2025-07-23 08:45:03 [2025-07-23 08:45:03 +0000] [3] [INFO] Starting gunicorn 23.0.0
+2025-07-23 08:45:03 [2025-07-23 08:45:03 +0000] [3] [INFO] Listening at: http://0.0.0.0:8081 (3)
+2025-07-23 08:45:03 [2025-07-23 08:45:03 +0000] [3] [INFO] Using worker: sync
+2025-07-23 08:45:03 [2025-07-23 08:45:03 +0000] [7] [INFO] Booting worker with pid: 7
+2025-07-23 08:45:03 2025-07-23 08:45:03,729 - expert_bot_api - INFO - Request: OPTIONS /api/v1/energy/dashboard - IP: 169.254.169.126
+2025-07-23 08:45:03 2025-07-23 08:45:03,729 - expert_bot_api.energy_routes - INFO - Acceso an?nimo a energy endpoint: expert_energy_routes.get_dashboard_data
+2025-07-23 08:45:03 169.254.169.126 - - [23/Jul/2025:08:45:03 +0000] "OPTIONS /api/v1/energy/dashboard?period=week HTTP/1.1" 200 0 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23 08:45:03 [2025-07-23 08:45:03 +0000] [8] [INFO] Booting worker with pid: 8
+2025-07-23 08:45:17 [2025-07-23 08:45:03 +0000] [9] [INFO] Booting worker with pid: 9
+2025-07-23 08:45:34 [2025-07-23 08:45:27 +0000] [10] [INFO] Booting worker with pid: 10
+2025-07-23 08:45:36 OPTIONS 200 https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/session/start
+2025-07-23 08:45:36 2025-07-23 08:45:36,029 - expert_bot_api - INFO - Request: OPTIONS /api/v1/chatbot/session/start - IP: 169.254.169.126
+2025-07-23 08:45:36 2025-07-23 08:45:36,029 - expert_bot_api.routes - INFO - Acceso an?nimo a chat_routes.start_chat_session
+2025-07-23 08:45:36 169.254.169.126 - - [23/Jul/2025:08:45:36 +0000] "OPTIONS /api/v1/chatbot/session/start HTTP/1.1" 200 0 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23 08:45:36 POST 200 https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/session/start
+2025-07-23 08:45:36 2025-07-23 08:45:36,094 - expert_bot_api - INFO - Request: POST /api/v1/chatbot/session/start - IP: 169.254.169.126
+2025-07-23 08:45:36 2025-07-23 08:45:36,094 - expert_bot_api.routes - INFO - Acceso an?nimo a chat_routes.start_chat_session
+2025-07-23 08:45:36 2025-07-23 08:45:36,427 - expert_bot_api.routes - INFO - Iniciando sesi?n de chat para usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2    
+2025-07-23 08:45:36 2025-07-23 08:45:36,429 - app.services.enterprise_links_service - INFO - ? Enterprise Link Service inicializado correctamente   
+2025-07-23 08:45:36 2025-07-23 08:45:36,429 - app.services.enterprise_links_service - INFO - ? EnterpriseLinkService singleton inicializado
+2025-07-23 08:45:36 2025-07-23 08:45:36,436 - root - INFO - ? Cliente BigQuery inicializado correctamente - Intento 1
+2025-07-23 08:45:36 2025-07-23 08:45:36,441 - root - INFO - ? Cliente BigQuery AI inicializado - Intento 1     
+2025-07-23 08:45:36 2025-07-23 08:45:36,630 - root - INFO - ? Tabla AI empresarial ai_sentiment_analysis ya existe
+2025-07-23 08:45:36 2025-07-23 08:45:36,783 - root - INFO - ? Tabla AI empresarial ai_user_patterns ya existe  
+2025-07-23 08:45:36 2025-07-23 08:45:36,909 - root - INFO - ? Tabla AI empresarial ai_predictions ya existe    
+2025-07-23 08:45:36 2025-07-23 08:45:36,994 - root - INFO - ? Tabla AI empresarial ai_business_metrics ya existe
+2025-07-23 08:45:36 2025-07-23 08:45:36,995 - root - INFO - ? AILearningService Empresarial inicializado correctamente
+2025-07-23 08:45:36 2025-07-23 08:45:36,995 - root - INFO - ? Sistema de Aprendizaje Autom?tico Empresarial inicializado
+2025-07-23 08:45:37 2025-07-23 08:45:37,328 - root - ERROR - Errores en inserci?n BigQuery - Intento 1: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]     
+2025-07-23 08:45:38 2025-07-23 08:45:38,528 - root - ERROR - Errores en inserci?n BigQuery - Intento 2: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]     
+2025-07-23 08:45:39 2025-07-23 08:45:39,569 - root - ERROR - Errores en inserci?n BigQuery - Intento 3: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]     
+2025-07-23 08:45:39 2025-07-23 08:45:39,569 - root - INFO - ? Sesi?n empresarial iniciada - ID: 1d834a54-f2e8-4c05-865a-f82016e428f3 - Usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2
+2025-07-23 08:45:39 2025-07-23 08:45:39,569 - expert_bot_api.routes - INFO - Sesi?n de chat iniciada correctamente para usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2
+2025-07-23 08:45:39 169.254.169.126 - - [23/Jul/2025:08:45:39 +0000] "POST /api/v1/chatbot/session/start HTTP/1.1" 200 219 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23 08:47:04 OPTIONS 200 https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/new-conversation
+2025-07-23 08:47:04 2025-07-23 08:47:04,182 - expert_bot_api - INFO - Request: OPTIONS /api/v1/chatbot/new-conversation - IP: 169.254.169.126       
+2025-07-23 08:47:04 2025-07-23 08:47:04,182 - expert_bot_api.routes - INFO - Acceso an?nimo a chat_routes.create_new_conversation
+2025-07-23 08:47:04 169.254.169.126 - - [23/Jul/2025:08:47:04 +0000] "OPTIONS /api/v1/chatbot/new-conversation HTTP/1.1" 200 0 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23 08:47:04 POST 500 https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/new-conversation
+2025-07-23 08:47:04 2025-07-23 08:47:04,238 - expert_bot_api - INFO - Request: POST /api/v1/chatbot/new-conversation - IP: 169.254.169.126
+2025-07-23 08:47:04 2025-07-23 08:47:04,238 - expert_bot_api.routes - INFO - Acceso an?nimo a chat_routes.create_new_conversation
+2025-07-23 08:47:04 2025-07-23 08:47:04,571 - expert_bot_api.routes - INFO - Creando nueva conversaci?n para usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2, conversaci?n actual: None
+2025-07-23 08:47:04 2025-07-23 08:47:04,675 - root - ERROR - Errores en inserci?n BigQuery - Intento 1: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]     
+2025-07-23 08:47:05 2025-07-23 08:47:05,782 - root - ERROR - Errores en inserci?n BigQuery - Intento 2: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]     
+2025-07-23 08:47:06 2025-07-23 08:47:06,839 - root - ERROR - Errores en inserci?n BigQuery - Intento 3: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]     
+2025-07-23 08:47:06 2025-07-23 08:47:06,839 - expert_bot_api.routes - ERROR - Error creando nueva conversaci?n: name 'logger' is not defined        
+2025-07-23 08:47:06 2025-07-23 08:47:06,840 - root - ERROR - Error en decorador token_required: Error interno creando nueva conversaci?n: name 'logger' is not defined
+2025-07-23 08:47:06 2025-07-23 08:47:06,850 - utils.error_handlers - ERROR - {"error_id": "d6ac4a6e-7497-4996-bc0b-51c832a7ee2f", "timestamp": "2025-07-23T08:47:06.840527+00:00", "level": "high", "category": "authentication", "message": "Error de autenticaci\u00f3n", "user_id": "56bE1dNrjef8kO0Erg1qKQytKAq2", "endpoint": "chat_routes.create_new_conversation", "method": "POST", "ip_address": "169.254.169.126"}
+2025-07-23 08:47:06 169.254.169.126 - - [23/Jul/2025:08:47:06 +0000] "POST /api/v1/chatbot/new-conversation HTTP/1.1" 500 192 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+PS C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\expert_bot_api_COPY>
+
+evicio chatbot\servicios\expert_bot_api_COPY> gcloud logging read "resource.type=cloud_run_revision AND resource.labels.service_name=expert-bot-api" --limit=20                          
+---                                  
+insertId: 6880a18a000d004905f8aaff
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:07.181532187Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: 169.254.169.126 - - [23/Jul/2025:08:47:06 +0000] "POST /api/v1/chatbot/new-conversation
+  HTTP/1.1" 500 192 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64;
+  x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+timestamp: '2025-07-23T08:47:06.852041Z'
+---
+insertId: 6880a18a000cf7a8111d1279   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:07.181532187Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: '2025-07-23 08:47:06,850 - utils.error_handlers - ERROR - {"error_id":
+  "d6ac4a6e-7497-4996-bc0b-51c832a7ee2f", "timestamp": "2025-07-23T08:47:06.840527+00:00",
+  "level": "high", "category": "authentication", "message": "Error de autenticaci\u00f3n",
+  "user_id": "56bE1dNrjef8kO0Erg1qKQytKAq2", "endpoint": "chat_routes.create_new_conversation",
+  "method": "POST", "ip_address": "169.254.169.126"}'
+timestamp: '2025-07-23T08:47:06.849832Z'
+---
+insertId: 6880a18a000ccc1c37c1e0fe   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:06.847446895Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: "2025-07-23 08:47:06,840 - root - ERROR - Error en decorador token_required:\
+  \ Error interno creando nueva conversaci?n: name 'logger' is not defined"
+timestamp: '2025-07-23T08:47:06.838684Z'
+---
+insertId: 6880a18a000ccafa9f843c34   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:06.847446895Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: "2025-07-23 08:47:06,839 - expert_bot_api.routes - ERROR - Error creando\
+  \ nueva conversaci?n: name 'logger' is not defined"
+timestamp: '2025-07-23T08:47:06.838394Z'
+---
+insertId: 6880a18a000cc9913d950e18   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:06.847446895Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: "2025-07-23 08:47:06,839 - root - ERROR - Errores en inserci?n BigQuery\
+  \ - Intento 3: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info',\
+  \ 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]"
+timestamp: '2025-07-23T08:47:06.838033Z'
+---
+insertId: 6880a189000bed5146d9dd38   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:05.848661620Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: "2025-07-23 08:47:05,782 - root - ERROR - Errores en inserci?n BigQuery\
+  \ - Intento 2: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info',\
+  \ 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]"
+timestamp: '2025-07-23T08:47:05.781649Z'
+---
+insertId: 6880a188000a48fe9a71e87a   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:04.850447279Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: "2025-07-23 08:47:04,675 - root - ERROR - Errores en inserci?n BigQuery\
+  \ - Intento 1: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info',\
+  \ 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]"
+timestamp: '2025-07-23T08:47:04.674046Z'
+---
+insertId: 6880a1880008b26ea7eae505   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:04.850447279Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: '2025-07-23 08:47:04,571 - expert_bot_api.routes - INFO - Creando nueva
+  conversaci?n para usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2, conversaci?n actual: None'
+timestamp: '2025-07-23T08:47:04.569966Z'
+---
+insertId: 6880a18800039ebb8aeb756a   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:04.515938739Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: 2025-07-23 08:47:04,238 - expert_bot_api.routes - INFO - Acceso an?nimo
+  a chat_routes.create_new_conversation
+timestamp: '2025-07-23T08:47:04.237243Z'
+---
+insertId: 6880a18800039e61fb9d07ed   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:04.515938739Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: '2025-07-23 08:47:04,238 - expert_bot_api - INFO - Request: POST /api/v1/chatbot/new-conversation 
+  - IP: 169.254.169.126'
+timestamp: '2025-07-23T08:47:04.237153Z'
+---
+httpRequest:
+  latency: 2.615866019s
+  protocol: HTTP/1.1
+  referer: https://smarwatt.com/     
+  remoteIp: 88.18.43.60
+  requestMethod: POST
+  requestSize: '3331'
+  requestUrl: https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/new-conversation        
+  responseSize: '392'
+  serverIp: 34.143.78.2
+  status: 500
+  userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+    like Gecko) Chrome/138.0.0.0 Safari/537.36
+insertId: 6880a18a000cfdb0612772ae   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Frequests
+receiveTimestamp: '2025-07-23T08:47:07.182466994Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+severity: ERROR
+spanId: c408b3c5b7d97be3
+timestamp: '2025-07-23T08:47:04.233881Z'
+trace: projects/smatwatt/traces/fd02c702b101673fa71a1e7a64416814
+---
+insertId: 6880a1880002c6209ca4e4de   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:04.515938739Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: 169.254.169.126 - - [23/Jul/2025:08:47:04 +0000] "OPTIONS /api/v1/chatbot/new-conversation        
+  HTTP/1.1" 200 0 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+  AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"  
+timestamp: '2025-07-23T08:47:04.181792Z'
+---
+insertId: 6880a1880002c2bb7ead5551   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:04.182872732Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: 2025-07-23 08:47:04,182 - expert_bot_api.routes - INFO - Acceso an?nimo
+  a chat_routes.create_new_conversation
+timestamp: '2025-07-23T08:47:04.180923Z'
+---
+insertId: 6880a1880002c27adaa508f6   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:47:04.182872732Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: '2025-07-23 08:47:04,182 - expert_bot_api - INFO - Request: OPTIONS /api/v1/chatbot/new-conversation
+  - IP: 169.254.169.126'
+timestamp: '2025-07-23T08:47:04.180858Z'
+---
+httpRequest:
+  latency: 0.004116980s
+  protocol: HTTP/1.1
+  referer: https://smarwatt.com/
+  remoteIp: 88.18.43.60
+  requestMethod: OPTIONS
+  requestSize: '729'
+  requestUrl: https://expert-bot-api-1010012211318.europe-west1.run.app/api/v1/chatbot/new-conversation        
+  responseSize: '351'
+  serverIp: 34.143.78.2
+  status: 200
+  userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+    like Gecko) Chrome/138.0.0.0 Safari/537.36
+insertId: 6880a1880002c7ad57d785d1   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Frequests
+receiveTimestamp: '2025-07-23T08:47:04.185317640Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+severity: INFO
+spanId: d34ac5638fda4e42
+timestamp: '2025-07-23T08:47:04.167497Z'
+trace: projects/smatwatt/traces/3f2c919ab642feaaa71a1e7a644167ba
+traceSampled: true
+---
+insertId: 6880a1330008ae5d5a4970fb   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:45:39.694216762Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: 169.254.169.126 - - [23/Jul/2025:08:45:39 +0000] "POST /api/v1/chatbot/session/start
+  HTTP/1.1" 200 219 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64;
+  x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+timestamp: '2025-07-23T08:45:39.568925Z'
+---
+insertId: 6880a1330008aaceddbd1c53   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:45:39.694216762Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: '2025-07-23 08:45:39,569 - expert_bot_api.routes - INFO - Sesi?n de chat
+  iniciada correctamente para usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2'      
+timestamp: '2025-07-23T08:45:39.568014Z'
+---
+insertId: 6880a1330008aa715fccce36   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:45:39.694216762Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api
+  type: cloud_run_revision
+textPayload: '2025-07-23 08:45:39,569 - root - INFO - ? Sesi?n empresarial iniciada
+  - ID: 1d834a54-f2e8-4c05-865a-f82016e428f3 - Usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2'
+timestamp: '2025-07-23T08:45:39.567921Z'
+---
+insertId: 6880a1330008aa190aa669fd   
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:45:39.694216762Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: "2025-07-23 08:45:39,569 - root - ERROR - Errores en inserci?n BigQuery\
+  \ - Intento 3: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info',\
+  \ 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]"
+timestamp: '2025-07-23T08:45:39.567833Z'
+---
+insertId: 6880a13200080caa7ca3ca02
+labels:
+  instanceId: 0069c7a98893df2b86453244dc3539eaf04dc70f1d6f189276cc0e75c46de2a374a4950a49b623c8ae8f32c4039893aca60bf5ee4e46b934b32da2457901e5ab31d7928d89cd5de263c2bb2e9d30044c
+logName: projects/smatwatt/logs/run.googleapis.com%2Fstdout
+receiveTimestamp: '2025-07-23T08:45:38.696420328Z'
+resource:
+  labels:
+    configuration_name: expert-bot-api
+    location: europe-west1
+    project_id: smatwatt
+    revision_name: expert-bot-api-00085-9qc
+    service_name: expert-bot-api     
+  type: cloud_run_revision
+textPayload: "2025-07-23 08:45:38,528 - root - ERROR - Errores en inserci?n BigQuery\
+  \ - Intento 2: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info',\
+  \ 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]"
+timestamp: '2025-07-23T08:45:38.527530Z'
+PS C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\expert_bot_api_COPY>.labels.service_name=expert-bot-api" --limit=20 --format="value(timestamp,severity,textPayload)" --freshness=1h
+2025-07-23T08:47:06.852041Z         169.254.169.126 - - [23/Jul/2025:08:47:06 +0000] "POST /api/v1/chatbot/new-conversation HTTP/1.1" 500 192 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23T08:47:06.849832Z         2025-07-23 08:47:06,850 - utils.error_handlers - ERROR - {"error_id": "d6ac4a6e-7497-4996-bc0b-51c832a7ee2f", "timestamp": "2025-07-23T08:47:06.840527+00:00", "level": "high", "category": "authentication", "message": "Error de autenticaci\u00f3n", "user_id": "56bE1dNrjef8kO0Erg1qKQytKAq2", "endpoint": "chat_routes.create_new_conversation", "method": "POST", "ip_address": "169.254.169.126"}
+2025-07-23T08:47:06.838684Z         2025-07-23 08:47:06,840 - root - ERROR - Error en decorador token_required: Error interno creando nueva conversaci?n: name 'logger' is not defined   
+2025-07-23T08:47:06.838394Z         2025-07-23 08:47:06,839 - expert_bot_api.routes - ERROR - Error creando nueva conversaci?n: name 'logger' is not defined
+2025-07-23T08:47:06.838033Z         2025-07-23 08:47:06,839 - root - ERROR - Errores en inserci?n BigQuery - Intento 3: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]
+2025-07-23T08:47:05.781649Z         2025-07-23 08:47:05,782 - root - ERROR - Errores en inserci?n BigQuery - Intento 2: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]
+2025-07-23T08:47:04.674046Z         2025-07-23 08:47:04,675 - root - ERROR - Errores en inserci?n BigQuery - Intento 1: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]
+2025-07-23T08:47:04.569966Z         2025-07-23 08:47:04,571 - expert_bot_api.routes - INFO - Creando nueva conversaci?n para usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2, conversaci?n actual: None
+2025-07-23T08:47:04.237243Z         2025-07-23 08:47:04,238 - expert_bot_api.routes - INFO - Acceso an?nimo a chat_routes.create_new_conversation   
+2025-07-23T08:47:04.237153Z         2025-07-23 08:47:04,238 - expert_bot_api - INFO - Request: POST /api/v1/chatbot/new-conversation - IP: 169.254.169.126
+2025-07-23T08:47:04.233881Z     ERROR
+2025-07-23T08:47:04.181792Z         169.254.169.126 - - [23/Jul/2025:08:47:04 +0000] "OPTIONS /api/v1/chatbot/new-conversation HTTP/1.1" 200 0 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23T08:47:04.180923Z         2025-07-23 08:47:04,182 - expert_bot_api.routes - INFO - Acceso an?nimo a chat_routes.create_new_conversation   
+2025-07-23T08:47:04.180858Z         2025-07-23 08:47:04,182 - expert_bot_api - INFO - Request: OPTIONS /api/v1/chatbot/new-conversation - IP: 169.254.169.126
+2025-07-23T08:47:04.167497Z     INFO 
+2025-07-23T08:45:39.568925Z         169.254.169.126 - - [23/Jul/2025:08:45:39 +0000] "POST /api/v1/chatbot/session/start HTTP/1.1" 200 219 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23T08:45:39.568014Z         2025-07-23 08:45:39,569 - expert_bot_api.routes - INFO - Sesi?n de chat iniciada correctamente para usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2
+2025-07-23T08:45:39.567921Z         2025-07-23 08:45:39,569 - root - INFO - ? Sesi?n empresarial iniciada - ID: 1d834a54-f2e8-4c05-865a-f82016e428f3 - Usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2
+2025-07-23T08:45:39.567833Z         2025-07-23 08:45:39,569 - root - ERROR - Errores en inserci?n BigQuery - Intento 3: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]
+2025-07-23T08:45:38.527530Z         2025-07-23 08:45:38,528 - root - ERROR - Errores en inserci?n BigQuery - Intento 2: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]
+PS C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\expert_bot_api_COPY>
+
+PS C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\expert_bot_api_COPY> gcloud logging read "resource.type=cloud_run_revision AND resource.labels.service_name=expert-bot-api" --limit=20 --format="value(timestamp,severity,textPayload)" --freshness=1h
+2025-07-23T08:47:06.852041Z         169.254.169.126 - - [23/Jul/2025:08:47:06 +0000] "POST /api/v1/chatbot/new-conversation HTTP/1.1" 500 192 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23T08:47:06.849832Z         2025-07-23 08:47:06,850 - utils.error_handlers - ERROR - {"error_id": "d6ac4a6e-7497-4996-bc0b-51c832a7ee2f", "timestamp": "2025-07-23T08:47:06.840527+00:00", "level": "high", "category": "authentication", "message": "Error de autenticaci\u00f3n", "user_id": "56bE1dNrjef8kO0Erg1qKQytKAq2", "endpoint": "chat_routes.create_new_conversation", "method": "POST", "ip_address": "169.254.169.126"}
+2025-07-23T08:47:06.838684Z         2025-07-23 08:47:06,840 - root - ERROR - Error en decorador token_required: Error interno creando nueva conversaci?n: name 'logger' is not defined   
+2025-07-23T08:47:06.838394Z         2025-07-23 08:47:06,839 - expert_bot_api.routes - ERROR - Error creando nueva conversaci?n: name 'logger' is not defined
+2025-07-23T08:47:06.838033Z         2025-07-23 08:47:06,839 - root - ERROR - Errores en inserci?n BigQuery - Intento 3: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]
+2025-07-23T08:47:05.781649Z         2025-07-23 08:47:05,782 - root - ERROR - Errores en inserci?n BigQuery - Intento 2: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]
+2025-07-23T08:47:04.674046Z         2025-07-23 08:47:04,675 - root - ERROR - Errores en inserci?n BigQuery - Intento 1: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]
+2025-07-23T08:47:04.569966Z         2025-07-23 08:47:04,571 - expert_bot_api.routes - INFO - Creando nueva conversaci?n para usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2, conversaci?n actual: None
+2025-07-23T08:47:04.237243Z         2025-07-23 08:47:04,238 - expert_bot_api.routes - INFO - Acceso an?nimo a chat_routes.create_new_conversation   
+2025-07-23T08:47:04.237153Z         2025-07-23 08:47:04,238 - expert_bot_api - INFO - Request: POST /api/v1/chatbot/new-conversation - IP: 169.254.169.126
+2025-07-23T08:47:04.233881Z     ERROR
+2025-07-23T08:47:04.181792Z         169.254.169.126 - - [23/Jul/2025:08:47:04 +0000] "OPTIONS /api/v1/chatbot/new-conversation HTTP/1.1" 200 0 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23T08:47:04.180923Z         2025-07-23 08:47:04,182 - expert_bot_api.routes - INFO - Acceso an?nimo a chat_routes.create_new_conversation   
+2025-07-23T08:47:04.180858Z         2025-07-23 08:47:04,182 - expert_bot_api - INFO - Request: OPTIONS /api/v1/chatbot/new-conversation - IP: 169.254.169.126
+2025-07-23T08:47:04.167497Z     INFO 
+2025-07-23T08:45:39.568925Z         169.254.169.126 - - [23/Jul/2025:08:45:39 +0000] "POST /api/v1/chatbot/session/start HTTP/1.1" 200 219 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23T08:45:39.568014Z         2025-07-23 08:45:39,569 - expert_bot_api.routes - INFO - Sesi?n de chat iniciada correctamente para usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2
+2025-07-23T08:45:39.567921Z         2025-07-23 08:45:39,569 - root - INFO - ? Sesi?n empresarial iniciada - ID: 1d834a54-f2e8-4c05-865a-f82016e428f3 - Usuario: 56bE1dNrjef8kO0Erg1qKQytKAq2
+2025-07-23T08:45:39.567833Z         2025-07-23 08:45:39,569 - root - ERROR - Errores en inserci?n BigQuery - Intento 3: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]
+2025-07-23T08:45:38.527530Z         2025-07-23 08:45:38,528 - root - ERROR - Errores en inserci?n BigQuery - Intento 2: [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'session_info', 'debugInfo': '', 'message': 'This field: session_info is not a record.'}]}]
+PS C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\expert_bot_api_COPY> gcloud logging read "resource.type=cloud_run_revision AND resource.labels.service_name=energy-ia-api" --limit=20 --format="value(timestamp,severity,textPayload)" --freshness=1h
+ 
+2025-07-23T08:47:03.937364Z         169.254.169.126 - - [23/Jul/2025:08:47:03 +0000] "OPTIONS /api/v1/chatbot/message/v2 HTTP/1.1" 200 0 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23T08:47:03.936742Z         INFO:app:? RESPONSE [req_1753260423] 200 - 0.000s
+2025-07-23T08:47:03.936439Z         INFO:app:? REQUEST [req_1753260423] OPTIONS /api/v1/chatbot/message/v2     
+2025-07-23T08:47:03.935765Z         169.254.169.126 - - [23/Jul/2025:08:47:03 +0000] "OPTIONS /conversations HTTP/1.1" 404 143 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23T08:47:03.935211Z         169.254.169.126 - - [23/Jul/2025:08:47:03 +0000] "OPTIONS /conversations HTTP/1.1" 404 143 "https://smarwatt.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-23T08:47:03.918503Z         INFO:app:? RESPONSE [req_1753260423] 404 - 0.023s
+2025-07-23T08:47:03.915629Z         INFO:app:? RESPONSE [req_1753260423] 404 - 0.022s
+2025-07-23T08:47:03.895033Z         INFO:app:? REQUEST [req_1753260423] OPTIONS /conversations
+2025-07-23T08:47:03.893569Z         INFO:app:? REQUEST [req_1753260423] OPTIONS /conversations
+2025-07-23T08:47:03.795808Z         [2025-07-23 08:47:03 +0000] [16] [INFO] Booting worker with pid: 16        
+2025-07-23T08:47:03.658168Z         [2025-07-23 08:47:03 +0000] [15] [INFO] Booting worker with pid: 15        
+2025-07-23T08:47:03.424149Z         [2025-07-23 08:47:03 +0000] [14] [INFO] Booting worker with pid: 14        
+2025-07-23T08:47:03.377384Z         [2025-07-23 08:47:03 +0000] [13] [INFO] Booting worker with pid: 13        
+2025-07-23T08:47:02.887164Z     INFODefault STARTUP TCP probe succeeded after 1 attempt for container "energy-ia-api-1" on port 8080.
+2025-07-23T08:47:02.886764Z         [2025-07-23 08:47:02 +0000] [3] [INFO] Using worker: sync
+2025-07-23T08:47:02.886724Z         [2025-07-23 08:47:02 +0000] [3] [INFO] Listening at: http://0.0.0.0:8080 (3)
+2025-07-23T08:47:02.882020Z         [2025-07-23 08:47:02 +0000] [3] [INFO] Starting gunicorn 23.0.0
+2025-07-23T08:47:02.881091Z         INFO:run:? Inicio: 2025-07-23T08:47:02.881369
+2025-07-23T08:47:02.881054Z         INFO:run:? Versi?n: 2025.1.0
+2025-07-23T08:47:02.881008Z         INFO:run:? Configuraci?n: production  
+PS C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\expert_bot_api_COPY>

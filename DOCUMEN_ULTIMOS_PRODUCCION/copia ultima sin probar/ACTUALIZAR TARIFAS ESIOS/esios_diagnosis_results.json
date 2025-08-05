@@ -1,0 +1,42 @@
+{
+  "connectivity": {
+    "status_code": 403,
+    "success": false,
+    "headers": {
+      "Content-Type": "application/json",
+      "Connection": "keep-alive",
+      "Date": "Sat, 02 Aug 2025 09:31:03 GMT",
+      "x-amz-apigw-id": "Oq8hsHuNjoEEVow=",
+      "x-amzn-RequestId": "0bcac1ad-396a-41d5-920c-3f1370299d9c",
+      "x-amzn-ErrorType": "ForbiddenException",
+      "X-Cache": "Error from cloudfront",
+      "Via": "1.1 1c6c01e9f8eba6dda84f1f8306c41240.cloudfront.net (CloudFront)",
+      "X-Amz-Cf-Pop": "MAD53-P1",
+      "X-Amz-Cf-Id": "lMU5hDILCw95dkzlpmrPgQ6CNHzSGuj4ZOcrdaLnCwCSrZYOWj3dsA==",
+      "Set-Cookie": "visid_incap_1885724=1adE4B1kR0Gr1u0PdGzhIdbajWgAAAAAQUIPAAAAAAA+IGap7/jgAmbHllwz++mI; expires=Sat, 01 Aug 2026 23:59:17 GMT; HttpOnly; path=/; Domain=.esios.ree.es; Secure; SameSite=None, nlbi_1885724=0vDlAXt7jjBpZ4BLii4XKAAAAACMLhhXJU4rhaoqwYZbBBOs; HttpOnly; path=/; Domain=.esios.ree.es; Secure; SameSite=None, incap_ses_250_1885724=u4GkSIfcPTBeGlGRGi54A9bajWgAAAAAzVSmJRAPW/GN9fD1l3yzJQ==; path=/; Domain=.esios.ree.es; Secure; SameSite=None",
+      "Strict-Transport-Security": "max-age=31536000",
+      "X-CDN": "Imperva",
+      "Content-Encoding": "gzip",
+      "Transfer-Encoding": "chunked",
+      "X-Iinfo": "43-58709665-58709666 NNYY CT(1 2 0) RT(1754127063121 39) q(0 0 0 16) r(0 0) U24"
+    },
+    "response_size": 36
+  },
+  "indicator_check": {
+    "status_code": 403,
+    "success": false,
+    "response_size": 36,
+    "error_response": "{\"Status\":403,\"message\":\"Forbidden\"}"
+  },
+  "data_fetch": {
+    "status_code": 403,
+    "success": false,
+    "url": "https://api.esios.ree.es/v1/indicators/1001?start_date=2025-08-01T00%3A00&end_date=2025-08-02T23%3A59&time_trunc=hour",
+    "params_used": {
+      "start_date": "2025-08-01T00:00",
+      "end_date": "2025-08-02T23:59",
+      "time_trunc": "hour"
+    },
+    "error_response": "{\"Status\":403,\"message\":\"Forbidden\"}"
+  }
+}

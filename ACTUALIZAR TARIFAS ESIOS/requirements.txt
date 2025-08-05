@@ -1,0 +1,23 @@
+# 🔥 ACTUALIZADOR ESIOS - DEPENDENCIAS
+# =====================================
+
+# Librerías core
+requests>=2.31.0
+schedule>=1.2.0
+python-dotenv>=1.0.0
+
+# Fecha y hora
+python-dateutil>=2.8.2
+
+# Logs y monitoreo  
+colorlog>=6.7.0
+
+# Validación de datos
+pydantic>=2.0.0
+
+# HTTP robusto
+urllib3>=1.26.0
+httpx>=0.24.0
+
+# Utilidades
+pathlib2>=2.3.7

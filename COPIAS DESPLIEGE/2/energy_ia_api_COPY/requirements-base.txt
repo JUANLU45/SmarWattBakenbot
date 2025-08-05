@@ -1,0 +1,65 @@
+# energy_ia_api_COPY/requirements-base.txt
+# 🏢 DEPENDENCIAS BASE EMPRESARIALES - PRODUCCIÓN ÚNICAMENTE
+
+# === FLASK FRAMEWORK EMPRESARIAL ===
+Flask>=2.3.0
+Flask-Cors>=4.0.0
+Flask-Limiter>=3.5.0
+Flask-Caching>=2.1.0
+Flask-Session>=0.5.0
+Flask-HTTPAuth>=4.8.0
+
+# === SERVIDOR EMPRESARIAL ===
+gunicorn>=21.2.0
+gevent>=23.7.0
+
+# === GOOGLE CLOUD PLATFORM EMPRESARIAL ===
+google-cloud-aiplatform>=1.35.0
+google-cloud-bigquery>=3.12.0
+google-cloud-storage>=2.10.0
+google-cloud-pubsub>=2.18.0
+google-cloud-firestore>=2.12.0
+google-cloud-secretmanager>=2.16.0
+google-cloud-monitoring>=2.15.0
+google-cloud-logging>=3.8.0
+
+# === FIREBASE EMPRESARIAL ===
+firebase-admin>=6.2.0
+
+# === SMARWATT AUTH LIBRARY ===
+smarwatt-auth-library>=1.0.0
+
+# === GOOGLE GENERATIVE AI EMPRESARIAL ===
+google-generativeai>=0.3.2
+google-ai-generativelanguage>=0.4.0
+google-auth>=2.23.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.1.0
+
+# === AUTENTICACIÓN Y SEGURIDAD EMPRESARIAL ===
+PyJWT>=2.8.0
+cryptography>=41.0.0
+bcrypt>=4.0.0
+
+# === UTILIDADES EMPRESARIALES ===
+requests>=2.31.0
+urllib3>=2.0.0
+python-dotenv>=1.0.0
+pydantic>=2.1.0
+marshmallow>=3.20.0
+jsonschema>=4.19.0
+
+# === MONITOREO Y LOGGING ===
+sentry-sdk>=1.28.0
+prometheus-client>=0.17.0
+structlog>=23.1.0
+
+# === CONFIGURACIÓN EMPRESARIAL ===
+python-decouple>=3.8
+pyyaml>=6.0.1
+configparser>=5.3.0
+
+# === VERSIONS LOCK ===
+setuptools>=68.0.0
+wheel>=0.41.0
+pip>=23.2.0

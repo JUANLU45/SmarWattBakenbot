@@ -1,0 +1,36 @@
+=== MAPA DE UNIFICACIÓN DE TABLAS BIGQUERY ===
+
+                'self.bq_recommendation_log_table_id = "recommendation_log"',
+                "self.bq_recommendation_log_table_id = None",
+        if "self.bq_recommendation_log_table_id = None" in contenido:
+        self.bq_async_tasks_table_id = "async_tasks"
+        self.bq_async_tasks_table_id = current_app.config.get(
+        self.bq_consumption_log_table_id = current_app.config.get(
+        self.bq_consumption_table_id = current_app.config.get(
+        self.bq_conversations_table_id = current_app.config.get(
+        self.bq_feedback_table_id = current_app.config.get(
+        self.bq_market_analysis_table_id = current_app.config.get(
+        self.bq_market_analysis_table_id = None
+        self.bq_market_electricity_tariffs_table_id = current_app.config.get(
+        self.bq_market_electricity_tariffs_table_id = None
+        self.bq_recommendation_log_table_id = current_app.config.get(
+        self.bq_recommendation_log_table_id = None
+        self.bq_uploaded_docs_table_id = current_app.config.get(
+        self.bq_user_profiles_table_id = current_app.config.get(
+        self.bq_worker_metrics_table_id = "worker_metrics"
+        self.bq_worker_metrics_table_id = current_app.config.get(
+    BQ_AI_BUSINESS_METRICS_TABLE_ID = os.environ.get(
+    BQ_AI_OPTIMIZATION_TABLE_ID = os.environ.get(
+    BQ_AI_PATTERNS_TABLE_ID = os.environ.get(
+    BQ_AI_PREDICTIONS_TABLE_ID = os.environ.get(
+    BQ_AI_SENTIMENT_TABLE_ID = os.environ.get(
+    BQ_ASYNC_TASKS_TABLE_ID = os.environ.get("BQ_ASYNC_TASKS_TABLE_ID", "async_tasks")
+    BQ_CONSUMPTION_LOG_TABLE_ID = os.environ.get(
+    BQ_CONVERSATIONS_TABLE_ID = os.environ.get(
+    BQ_FEEDBACK_TABLE_ID = os.environ.get("BQ_FEEDBACK_TABLE_ID", "feedback_log")
+    BQ_MARKET_TARIFFS_TABLE_ID = (
+    BQ_MARKET_TARIFFS_TABLE_ID = os.environ.get(
+    BQ_RECOMMENDATION_LOG_TABLE_ID = os.environ.get(
+    BQ_UPLOADED_DOCS_TABLE_ID = os.environ.get(
+    BQ_USER_PROFILES_TABLE_ID = os.environ.get(
+    BQ_WORKER_METRICS_TABLE_ID = os.environ.get(

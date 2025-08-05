@@ -1,0 +1,81 @@
+# expert_bot_api_COPY/requirements-base.txt
+# 🏢 DEPENDENCIAS BASE EMPRESARIALES - PRODUCCIÓN ÚNICAMENTE
+
+# === CORE FRAMEWORK ===
+Flask>=2.3.0
+Werkzeug>=2.3.0
+python-dotenv>=1.0.0
+gunicorn>=21.2.0
+
+# === CORS Y SEGURIDAD ===
+Flask-Cors>=4.0.0
+cryptography>=41.0.0
+PyJWT>=2.8.0
+
+# === GOOGLE CLOUD PLATFORM ===
+google-cloud-bigquery>=3.11.0
+google-cloud-pubsub>=2.18.0
+google-cloud-storage>=2.10.0
+google-auth>=2.22.0
+google-api-core>=2.11.0
+google-cloud-core>=2.3.0
+google-cloud-firestore>=2.11.0
+
+# === FIREBASE ===
+firebase-admin>=6.2.0
+
+# === SMARWATT AUTH LIBRARY ===
+smarwatt-auth-library>=1.0.0
+
+# === GOOGLE AI ===
+google-generativeai>=0.3.0
+
+# === DATABASES Y CACHE ===
+redis>=4.6.0
+pymongo>=4.4.0
+
+# === PROCESAMIENTO ASÍNCRONO ===
+celery>=5.3.0
+kombu>=5.3.0
+
+# === MONITOREO Y LOGGING ===
+sentry-sdk>=1.28.0
+prometheus-client>=0.17.0
+structlog>=23.1.0
+
+# === UTILIDADES ===
+requests>=2.31.0
+urllib3>=2.0.0
+certifi>=2023.0.0
+charset-normalizer>=3.2.0
+idna>=3.4
+
+# === VALIDACIÓN Y SERIALIZACIÓN ===
+marshmallow>=3.20.0
+jsonschema>=4.19.0
+pydantic>=2.1.0
+
+# === NETWORKING ===
+aiohttp>=3.8.0
+httpx>=0.24.0
+
+# === CRON Y SCHEDULING ===
+schedule>=1.2.0
+APScheduler>=3.10.0
+
+# === CONFIGURACIÓN EMPRESARIAL ===
+python-decouple>=3.8
+pyyaml>=6.0.1
+configparser>=5.3.0
+
+# === MÉTRICAS Y ANÁLISIS ===
+psutil>=5.9.0
+
+# === COMPATIBILIDAD ===
+typing-extensions>=4.7.0
+dataclasses>=0.8.0
+
+# === VERSIONS LOCK ===
+setuptools>=68.0.0
+wheel>=0.41.0
+pip>=23.2.0

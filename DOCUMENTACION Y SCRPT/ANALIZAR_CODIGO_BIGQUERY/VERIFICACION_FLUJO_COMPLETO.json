@@ -1,0 +1,160 @@
+{
+  "timestamp": "2025-07-22T12:00:00Z",
+  "verificaciones": {
+    "referencias_tablas": {
+      "energy_api": {
+        "conversations_log": [
+          "chatbot_routes.py",
+          "config.py",
+          "generative_chat_service.py"
+        ],
+        "user_profiles_enriched": [
+          "config.py"
+        ],
+        "consumption_log": [
+          "config.py",
+          "vertex_ai_service.py"
+        ],
+        "recommendation_log": [
+          "config.py",
+          "vertex_ai_service.py"
+        ],
+        "feedback_log": [
+          "config.py",
+          "vertex_ai_service.py"
+        ],
+        "uploaded_documents_log": [
+          "config.py"
+        ]
+      },
+      "expert_api": {
+        "user_profiles_enriched": [
+          "config.py",
+          "energy_service.py",
+          "energy_service.py"
+        ],
+        "consumption_log": [
+          "config.py",
+          "energy_service.py",
+          "async_processing_service.py",
+          "energy_service.py"
+        ],
+        "conversations_log": [
+          "config.py",
+          "ai_learning_service.py",
+          "chat_service.py"
+        ],
+        "recommendation_log": [
+          "config.py",
+          "energy_service.py"
+        ],
+        "feedback_log": [
+          "config.py",
+          "ai_learning_service.py",
+          "chat_service.py"
+        ],
+        "uploaded_documents_log": [
+          "config.py",
+          "energy_service.py",
+          "async_processing_service.py",
+          "energy_service.py"
+        ]
+      }
+    },
+    "unificacion_datos": {
+      "user_profiles_enriched": {
+        "energy_api_usa": true,
+        "expert_api_usa": true,
+        "unificado": true,
+        "descripcion": "Perfiles de usuario - DEBE estar disponible para ambos servicios"
+      },
+      "consumption_log": {
+        "energy_api_usa": true,
+        "expert_api_usa": true,
+        "unificado": true,
+        "descripcion": "Datos de consumo - DEBE alimentar recomendaciones"
+      },
+      "conversations_log": {
+        "energy_api_usa": true,
+        "expert_api_usa": true,
+        "unificado": true,
+        "descripcion": "Historial de chat - DEBE estar unificado"
+      },
+      "recommendation_log": {
+        "energy_api_usa": true,
+        "expert_api_usa": true,
+        "unificado": true,
+        "descripcion": "Recomendaciones - DEBE estar disponible para ambos servicios"
+      },
+      "feedback_log": {
+        "energy_api_usa": true,
+        "expert_api_usa": true,
+        "unificado": true,
+        "descripcion": "Feedback de usuario - DEBE mejorar IA en ambos servicios"
+      },
+      "uploaded_documents_log": {
+        "energy_api_usa": true,
+        "expert_api_usa": true,
+        "unificado": true,
+        "descripcion": "Documentos subidos - DEBE estar accesible"
+      }
+    },
+    "configuraciones": {
+      "BQ_CONSUMPTION_LOG_TABLE_ID": {
+        "energy_tiene": true,
+        "expert_tiene": true,
+        "consistente": true
+      },
+      "BQ_CONVERSATIONS_LOG_TABLE_ID": {
+        "energy_tiene": false,
+        "expert_tiene": false,
+        "consistente": false
+      },
+      "BQ_RECOMMENDATION_LOG_TABLE_ID": {
+        "energy_tiene": true,
+        "expert_tiene": true,
+        "consistente": true
+      },
+      "BQ_FEEDBACK_TABLE_ID": {
+        "energy_tiene": true,
+        "expert_tiene": true,
+        "consistente": true
+      }
+    },
+    "flujo_usuario": {
+      "perfil_usuario": {
+        "tabla": "user_profiles_enriched",
+        "descripcion": "Perfil de usuario debe estar en ambos servicios",
+        "energy_lee": false,
+        "energy_escribe": false,
+        "expert_lee": false,
+        "expert_escribe": false,
+        "flujo_completo": false
+      },
+      "consumo_recomendaciones": {
+        "tabla": "consumption_log",
+        "descripcion": "Datos de consumo deben generar recomendaciones",
+        "energy_lee": true,
+        "energy_escribe": false,
+        "expert_lee": true,
+        "expert_escribe": false,
+        "flujo_completo": true
+      },
+      "conversaciones": {
+        "tabla": "conversations_log",
+        "descripcion": "Conversaciones deben estar unificadas",
+        "energy_lee": true,
+        "energy_escribe": true,
+        "expert_lee": false,
+        "expert_escribe": false,
+        "flujo_completo": false
+      }
+    }
+  },
+  "puntuacion": {
+    "puntos_obtenidos": 90,
+    "puntos_totales": 110,
+    "porcentaje": 81.81818181818183,
+    "estado": "NECESITA_MEJORAS"
+  }
+}

@@ -1,0 +1,1940 @@
+{
+  "timestamp": "2025-08-05T14:29:26.297037",
+  "summary": {
+    "total_endpoints_tested": 41,
+    "successful": 17,
+    "failed": 24,
+    "success_rate_percentage": 41.46
+  },
+  "results_by_service": {
+    "energy_ia_api": [
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/chatbot/message/v2",
+        "method": "POST",
+        "status_code": "ERROR",
+        "success": false,
+        "error": "HTTPSConnectionPool(host='energy-ia-api-1010012211318.europe-west1.run.app', port=443): Read timed out. (read timeout=10)",
+        "timestamp": "2025-08-05T14:28:30.819256"
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/chatbot/message",
+        "method": "POST",
+        "status_code": "ERROR",
+        "success": false,
+        "error": "HTTPSConnectionPool(host='energy-ia-api-1010012211318.europe-west1.run.app', port=443): Read timed out. (read timeout=10)",
+        "timestamp": "2025-08-05T14:28:41.233435"
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/chatbot/message/v2",
+        "method": "POST",
+        "status_code": "ERROR",
+        "success": false,
+        "error": "HTTPSConnectionPool(host='energy-ia-api-1010012211318.europe-west1.run.app', port=443): Read timed out. (read timeout=10)",
+        "timestamp": "2025-08-05T14:28:51.630433"
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/chatbot/cross-service",
+        "method": "POST",
+        "status_code": 200,
+        "success": true,
+        "response_size": 142,
+        "timestamp": "2025-08-05T14:28:52.187646",
+        "response": {
+          "data": {
+            "error": "Expert bot unavailable: 404"
+          },
+          "source_service": "unknown",
+          "status": "success",
+          "timestamp": "2025-08-05T14:28:52.886062+02:00"
+        }
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/chatbot/conversations",
+        "method": "GET",
+        "status_code": 200,
+        "success": true,
+        "response_size": 112,
+        "timestamp": "2025-08-05T14:28:53.524806",
+        "response": {
+          "data": {
+            "conversations": [],
+            "total_count": 0
+          },
+          "status": "success",
+          "timestamp": "2025-08-05T14:28:54.219970+02:00"
+        }
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/energy/tariffs/recommendations?user_id=test_user_123",
+        "method": "GET",
+        "status_code": 404,
+        "success": false,
+        "response_size": 142,
+        "timestamp": "2025-08-05T14:28:55.597859",
+        "response": {
+          "error_code": 404,
+          "message": "No se encontró perfil de consumo detallado para el usuario. Por favor, sube una factura.",
+          "status": "error"
+        }
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/energy/tariffs/market-data",
+        "method": "GET",
+        "status_code": 200,
+        "success": true,
+        "response_size": 1415,
+        "timestamp": "2025-08-05T14:28:56.759068",
+        "response": {
+          "data": {
+            "market_statistics": {
+              "active_tariffs": 3,
+              "last_updated": "2025-07-31T16:17:35.893374+00:00",
+              "providers": 2,
+              "pvpc_tariffs": 3,
+              "total_tariffs": 3,
+              "with_peak_valley": 2
+            },
+            "tariffs": [
+              {
+                "fixed_monthly_fee": 0.123626,
+                "is_active": true,
+                "is_pvpc": true,
+                "kwh_price_flat": 0.14623390909090905,
+                "kwh_price_peak": 0.17472850000000004,
+                "kwh_price_valley": 0.12995128571428574,
+                "power_price_per_kw_per_month": 2.4988,
+                "provider_name": "REE (Red Eléctrica de España)",
+                "tariff_id": "PVPC_20250731",
+                "tariff_name": "PVPC 2025-07-31",
+                "tariff_type": "PVPC",
+                "update_timestamp": "2025-07-31T16:17:35.893374+00:00"
+              },
+              {
+                "fixed_monthly_fee": 0.123626,
+                "is_active": true,
+                "is_pvpc": true,
+                "kwh_price_flat": 0.12608499999999997,
+                "kwh_price_peak": 0.0,
+                "kwh_price_valley": 0.12608499999999997,
+                "power_price_per_kw_per_month": 2.4988,
+                "provider_name": "REE (Red Eléctrica de España)",
+                "tariff_id": "PVPC_20250730",
+                "tariff_name": "PVPC 2025-07-30",
+                "tariff_type": "PVPC",
+                "update_timestamp": "2025-07-31T16:17:35.891375+00:00"
+              },
+              {
+                "fixed_monthly_fee": 0.0,
+                "is_active": true,
+                "is_pvpc": true,
+                "kwh_price_flat": 0.095193,
+                "kwh_price_peak": 0.095193,
+                "kwh_price_valley": 0.095193,
+                "power_price_per_kw_per_month": 0.0,
+                "provider_name": "Red Eléctrica de España (REE)",
+                "tariff_id": "REDELÉCTRICADEESPAÑA_PVPCTARIFAREGULADA_PVPC",
+                "tariff_name": "PVPC - Tarifa Regulada",
+                "tariff_type": "pvpc",
+                "update_timestamp": "2025-07-11T08:36:28.798234+00:00"
+              }
+            ]
+          },
+          "status": "success"
+        }
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/energy/tariffs/compare",
+        "method": "POST",
+        "status_code": 404,
+        "success": false,
+        "response_size": 83,
+        "timestamp": "2025-08-05T14:28:57.877935",
+        "response": {
+          "message": "No se encontraron suficientes tarifas para comparar",
+          "status": "error"
+        }
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/energy/admin/tariffs/add",
+        "method": "POST",
+        "status_code": 500,
+        "success": false,
+        "response_size": 244,
+        "timestamp": "2025-08-05T14:28:58.357758",
+        "response": {
+          "category": "server_error",
+          "error_code": 500,
+          "error_id": "85e8c4d7",
+          "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+          "service": "energy_ia_api_copy",
+          "status": "error",
+          "timestamp": "2025-08-05T14:28:59.056539+02:00"
+        }
+      },
+      {
+        "service": "energy",
+        "endpoint": "/health",
+        "method": "GET",
+        "status_code": 200,
+        "success": true,
+        "response_size": 199,
+        "timestamp": "2025-08-05T14:28:58.532538",
+        "response": {
+          "enterprise_mode": true,
+          "environment": "production",
+          "service": "energy_ia_api_copy",
+          "status": "healthy",
+          "timestamp": "2025-08-05T14:28:59.233706+02:00",
+          "uptime_seconds": 1607.646551,
+          "version": "2025.1.0"
+        }
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/info",
+        "method": "GET",
+        "status_code": 200,
+        "success": true,
+        "response_size": 570,
+        "timestamp": "2025-08-05T14:28:58.660020",
+        "response": {
+          "api_version": "2025.1.0",
+          "capabilities": [
+            "energy_recommendations",
+            "tariff_analysis",
+            "consumption_optimization",
+            "chat_interface",
+            "machine_learning_integration"
+          ],
+          "description": "API empresarial para IA de recomendaciones de tarifas energéticas",
+          "endpoints": {
+            "chatbot": "/api/v1/chatbot",
+            "energy": "/api/v1/energy",
+            "health": "/health",
+            "info": "/api/v1/info"
+          },
+          "enterprise_features": [
+            "advanced_authentication",
+            "error_handling",
+            "performance_monitoring",
+            "security_headers",
+            "request_logging"
+          ],
+          "service_name": "energy_ia_api_copy",
+          "timestamp": "2025-08-05T14:28:59.355607+02:00"
+        }
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/status",
+        "method": "GET",
+        "status_code": 200,
+        "success": true,
+        "response_size": 305,
+        "timestamp": "2025-08-05T14:28:58.823644",
+        "response": {
+          "components": {
+            "cors": "enabled",
+            "error_handlers": "active",
+            "firebase_admin": "connected",
+            "flask_app": "running"
+          },
+          "metrics": {
+            "config_name": "production",
+            "start_time": "2025-08-05T14:02:11.587174+02:00",
+            "uptime_seconds": 1607.935123
+          },
+          "service_status": "operational",
+          "timestamp": "2025-08-05T14:28:59.522313+02:00"
+        }
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/links/status",
+        "method": "GET",
+        "status_code": 200,
+        "success": true,
+        "response_size": 188,
+        "timestamp": "2025-08-05T14:28:59.223153",
+        "response": {
+          "available_links": [
+            "blog",
+            "dashboard",
+            "calculator",
+            "contact",
+            "terms",
+            "privacy"
+          ],
+          "links_configured": 6,
+          "service_name": "EnterpriseLinkService",
+          "status": "active",
+          "version": "2025_enterprise"
+        }
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/links/direct/recommendations",
+        "method": "GET",
+        "status_code": 404,
+        "success": false,
+        "response_size": 166,
+        "timestamp": "2025-08-05T14:28:59.619512",
+        "response": {
+          "available_types": [
+            "blog",
+            "dashboard",
+            "calculator",
+            "weather",
+            "contact",
+            "terms",
+            "privacy"
+          ],
+          "error": "Tipo de enlace 'recommendations' no encontrado",
+          "status": "error"
+        }
+      },
+      {
+        "service": "energy",
+        "endpoint": "/api/v1/links/test",
+        "method": "POST",
+        "status_code": 400,
+        "success": false,
+        "response_size": 61,
+        "timestamp": "2025-08-05T14:29:00.021396",
+        "response": {
+          "error": "Campo 'response_text' requerido",
+          "status": "error"
+        }
+      }
+    ],
+    "expert_bot_api": [
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/analysis/sentiment",
+        "method": "POST",
+        "status_code": 500,
+        "success": false,
+        "response_size": 192,
+        "timestamp": "2025-08-05T14:29:00.670827",
+        "response": {
+          "error": {
+            "category": "authentication",
+            "error_id": "7a7606be-d09e-4586-a594-5467b67356d1",
+            "level": "high",
+            "message": "Error de autenticación",
+            "timestamp": "2025-08-05T12:29:01.364886+00:00"
+          }
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/analysis/sentiment/internal",
+        "method": "POST",
+        "status_code": 400,
+        "success": false,
+        "response_size": 138,
+        "timestamp": "2025-08-05T14:29:01.106164",
+        "response": {
+          "error_type": "analysis_error",
+          "message": "Campo 'message_text' es obligatorio",
+          "status": "error",
+          "timestamp": "2025-08-05T12:29:01.804337"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/analysis/admin/system/metrics",
+        "method": "GET",
+        "status_code": 404,
+        "success": false,
+        "response_size": 177,
+        "timestamp": "2025-08-05T14:29:01.528037",
+        "response": {
+          "error": {
+            "category": "system",
+            "error_id": "2cefd2e3-f96f-449b-8d00-70284f635953",
+            "level": "low",
+            "message": "Recurso no encontrado",
+            "timestamp": "2025-08-05T14:29:02.217204+02:00"
+          }
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/async/user/tasks",
+        "method": "GET",
+        "status_code": 500,
+        "success": false,
+        "response_size": 103,
+        "timestamp": "2025-08-05T14:29:02.442720",
+        "response": {
+          "error": "Error interno del servidor",
+          "status": "error",
+          "timestamp": "2025-08-05T12:29:03.138944+00:00"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/async/user/tasks",
+        "method": "POST",
+        "status_code": 500,
+        "success": false,
+        "response_size": 103,
+        "timestamp": "2025-08-05T14:29:02.923194",
+        "response": {
+          "error": "Error interno del servidor",
+          "status": "error",
+          "timestamp": "2025-08-05T12:29:03.623679+00:00"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/async/user/tasks/test_task_id",
+        "method": "GET",
+        "status_code": 500,
+        "success": false,
+        "response_size": 103,
+        "timestamp": "2025-08-05T14:29:03.940767",
+        "response": {
+          "error": "Error interno del servidor",
+          "status": "error",
+          "timestamp": "2025-08-05T12:29:04.638503+00:00"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/async/admin/tasks/management",
+        "method": "GET",
+        "status_code": 500,
+        "success": false,
+        "response_size": 103,
+        "timestamp": "2025-08-05T14:29:04.456563",
+        "response": {
+          "error": "Error interno del servidor",
+          "status": "error",
+          "timestamp": "2025-08-05T12:29:05.157995+00:00"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/energy/consumption",
+        "method": "POST",
+        "status_code": 400,
+        "success": false,
+        "response_size": 458,
+        "timestamp": "2025-08-05T14:29:04.967208",
+        "response": {
+          "alternative_action": {
+            "description": "También puedes introducir tus datos manualmente",
+            "endpoint": "/manual-data",
+            "required_fields": [
+              "kwh_consumidos",
+              "potencia_contratada_kw"
+            ],
+            "type": "manual_input"
+          },
+          "help_message": "Si tienes problemas subiendo el archivo, puedes introducir los datos manualmente usando el botón 'Entrada Manual' en la aplicación.",
+          "message": "Por favor, selecciona una factura de electricidad para continuar.",
+          "status": "error"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/energy/consumption/analyze",
+        "method": "POST",
+        "status_code": 500,
+        "success": false,
+        "response_size": 192,
+        "timestamp": "2025-08-05T14:29:07.031517",
+        "response": {
+          "error": {
+            "category": "authentication",
+            "error_id": "31a10e57-abee-406d-8836-49e11495da1a",
+            "level": "high",
+            "message": "Error de autenticación",
+            "timestamp": "2025-08-05T12:29:07.726244+00:00"
+          }
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/energy/consumption/recommendations",
+        "method": "GET",
+        "status_code": 500,
+        "success": false,
+        "response_size": 192,
+        "timestamp": "2025-08-05T14:29:09.190261",
+        "response": {
+          "error": {
+            "category": "authentication",
+            "error_id": "ce02484b-60ae-44c0-819f-c5a7ca84a217",
+            "level": "high",
+            "message": "Error de autenticación",
+            "timestamp": "2025-08-05T12:29:09.885483+00:00"
+          }
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/energy/consumption/history",
+        "method": "GET",
+        "status_code": 500,
+        "success": false,
+        "response_size": 192,
+        "timestamp": "2025-08-05T14:29:11.278989",
+        "response": {
+          "error": {
+            "category": "authentication",
+            "error_id": "3aa7fdb9-d55c-4afb-af8c-7ec2e59adb4f",
+            "level": "high",
+            "message": "Error de autenticación",
+            "timestamp": "2025-08-05T12:29:11.958445+00:00"
+          }
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/energy/consumption/compare",
+        "method": "POST",
+        "status_code": 500,
+        "success": false,
+        "response_size": 192,
+        "timestamp": "2025-08-05T14:29:13.326389",
+        "response": {
+          "error": {
+            "category": "authentication",
+            "error_id": "6e5730a4-1324-402a-ad6a-51ca1a769f9f",
+            "level": "high",
+            "message": "Error de autenticación",
+            "timestamp": "2025-08-05T12:29:14.025144+00:00"
+          }
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/energy/consumption/update",
+        "method": "PUT",
+        "status_code": 500,
+        "success": false,
+        "response_size": 192,
+        "timestamp": "2025-08-05T14:29:15.474799",
+        "response": {
+          "error": {
+            "category": "authentication",
+            "error_id": "64e8a147-12fe-4373-90af-10ecde564769",
+            "level": "high",
+            "message": "Error de autenticación",
+            "timestamp": "2025-08-05T12:29:16.173792+00:00"
+          }
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/energy/consumption/title",
+        "method": "PUT",
+        "status_code": 500,
+        "success": false,
+        "response_size": 192,
+        "timestamp": "2025-08-05T14:29:15.995472",
+        "response": {
+          "error": {
+            "category": "authentication",
+            "error_id": "d59aa791-19a0-4386-b4a4-7b681c371d51",
+            "level": "high",
+            "message": "Error de autenticación",
+            "timestamp": "2025-08-05T12:29:16.696290+00:00"
+          }
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/energy/manual-data",
+        "method": "POST",
+        "status_code": 500,
+        "success": false,
+        "response_size": 192,
+        "timestamp": "2025-08-05T14:29:16.518340",
+        "response": {
+          "error": {
+            "category": "authentication",
+            "error_id": "2ace3eb4-f191-4b80-a23b-108450427709",
+            "level": "high",
+            "message": "Error de autenticación",
+            "timestamp": "2025-08-05T12:29:17.215124+00:00"
+          }
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/energy/dashboard",
+        "method": "GET",
+        "status_code": 200,
+        "success": true,
+        "response_size": 61,
+        "timestamp": "2025-08-05T14:29:18.280021",
+        "response": {
+          "uploaded_documents": [],
+          "user_id": "juanluvaldi_uid_123456"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/energy/users/profile",
+        "method": "GET",
+        "status_code": 200,
+        "success": true,
+        "response_size": 89,
+        "timestamp": "2025-08-05T14:29:20.067662",
+        "response": {
+          "data": {
+            "uploaded_documents": [],
+            "user_id": "juanluvaldi_uid_123456"
+          },
+          "status": "success"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/chatbot/session/start",
+        "method": "POST",
+        "status_code": 200,
+        "success": true,
+        "response_size": 614,
+        "timestamp": "2025-08-05T14:29:20.732460",
+        "response": {
+          "enterprise_features": [
+            "ml_recommendations",
+            "hybrid_consultation",
+            "feedback_analysis"
+          ],
+          "message": "Sesión empresarial iniciada correctamente",
+          "session_id": "628862cd-a456-4037-b0a1-c36e0f2552cc",
+          "status": "success",
+          "welcomeMessage": {
+            "content": "Buenas tardes, son las 14:29.\n\nSoy WattBot, tu asistente energético. Puedo ayudarte con consultas sobre energía, análisis de consumo y recomendaciones para optimizar tu factura.\n\n¿En qué puedo ayudarte hoy?",
+            "id": "welcome_1754396961",
+            "personalized": false,
+            "premium_data": false,
+            "timestamp": "2025-08-05T14:29:21.302919+02:00",
+            "type": "bot"
+          }
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/chatbot/message",
+        "method": "POST",
+        "status_code": 200,
+        "success": true,
+        "response_size": 492,
+        "timestamp": "2025-08-05T14:29:21.747542",
+        "response": {
+          "action": "emergency_response",
+          "context_quality": {
+            "available_sources_count": 0,
+            "data_completeness": 0,
+            "personalization_applied": true
+          },
+          "intent": "enterprise_fallback",
+          "message_analysis": {
+            "complexity": 4,
+            "contains_question": true,
+            "length": 28,
+            "technical_terms": false,
+            "urgency_detected": false
+          },
+          "response": "Lamento no poder responder su pregunta en este momento, usuario. Estoy experimentando dificultades técnicas temporales.",
+          "source": "enterprise_fallback_system",
+          "status": "fallback_activated"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/chatbot/new-conversation",
+        "method": "POST",
+        "status_code": 200,
+        "success": true,
+        "response_size": 395,
+        "timestamp": "2025-08-05T14:29:22.379985",
+        "response": {
+          "conversation_id": "81badc28-3ed0-4229-b5ff-c46bca6fc210",
+          "enterprise_features": [
+            "ml_recommendations",
+            "hybrid_consultation",
+            "conversation_management"
+          ],
+          "message": "Nueva conversación creada correctamente",
+          "previous_conversation_id": null,
+          "previous_conversation_saved": false,
+          "session_id": "81badc28-3ed0-4229-b5ff-c46bca6fc210",
+          "status": "success",
+          "timestamp": "2025-08-05T12:29:23.074089+00:00"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/chatbot/conversation/history",
+        "method": "GET",
+        "status_code": 200,
+        "success": true,
+        "response_size": 165,
+        "timestamp": "2025-08-05T14:29:23.579759",
+        "response": {
+          "data": {
+            "conversation_id": "1",
+            "messages": [],
+            "status": "success",
+            "total_messages": 0
+          },
+          "limit": 20,
+          "page": 1,
+          "status": "success",
+          "timestamp": "2025-08-05T12:29:24.279146"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/chatbot/conversation/test_conv_id",
+        "method": "DELETE",
+        "status_code": 200,
+        "success": true,
+        "response_size": 147,
+        "timestamp": "2025-08-05T14:29:24.648006",
+        "response": {
+          "conversation_id": "test_conv_id",
+          "message": "Conversación borrada correctamente",
+          "status": "success",
+          "timestamp": "2025-08-05T12:29:25.350556"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/chatbot/conversation/feedback",
+        "method": "POST",
+        "status_code": 500,
+        "success": false,
+        "response_size": 192,
+        "timestamp": "2025-08-05T14:29:25.141533",
+        "response": {
+          "error": {
+            "category": "authentication",
+            "error_id": "64cf50e3-672d-4252-9d79-5013a3044dcb",
+            "level": "high",
+            "message": "Error de autenticación",
+            "timestamp": "2025-08-05T12:29:25.840625+00:00"
+          }
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/api/v1/chatbot/metrics",
+        "method": "GET",
+        "status_code": 200,
+        "success": true,
+        "response_size": 72,
+        "timestamp": "2025-08-05T14:29:25.942469",
+        "response": {
+          "data": {},
+          "status": "success",
+          "timestamp": "2025-08-05T12:29:26.640966"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/health",
+        "method": "GET",
+        "status_code": 200,
+        "success": true,
+        "response_size": 111,
+        "timestamp": "2025-08-05T14:29:26.162960",
+        "response": {
+          "mode": "production",
+          "status": "healthy",
+          "timestamp": "2025-08-05T12:29:26.818848",
+          "version": "2.0.0-enterprise"
+        }
+      },
+      {
+        "service": "expert",
+        "endpoint": "/health/detailed",
+        "method": "GET",
+        "status_code": 200,
+        "success": true,
+        "response_size": 179,
+        "timestamp": "2025-08-05T14:29:26.296479",
+        "response": {
+          "config": "production",
+          "enterprise_mode": true,
+          "firebase_initialized": true,
+          "startup_time": "2025-08-05T12:03:57.038467",
+          "status": "healthy",
+          "timestamp": "2025-08-05T12:29:26.972299"
+        }
+      }
+    ]
+  },
+  "failed_endpoints": [
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/chatbot/message/v2",
+      "method": "POST",
+      "status_code": "ERROR",
+      "success": false,
+      "error": "HTTPSConnectionPool(host='energy-ia-api-1010012211318.europe-west1.run.app', port=443): Read timed out. (read timeout=10)",
+      "timestamp": "2025-08-05T14:28:30.819256"
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/chatbot/message",
+      "method": "POST",
+      "status_code": "ERROR",
+      "success": false,
+      "error": "HTTPSConnectionPool(host='energy-ia-api-1010012211318.europe-west1.run.app', port=443): Read timed out. (read timeout=10)",
+      "timestamp": "2025-08-05T14:28:41.233435"
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/chatbot/message/v2",
+      "method": "POST",
+      "status_code": "ERROR",
+      "success": false,
+      "error": "HTTPSConnectionPool(host='energy-ia-api-1010012211318.europe-west1.run.app', port=443): Read timed out. (read timeout=10)",
+      "timestamp": "2025-08-05T14:28:51.630433"
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/energy/tariffs/recommendations?user_id=test_user_123",
+      "method": "GET",
+      "status_code": 404,
+      "success": false,
+      "response_size": 142,
+      "timestamp": "2025-08-05T14:28:55.597859",
+      "response": {
+        "error_code": 404,
+        "message": "No se encontró perfil de consumo detallado para el usuario. Por favor, sube una factura.",
+        "status": "error"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/energy/tariffs/compare",
+      "method": "POST",
+      "status_code": 404,
+      "success": false,
+      "response_size": 83,
+      "timestamp": "2025-08-05T14:28:57.877935",
+      "response": {
+        "message": "No se encontraron suficientes tarifas para comparar",
+        "status": "error"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/energy/admin/tariffs/add",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 244,
+      "timestamp": "2025-08-05T14:28:58.357758",
+      "response": {
+        "category": "server_error",
+        "error_code": 500,
+        "error_id": "85e8c4d7",
+        "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+        "service": "energy_ia_api_copy",
+        "status": "error",
+        "timestamp": "2025-08-05T14:28:59.056539+02:00"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/links/direct/recommendations",
+      "method": "GET",
+      "status_code": 404,
+      "success": false,
+      "response_size": 166,
+      "timestamp": "2025-08-05T14:28:59.619512",
+      "response": {
+        "available_types": [
+          "blog",
+          "dashboard",
+          "calculator",
+          "weather",
+          "contact",
+          "terms",
+          "privacy"
+        ],
+        "error": "Tipo de enlace 'recommendations' no encontrado",
+        "status": "error"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/links/test",
+      "method": "POST",
+      "status_code": 400,
+      "success": false,
+      "response_size": 61,
+      "timestamp": "2025-08-05T14:29:00.021396",
+      "response": {
+        "error": "Campo 'response_text' requerido",
+        "status": "error"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/analysis/sentiment",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:00.670827",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "7a7606be-d09e-4586-a594-5467b67356d1",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:01.364886+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/analysis/sentiment/internal",
+      "method": "POST",
+      "status_code": 400,
+      "success": false,
+      "response_size": 138,
+      "timestamp": "2025-08-05T14:29:01.106164",
+      "response": {
+        "error_type": "analysis_error",
+        "message": "Campo 'message_text' es obligatorio",
+        "status": "error",
+        "timestamp": "2025-08-05T12:29:01.804337"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/analysis/admin/system/metrics",
+      "method": "GET",
+      "status_code": 404,
+      "success": false,
+      "response_size": 177,
+      "timestamp": "2025-08-05T14:29:01.528037",
+      "response": {
+        "error": {
+          "category": "system",
+          "error_id": "2cefd2e3-f96f-449b-8d00-70284f635953",
+          "level": "low",
+          "message": "Recurso no encontrado",
+          "timestamp": "2025-08-05T14:29:02.217204+02:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/async/user/tasks",
+      "method": "GET",
+      "status_code": 500,
+      "success": false,
+      "response_size": 103,
+      "timestamp": "2025-08-05T14:29:02.442720",
+      "response": {
+        "error": "Error interno del servidor",
+        "status": "error",
+        "timestamp": "2025-08-05T12:29:03.138944+00:00"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/async/user/tasks",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 103,
+      "timestamp": "2025-08-05T14:29:02.923194",
+      "response": {
+        "error": "Error interno del servidor",
+        "status": "error",
+        "timestamp": "2025-08-05T12:29:03.623679+00:00"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/async/user/tasks/test_task_id",
+      "method": "GET",
+      "status_code": 500,
+      "success": false,
+      "response_size": 103,
+      "timestamp": "2025-08-05T14:29:03.940767",
+      "response": {
+        "error": "Error interno del servidor",
+        "status": "error",
+        "timestamp": "2025-08-05T12:29:04.638503+00:00"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/async/admin/tasks/management",
+      "method": "GET",
+      "status_code": 500,
+      "success": false,
+      "response_size": 103,
+      "timestamp": "2025-08-05T14:29:04.456563",
+      "response": {
+        "error": "Error interno del servidor",
+        "status": "error",
+        "timestamp": "2025-08-05T12:29:05.157995+00:00"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption",
+      "method": "POST",
+      "status_code": 400,
+      "success": false,
+      "response_size": 458,
+      "timestamp": "2025-08-05T14:29:04.967208",
+      "response": {
+        "alternative_action": {
+          "description": "También puedes introducir tus datos manualmente",
+          "endpoint": "/manual-data",
+          "required_fields": [
+            "kwh_consumidos",
+            "potencia_contratada_kw"
+          ],
+          "type": "manual_input"
+        },
+        "help_message": "Si tienes problemas subiendo el archivo, puedes introducir los datos manualmente usando el botón 'Entrada Manual' en la aplicación.",
+        "message": "Por favor, selecciona una factura de electricidad para continuar.",
+        "status": "error"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption/analyze",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:07.031517",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "31a10e57-abee-406d-8836-49e11495da1a",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:07.726244+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption/recommendations",
+      "method": "GET",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:09.190261",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "ce02484b-60ae-44c0-819f-c5a7ca84a217",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:09.885483+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption/history",
+      "method": "GET",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:11.278989",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "3aa7fdb9-d55c-4afb-af8c-7ec2e59adb4f",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:11.958445+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption/compare",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:13.326389",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "6e5730a4-1324-402a-ad6a-51ca1a769f9f",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:14.025144+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption/update",
+      "method": "PUT",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:15.474799",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "64e8a147-12fe-4373-90af-10ecde564769",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:16.173792+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption/title",
+      "method": "PUT",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:15.995472",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "d59aa791-19a0-4386-b4a4-7b681c371d51",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:16.696290+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/manual-data",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:16.518340",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "2ace3eb4-f191-4b80-a23b-108450427709",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:17.215124+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/chatbot/conversation/feedback",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:25.141533",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "64cf50e3-672d-4252-9d79-5013a3044dcb",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:25.840625+00:00"
+        }
+      }
+    }
+  ],
+  "all_results": [
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/chatbot/message/v2",
+      "method": "POST",
+      "status_code": "ERROR",
+      "success": false,
+      "error": "HTTPSConnectionPool(host='energy-ia-api-1010012211318.europe-west1.run.app', port=443): Read timed out. (read timeout=10)",
+      "timestamp": "2025-08-05T14:28:30.819256"
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/chatbot/message",
+      "method": "POST",
+      "status_code": "ERROR",
+      "success": false,
+      "error": "HTTPSConnectionPool(host='energy-ia-api-1010012211318.europe-west1.run.app', port=443): Read timed out. (read timeout=10)",
+      "timestamp": "2025-08-05T14:28:41.233435"
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/chatbot/message/v2",
+      "method": "POST",
+      "status_code": "ERROR",
+      "success": false,
+      "error": "HTTPSConnectionPool(host='energy-ia-api-1010012211318.europe-west1.run.app', port=443): Read timed out. (read timeout=10)",
+      "timestamp": "2025-08-05T14:28:51.630433"
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/chatbot/cross-service",
+      "method": "POST",
+      "status_code": 200,
+      "success": true,
+      "response_size": 142,
+      "timestamp": "2025-08-05T14:28:52.187646",
+      "response": {
+        "data": {
+          "error": "Expert bot unavailable: 404"
+        },
+        "source_service": "unknown",
+        "status": "success",
+        "timestamp": "2025-08-05T14:28:52.886062+02:00"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/chatbot/conversations",
+      "method": "GET",
+      "status_code": 200,
+      "success": true,
+      "response_size": 112,
+      "timestamp": "2025-08-05T14:28:53.524806",
+      "response": {
+        "data": {
+          "conversations": [],
+          "total_count": 0
+        },
+        "status": "success",
+        "timestamp": "2025-08-05T14:28:54.219970+02:00"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/energy/tariffs/recommendations?user_id=test_user_123",
+      "method": "GET",
+      "status_code": 404,
+      "success": false,
+      "response_size": 142,
+      "timestamp": "2025-08-05T14:28:55.597859",
+      "response": {
+        "error_code": 404,
+        "message": "No se encontró perfil de consumo detallado para el usuario. Por favor, sube una factura.",
+        "status": "error"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/energy/tariffs/market-data",
+      "method": "GET",
+      "status_code": 200,
+      "success": true,
+      "response_size": 1415,
+      "timestamp": "2025-08-05T14:28:56.759068",
+      "response": {
+        "data": {
+          "market_statistics": {
+            "active_tariffs": 3,
+            "last_updated": "2025-07-31T16:17:35.893374+00:00",
+            "providers": 2,
+            "pvpc_tariffs": 3,
+            "total_tariffs": 3,
+            "with_peak_valley": 2
+          },
+          "tariffs": [
+            {
+              "fixed_monthly_fee": 0.123626,
+              "is_active": true,
+              "is_pvpc": true,
+              "kwh_price_flat": 0.14623390909090905,
+              "kwh_price_peak": 0.17472850000000004,
+              "kwh_price_valley": 0.12995128571428574,
+              "power_price_per_kw_per_month": 2.4988,
+              "provider_name": "REE (Red Eléctrica de España)",
+              "tariff_id": "PVPC_20250731",
+              "tariff_name": "PVPC 2025-07-31",
+              "tariff_type": "PVPC",
+              "update_timestamp": "2025-07-31T16:17:35.893374+00:00"
+            },
+            {
+              "fixed_monthly_fee": 0.123626,
+              "is_active": true,
+              "is_pvpc": true,
+              "kwh_price_flat": 0.12608499999999997,
+              "kwh_price_peak": 0.0,
+              "kwh_price_valley": 0.12608499999999997,
+              "power_price_per_kw_per_month": 2.4988,
+              "provider_name": "REE (Red Eléctrica de España)",
+              "tariff_id": "PVPC_20250730",
+              "tariff_name": "PVPC 2025-07-30",
+              "tariff_type": "PVPC",
+              "update_timestamp": "2025-07-31T16:17:35.891375+00:00"
+            },
+            {
+              "fixed_monthly_fee": 0.0,
+              "is_active": true,
+              "is_pvpc": true,
+              "kwh_price_flat": 0.095193,
+              "kwh_price_peak": 0.095193,
+              "kwh_price_valley": 0.095193,
+              "power_price_per_kw_per_month": 0.0,
+              "provider_name": "Red Eléctrica de España (REE)",
+              "tariff_id": "REDELÉCTRICADEESPAÑA_PVPCTARIFAREGULADA_PVPC",
+              "tariff_name": "PVPC - Tarifa Regulada",
+              "tariff_type": "pvpc",
+              "update_timestamp": "2025-07-11T08:36:28.798234+00:00"
+            }
+          ]
+        },
+        "status": "success"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/energy/tariffs/compare",
+      "method": "POST",
+      "status_code": 404,
+      "success": false,
+      "response_size": 83,
+      "timestamp": "2025-08-05T14:28:57.877935",
+      "response": {
+        "message": "No se encontraron suficientes tarifas para comparar",
+        "status": "error"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/energy/admin/tariffs/add",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 244,
+      "timestamp": "2025-08-05T14:28:58.357758",
+      "response": {
+        "category": "server_error",
+        "error_code": 500,
+        "error_id": "85e8c4d7",
+        "message": "Error interno del servidor. Por favor, inténtalo más tarde.",
+        "service": "energy_ia_api_copy",
+        "status": "error",
+        "timestamp": "2025-08-05T14:28:59.056539+02:00"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/health",
+      "method": "GET",
+      "status_code": 200,
+      "success": true,
+      "response_size": 199,
+      "timestamp": "2025-08-05T14:28:58.532538",
+      "response": {
+        "enterprise_mode": true,
+        "environment": "production",
+        "service": "energy_ia_api_copy",
+        "status": "healthy",
+        "timestamp": "2025-08-05T14:28:59.233706+02:00",
+        "uptime_seconds": 1607.646551,
+        "version": "2025.1.0"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/info",
+      "method": "GET",
+      "status_code": 200,
+      "success": true,
+      "response_size": 570,
+      "timestamp": "2025-08-05T14:28:58.660020",
+      "response": {
+        "api_version": "2025.1.0",
+        "capabilities": [
+          "energy_recommendations",
+          "tariff_analysis",
+          "consumption_optimization",
+          "chat_interface",
+          "machine_learning_integration"
+        ],
+        "description": "API empresarial para IA de recomendaciones de tarifas energéticas",
+        "endpoints": {
+          "chatbot": "/api/v1/chatbot",
+          "energy": "/api/v1/energy",
+          "health": "/health",
+          "info": "/api/v1/info"
+        },
+        "enterprise_features": [
+          "advanced_authentication",
+          "error_handling",
+          "performance_monitoring",
+          "security_headers",
+          "request_logging"
+        ],
+        "service_name": "energy_ia_api_copy",
+        "timestamp": "2025-08-05T14:28:59.355607+02:00"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/status",
+      "method": "GET",
+      "status_code": 200,
+      "success": true,
+      "response_size": 305,
+      "timestamp": "2025-08-05T14:28:58.823644",
+      "response": {
+        "components": {
+          "cors": "enabled",
+          "error_handlers": "active",
+          "firebase_admin": "connected",
+          "flask_app": "running"
+        },
+        "metrics": {
+          "config_name": "production",
+          "start_time": "2025-08-05T14:02:11.587174+02:00",
+          "uptime_seconds": 1607.935123
+        },
+        "service_status": "operational",
+        "timestamp": "2025-08-05T14:28:59.522313+02:00"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/links/status",
+      "method": "GET",
+      "status_code": 200,
+      "success": true,
+      "response_size": 188,
+      "timestamp": "2025-08-05T14:28:59.223153",
+      "response": {
+        "available_links": [
+          "blog",
+          "dashboard",
+          "calculator",
+          "contact",
+          "terms",
+          "privacy"
+        ],
+        "links_configured": 6,
+        "service_name": "EnterpriseLinkService",
+        "status": "active",
+        "version": "2025_enterprise"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/links/direct/recommendations",
+      "method": "GET",
+      "status_code": 404,
+      "success": false,
+      "response_size": 166,
+      "timestamp": "2025-08-05T14:28:59.619512",
+      "response": {
+        "available_types": [
+          "blog",
+          "dashboard",
+          "calculator",
+          "weather",
+          "contact",
+          "terms",
+          "privacy"
+        ],
+        "error": "Tipo de enlace 'recommendations' no encontrado",
+        "status": "error"
+      }
+    },
+    {
+      "service": "energy",
+      "endpoint": "/api/v1/links/test",
+      "method": "POST",
+      "status_code": 400,
+      "success": false,
+      "response_size": 61,
+      "timestamp": "2025-08-05T14:29:00.021396",
+      "response": {
+        "error": "Campo 'response_text' requerido",
+        "status": "error"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/analysis/sentiment",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:00.670827",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "7a7606be-d09e-4586-a594-5467b67356d1",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:01.364886+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/analysis/sentiment/internal",
+      "method": "POST",
+      "status_code": 400,
+      "success": false,
+      "response_size": 138,
+      "timestamp": "2025-08-05T14:29:01.106164",
+      "response": {
+        "error_type": "analysis_error",
+        "message": "Campo 'message_text' es obligatorio",
+        "status": "error",
+        "timestamp": "2025-08-05T12:29:01.804337"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/analysis/admin/system/metrics",
+      "method": "GET",
+      "status_code": 404,
+      "success": false,
+      "response_size": 177,
+      "timestamp": "2025-08-05T14:29:01.528037",
+      "response": {
+        "error": {
+          "category": "system",
+          "error_id": "2cefd2e3-f96f-449b-8d00-70284f635953",
+          "level": "low",
+          "message": "Recurso no encontrado",
+          "timestamp": "2025-08-05T14:29:02.217204+02:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/async/user/tasks",
+      "method": "GET",
+      "status_code": 500,
+      "success": false,
+      "response_size": 103,
+      "timestamp": "2025-08-05T14:29:02.442720",
+      "response": {
+        "error": "Error interno del servidor",
+        "status": "error",
+        "timestamp": "2025-08-05T12:29:03.138944+00:00"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/async/user/tasks",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 103,
+      "timestamp": "2025-08-05T14:29:02.923194",
+      "response": {
+        "error": "Error interno del servidor",
+        "status": "error",
+        "timestamp": "2025-08-05T12:29:03.623679+00:00"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/async/user/tasks/test_task_id",
+      "method": "GET",
+      "status_code": 500,
+      "success": false,
+      "response_size": 103,
+      "timestamp": "2025-08-05T14:29:03.940767",
+      "response": {
+        "error": "Error interno del servidor",
+        "status": "error",
+        "timestamp": "2025-08-05T12:29:04.638503+00:00"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/async/admin/tasks/management",
+      "method": "GET",
+      "status_code": 500,
+      "success": false,
+      "response_size": 103,
+      "timestamp": "2025-08-05T14:29:04.456563",
+      "response": {
+        "error": "Error interno del servidor",
+        "status": "error",
+        "timestamp": "2025-08-05T12:29:05.157995+00:00"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption",
+      "method": "POST",
+      "status_code": 400,
+      "success": false,
+      "response_size": 458,
+      "timestamp": "2025-08-05T14:29:04.967208",
+      "response": {
+        "alternative_action": {
+          "description": "También puedes introducir tus datos manualmente",
+          "endpoint": "/manual-data",
+          "required_fields": [
+            "kwh_consumidos",
+            "potencia_contratada_kw"
+          ],
+          "type": "manual_input"
+        },
+        "help_message": "Si tienes problemas subiendo el archivo, puedes introducir los datos manualmente usando el botón 'Entrada Manual' en la aplicación.",
+        "message": "Por favor, selecciona una factura de electricidad para continuar.",
+        "status": "error"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption/analyze",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:07.031517",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "31a10e57-abee-406d-8836-49e11495da1a",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:07.726244+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption/recommendations",
+      "method": "GET",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:09.190261",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "ce02484b-60ae-44c0-819f-c5a7ca84a217",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:09.885483+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption/history",
+      "method": "GET",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:11.278989",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "3aa7fdb9-d55c-4afb-af8c-7ec2e59adb4f",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:11.958445+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption/compare",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:13.326389",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "6e5730a4-1324-402a-ad6a-51ca1a769f9f",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:14.025144+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption/update",
+      "method": "PUT",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:15.474799",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "64e8a147-12fe-4373-90af-10ecde564769",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:16.173792+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/consumption/title",
+      "method": "PUT",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:15.995472",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "d59aa791-19a0-4386-b4a4-7b681c371d51",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:16.696290+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/manual-data",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:16.518340",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "2ace3eb4-f191-4b80-a23b-108450427709",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:17.215124+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/dashboard",
+      "method": "GET",
+      "status_code": 200,
+      "success": true,
+      "response_size": 61,
+      "timestamp": "2025-08-05T14:29:18.280021",
+      "response": {
+        "uploaded_documents": [],
+        "user_id": "juanluvaldi_uid_123456"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/energy/users/profile",
+      "method": "GET",
+      "status_code": 200,
+      "success": true,
+      "response_size": 89,
+      "timestamp": "2025-08-05T14:29:20.067662",
+      "response": {
+        "data": {
+          "uploaded_documents": [],
+          "user_id": "juanluvaldi_uid_123456"
+        },
+        "status": "success"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/chatbot/session/start",
+      "method": "POST",
+      "status_code": 200,
+      "success": true,
+      "response_size": 614,
+      "timestamp": "2025-08-05T14:29:20.732460",
+      "response": {
+        "enterprise_features": [
+          "ml_recommendations",
+          "hybrid_consultation",
+          "feedback_analysis"
+        ],
+        "message": "Sesión empresarial iniciada correctamente",
+        "session_id": "628862cd-a456-4037-b0a1-c36e0f2552cc",
+        "status": "success",
+        "welcomeMessage": {
+          "content": "Buenas tardes, son las 14:29.\n\nSoy WattBot, tu asistente energético. Puedo ayudarte con consultas sobre energía, análisis de consumo y recomendaciones para optimizar tu factura.\n\n¿En qué puedo ayudarte hoy?",
+          "id": "welcome_1754396961",
+          "personalized": false,
+          "premium_data": false,
+          "timestamp": "2025-08-05T14:29:21.302919+02:00",
+          "type": "bot"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/chatbot/message",
+      "method": "POST",
+      "status_code": 200,
+      "success": true,
+      "response_size": 492,
+      "timestamp": "2025-08-05T14:29:21.747542",
+      "response": {
+        "action": "emergency_response",
+        "context_quality": {
+          "available_sources_count": 0,
+          "data_completeness": 0,
+          "personalization_applied": true
+        },
+        "intent": "enterprise_fallback",
+        "message_analysis": {
+          "complexity": 4,
+          "contains_question": true,
+          "length": 28,
+          "technical_terms": false,
+          "urgency_detected": false
+        },
+        "response": "Lamento no poder responder su pregunta en este momento, usuario. Estoy experimentando dificultades técnicas temporales.",
+        "source": "enterprise_fallback_system",
+        "status": "fallback_activated"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/chatbot/new-conversation",
+      "method": "POST",
+      "status_code": 200,
+      "success": true,
+      "response_size": 395,
+      "timestamp": "2025-08-05T14:29:22.379985",
+      "response": {
+        "conversation_id": "81badc28-3ed0-4229-b5ff-c46bca6fc210",
+        "enterprise_features": [
+          "ml_recommendations",
+          "hybrid_consultation",
+          "conversation_management"
+        ],
+        "message": "Nueva conversación creada correctamente",
+        "previous_conversation_id": null,
+        "previous_conversation_saved": false,
+        "session_id": "81badc28-3ed0-4229-b5ff-c46bca6fc210",
+        "status": "success",
+        "timestamp": "2025-08-05T12:29:23.074089+00:00"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/chatbot/conversation/history",
+      "method": "GET",
+      "status_code": 200,
+      "success": true,
+      "response_size": 165,
+      "timestamp": "2025-08-05T14:29:23.579759",
+      "response": {
+        "data": {
+          "conversation_id": "1",
+          "messages": [],
+          "status": "success",
+          "total_messages": 0
+        },
+        "limit": 20,
+        "page": 1,
+        "status": "success",
+        "timestamp": "2025-08-05T12:29:24.279146"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/chatbot/conversation/test_conv_id",
+      "method": "DELETE",
+      "status_code": 200,
+      "success": true,
+      "response_size": 147,
+      "timestamp": "2025-08-05T14:29:24.648006",
+      "response": {
+        "conversation_id": "test_conv_id",
+        "message": "Conversación borrada correctamente",
+        "status": "success",
+        "timestamp": "2025-08-05T12:29:25.350556"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/chatbot/conversation/feedback",
+      "method": "POST",
+      "status_code": 500,
+      "success": false,
+      "response_size": 192,
+      "timestamp": "2025-08-05T14:29:25.141533",
+      "response": {
+        "error": {
+          "category": "authentication",
+          "error_id": "64cf50e3-672d-4252-9d79-5013a3044dcb",
+          "level": "high",
+          "message": "Error de autenticación",
+          "timestamp": "2025-08-05T12:29:25.840625+00:00"
+        }
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/api/v1/chatbot/metrics",
+      "method": "GET",
+      "status_code": 200,
+      "success": true,
+      "response_size": 72,
+      "timestamp": "2025-08-05T14:29:25.942469",
+      "response": {
+        "data": {},
+        "status": "success",
+        "timestamp": "2025-08-05T12:29:26.640966"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/health",
+      "method": "GET",
+      "status_code": 200,
+      "success": true,
+      "response_size": 111,
+      "timestamp": "2025-08-05T14:29:26.162960",
+      "response": {
+        "mode": "production",
+        "status": "healthy",
+        "timestamp": "2025-08-05T12:29:26.818848",
+        "version": "2.0.0-enterprise"
+      }
+    },
+    {
+      "service": "expert",
+      "endpoint": "/health/detailed",
+      "method": "GET",
+      "status_code": 200,
+      "success": true,
+      "response_size": 179,
+      "timestamp": "2025-08-05T14:29:26.296479",
+      "response": {
+        "config": "production",
+        "enterprise_mode": true,
+        "firebase_initialized": true,
+        "startup_time": "2025-08-05T12:03:57.038467",
+        "status": "healthy",
+        "timestamp": "2025-08-05T12:29:26.972299"
+      }
+    }
+  ]
+}

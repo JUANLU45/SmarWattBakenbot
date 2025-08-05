@@ -1,0 +1,1078 @@
+{
+  "timestamp": "2025-07-22T12:00:00Z",
+  "total_problemas": 131,
+  "problemas_criticos": 27,
+  "problemas_altos": 104,
+  "problemas_medios": 0,
+  "tablas_bigquery_encontradas": 22,
+  "tablas_analizadas": [
+    "ai_ab_testing",
+    "ai_business_metrics",
+    "ai_predictions",
+    "ai_prompt_optimization",
+    "ai_sentiment_analysis",
+    "ai_user_patterns",
+    "async_tasks",
+    "consumption_log",
+    "consumption_unified",
+    "conversations_log",
+    "electricity_consumption_log",
+    "feedback_log",
+    "feedback_unified",
+    "market_electricity_tariffs",
+    "ml_training_20250711_062334",
+    "model_feedback_log",
+    "model_versions",
+    "recommendation_log",
+    "uploaded_documents_log",
+    "user_context_cache",
+    "user_profiles_enriched",
+    "worker_metrics"
+  ],
+  "estado": "CON_PROBLEMAS",
+  "problemas_detallados": [
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\chatbot_routes.py",
+      "linea": 241,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.dataset_id}.user_context_cache`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\chatbot_routes.py",
+      "linea": 241,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.dataset_id}.user_context_cache`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\config.py",
+      "linea": 65,
+      "campo": "environ",
+      "contenido": "os.environ.get(\"BQ_MARKET_TARIFFS_TABLE_ID\") or \"market_electricity_tariffs\"",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\config.py",
+      "linea": 79,
+      "campo": "environ",
+      "contenido": "BQ_FEEDBACK_TABLE_ID = os.environ.get(\"BQ_FEEDBACK_TABLE_ID\", \"feedback_log\")",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\config.py",
+      "linea": 216,
+      "campo": "BQ_MARKET_TARIFFS_TABLE_ID",
+      "contenido": "\"market_electricity_tariffs\": cls.BQ_MARKET_TARIFFS_TABLE_ID,",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\config.py",
+      "linea": 217,
+      "campo": "BQ_RECOMMENDATION_LOG_TABLE_ID",
+      "contenido": "\"recommendation_log\": cls.BQ_RECOMMENDATION_LOG_TABLE_ID,",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\config.py",
+      "linea": 218,
+      "campo": "BQ_CONSUMPTION_LOG_TABLE_ID",
+      "contenido": "\"consumption_log\": cls.BQ_CONSUMPTION_LOG_TABLE_ID,",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\routes.py",
+      "linea": 58,
+      "tabla": "{table_id}",
+      "contenido": "FROM `{table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\routes.py",
+      "linea": 156,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.dataset_id}.market_electricity_tariffs`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\routes.py",
+      "linea": 156,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.dataset_id}.market_electricity_tariffs`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\routes.py",
+      "linea": 250,
+      "campo": "get_market_electricity_tariffs",
+      "contenido": "all_tariffs = self.get_market_electricity_tariffs()",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\routes.py",
+      "linea": 636,
+      "campo": "get_market_electricity_tariffs",
+      "contenido": "tariffs = service.get_market_electricity_tariffs()",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\routes.py",
+      "linea": 987,
+      "campo": "get_market_electricity_tariffs",
+      "contenido": "all_tariffs = service.get_market_electricity_tariffs()",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 105,
+      "campo": "bq_market_electricity_tariffs_table_id",
+      "contenido": "self.bq_market_electricity_tariffs_table_id = None",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 106,
+      "campo": "bq_recommendation_log_table_id",
+      "contenido": "self.bq_recommendation_log_table_id = None",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 173,
+      "campo": "bq_market_electricity_tariffs_table_id",
+      "contenido": "self.bq_market_electricity_tariffs_table_id = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 173,
+      "campo": "config",
+      "contenido": "self.bq_market_electricity_tariffs_table_id = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 176,
+      "campo": "bq_recommendation_log_table_id",
+      "contenido": "self.bq_recommendation_log_table_id = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 176,
+      "campo": "config",
+      "contenido": "self.bq_recommendation_log_table_id = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 179,
+      "campo": "bq_consumption_log_table_id",
+      "contenido": "self.bq_consumption_log_table_id = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 179,
+      "campo": "config",
+      "contenido": "self.bq_consumption_log_table_id = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 421,
+      "tabla": "bq_market_electricity_tariffs_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 421,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 421,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 421,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 804,
+      "tabla": "bq_market_electricity_tariffs_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 804,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 804,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 804,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 1542,
+      "campo": "bq_recommendation_log_table_id",
+      "contenido": "self.bq_recommendation_log_table_id",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3084,
+      "campo": "dataset_id",
+      "contenido": "metadata_table_id = f\"{self.dataset_id}.model_versions\"",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3373,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.model_versions`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3373,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.model_versions`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3939,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.ai_predictions` p",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3939,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.ai_predictions` p",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3940,
+      "tabla": "bq_consumption_log_table_id}",
+      "contenido": "JOIN `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_log_table_id}` c",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3940,
+      "campo": "project_id",
+      "contenido": "JOIN `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_log_table_id}` c",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3940,
+      "campo": "project_id",
+      "contenido": "JOIN `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_log_table_id}` c",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3940,
+      "campo": "project_id",
+      "contenido": "JOIN `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_log_table_id}` c",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3965,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.feedback_log`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3965,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.feedback_log`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3978,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.ai_business_metrics`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 3978,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.ai_business_metrics`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4000,
+      "campo": "warning",
+      "contenido": "logging.warning(\"No se encontraron datos de accuracy en ai_predictions\")",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4014,
+      "campo": "warning",
+      "contenido": "logging.warning(\"No se encontraron datos de feedback en feedback_log\")",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4074,
+      "tabla": "bq_market_electricity_tariffs_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4074,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4074,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4074,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4335,
+      "tabla": "bq_market_electricity_tariffs_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4335,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4335,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4335,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_market_electricity_tariffs_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4450,
+      "tabla": "bq_consumption_log_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_log_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4450,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_log_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4450,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_log_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4450,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_log_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\energy_ia_api_COPY\\app\\services\\vertex_ai_service.py",
+      "linea": 4556,
+      "tabla": "bq_user_profiles_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_user_profiles_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\config.py",
+      "linea": 72,
+      "campo": "environ",
+      "contenido": "BQ_FEEDBACK_TABLE_ID = os.environ.get(\"BQ_FEEDBACK_TABLE_ID\", \"feedback_log\")",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\config.py",
+      "linea": 113,
+      "campo": "environ",
+      "contenido": "BQ_ASYNC_TASKS_TABLE_ID = os.environ.get(\"BQ_ASYNC_TASKS_TABLE_ID\", \"async_tasks\")",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\energy_service.py",
+      "linea": 1656,
+      "tabla": "bq_uploaded_docs_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_uploaded_docs_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\energy_service.py",
+      "linea": 1969,
+      "tabla": "bq_consumption_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\energy_service.py",
+      "linea": 2081,
+      "tabla": "bq_consumption_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\energy_service.py",
+      "linea": 2104,
+      "tabla": "bq_consumption_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+      "linea": 149,
+      "campo": "ai_predictions_table",
+      "contenido": "self.ai_predictions_table = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+      "linea": 149,
+      "campo": "config",
+      "contenido": "self.ai_predictions_table = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+      "linea": 152,
+      "campo": "ai_business_metrics_table",
+      "contenido": "self.ai_business_metrics_table = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+      "linea": 152,
+      "campo": "config",
+      "contenido": "self.ai_business_metrics_table = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+      "linea": 203,
+      "campo": "ai_predictions_table",
+      "contenido": "self.ai_predictions_table: [",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+      "linea": 216,
+      "campo": "ai_business_metrics_table",
+      "contenido": "self.ai_business_metrics_table: [",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+      "linea": 1287,
+      "tabla": "ai_patterns_table}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.ai_patterns_table}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+      "linea": 1333,
+      "tabla": "ai_sentiment_table}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.ai_sentiment_table}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+      "linea": 1554,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.ai_predictions`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+      "linea": 1554,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.ai_predictions`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\ai_learning_service.py",
+      "linea": 1894,
+      "campo": "ai_business_metrics_table",
+      "contenido": "self.ai_business_metrics_table, [metric_data]",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 124,
+      "campo": "worker_metrics",
+      "contenido": "self.worker_metrics = {}",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 190,
+      "campo": "bq_async_tasks_table_id",
+      "contenido": "self.bq_async_tasks_table_id = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 190,
+      "campo": "config",
+      "contenido": "self.bq_async_tasks_table_id = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 193,
+      "campo": "bq_worker_metrics_table_id",
+      "contenido": "self.bq_worker_metrics_table_id = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 193,
+      "campo": "config",
+      "contenido": "self.bq_worker_metrics_table_id = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 213,
+      "campo": "worker_metrics",
+      "contenido": "self.worker_metrics[worker_id] = WorkerMetrics(worker_id=worker_id)",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 233,
+      "campo": "worker_metrics",
+      "contenido": "worker_metrics = self.worker_metrics[worker_id]",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 248,
+      "campo": "now",
+      "contenido": "worker_metrics.last_activity = datetime.now(timezone.utc)",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 248,
+      "campo": "utc",
+      "contenido": "worker_metrics.last_activity = datetime.now(timezone.utc)",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 689,
+      "campo": "bq_async_tasks_table_id",
+      "contenido": "self.bq_async_tasks_table_id",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 714,
+      "campo": "bq_async_tasks_table_id",
+      "contenido": "self.bq_async_tasks_table_id",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 755,
+      "campo": "bq_async_tasks_table_id",
+      "contenido": "self.bq_async_tasks_table_id",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 781,
+      "campo": "bq_async_tasks_table_id",
+      "contenido": "self.bq_async_tasks_table_id",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 823,
+      "campo": "bq_async_tasks_table_id",
+      "contenido": "self.bq_async_tasks_table_id",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 850,
+      "campo": "bq_async_tasks_table_id",
+      "contenido": "self.bq_async_tasks_table_id",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1013,
+      "campo": "worker_metrics",
+      "contenido": "for worker_id, metrics in self.worker_metrics.items():",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1028,
+      "campo": "worker_metrics",
+      "contenido": "self.worker_metrics[worker_id] = WorkerMetrics(worker_id=worker_id)",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1048,
+      "campo": "worker_metrics",
+      "contenido": "for w in self.worker_metrics.values()",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1059,
+      "campo": "worker_metrics",
+      "contenido": "new_worker_id = f\"worker_{len(self.worker_metrics):03d}\"",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1060,
+      "campo": "worker_metrics",
+      "contenido": "self.worker_metrics[new_worker_id] = WorkerMetrics(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1083,
+      "campo": "_collect_worker_metrics",
+      "contenido": "self._collect_worker_metrics()",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1100,
+      "campo": "worker_metrics",
+      "contenido": "for worker_id, metrics in self.worker_metrics.items():",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1108,
+      "campo": "_log_worker_metrics",
+      "contenido": "self._log_worker_metrics(worker_id, metrics)",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1114,
+      "campo": "bq_worker_metrics_table_id",
+      "contenido": "self.bq_worker_metrics_table_id",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1143,
+      "campo": "worker_metrics",
+      "contenido": "\"worker_count\": len(self.worker_metrics),",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1234,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.consumption_log`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1234,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.consumption_log`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1339,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.uploaded_documents_log`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1339,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.uploaded_documents_log`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1382,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.market_electricity_tariffs`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1382,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.market_electricity_tariffs`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1479,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.consumption_log`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1479,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.consumption_log`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1753,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.async_tasks`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1753,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.async_tasks`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1900,
+      "campo": "worker_metrics",
+      "contenido": "for worker_id, metrics in self.worker_metrics.items()",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1927,
+      "campo": "db",
+      "contenido": "doc_ref = self.db.collection(\"async_tasks\").document(task.task_id)",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\async_processing_service.py",
+      "linea": 1936,
+      "campo": "db",
+      "contenido": "doc_ref = self.db.collection(\"async_tasks\").document(task_id)",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\chat_service.py",
+      "linea": 950,
+      "tabla": "bq_conversations_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_conversations_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\chat_service.py",
+      "linea": 1011,
+      "tabla": "bq_conversations_table_id}",
+      "contenido": "UPDATE `{self.project_id}.{self.bq_dataset_id}.{self.bq_conversations_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\chat_service.py",
+      "linea": 1477,
+      "tabla": "bq_conversations_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_conversations_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\chat_service.py",
+      "linea": 1572,
+      "tabla": "bq_conversations_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_conversations_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\energy_service.py",
+      "linea": 146,
+      "campo": "bq_recommendation_log_table_id",
+      "contenido": "self.bq_recommendation_log_table_id = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\energy_service.py",
+      "linea": 146,
+      "campo": "config",
+      "contenido": "self.bq_recommendation_log_table_id = current_app.config.get(",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\energy_service.py",
+      "linea": 1546,
+      "tabla": "bq_user_profiles_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_user_profiles_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\energy_service.py",
+      "linea": 1739,
+      "tabla": "bq_uploaded_docs_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_uploaded_docs_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\energy_service.py",
+      "linea": 2052,
+      "tabla": "bq_consumption_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\energy_service.py",
+      "linea": 2164,
+      "tabla": "bq_consumption_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\energy_service.py",
+      "linea": 2187,
+      "tabla": "bq_consumption_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_consumption_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "TABLA_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\energy_service.py",
+      "linea": 2424,
+      "tabla": "bq_recommendation_log_table_id}",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_recommendation_log_table_id}`",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\energy_service.py",
+      "linea": 2424,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_recommendation_log_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\energy_service.py",
+      "linea": 2424,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_recommendation_log_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_NO_EXISTE",
+      "archivo": "C:\\Smarwatt_2\\SmarWatt_2\\backend\\sevicio chatbot\\servicios\\expert_bot_api_COPY\\app\\services\\energy_service.py",
+      "linea": 2424,
+      "campo": "project_id",
+      "contenido": "FROM `{self.project_id}.{self.bq_dataset_id}.{self.bq_recommendation_log_table_id}`",
+      "severidad": "ALTO"
+    },
+    {
+      "tipo": "CAMPO_CRITICO_FALTANTE",
+      "tabla": "model_versions",
+      "campo": "version_id",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_CRITICO_FALTANTE",
+      "tabla": "model_versions",
+      "campo": "model_name",
+      "severidad": "CRITICO"
+    },
+    {
+      "tipo": "CAMPO_CRITICO_FALTANTE",
+      "tabla": "model_versions",
+      "campo": "deployment_date",
+      "severidad": "CRITICO"
+    }
+  ],
+  "cobertura_real": 95.0
+}

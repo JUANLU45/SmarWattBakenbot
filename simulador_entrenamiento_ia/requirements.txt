@@ -1,0 +1,46 @@
+# ========================================
+# SIMULADOR DE ENTRENAMIENTO IA - DEPENDENCIAS
+# Dependencias exactas para interactuar con microservicios en producción
+# ========================================
+
+# === CORE PYTHON LIBRARIES ===
+requests==2.31.0
+python-dotenv==1.0.0
+fake==3.4.0
+faker==19.6.2
+
+# === GOOGLE CLOUD LIBRARIES ===
+google-cloud-bigquery==3.11.4
+google-cloud-firestore==2.11.1
+google-cloud-storage==2.10.0
+google-cloud-pubsub==2.18.4
+google-auth==2.23.3
+google-auth-oauthlib==1.0.0
+google-auth-httplib2==0.1.1
+
+# === FIREBASE ===
+firebase-admin==6.2.0
+pyjwt==2.8.0
+
+# === DATA PROCESSING ===
+pandas==2.1.1
+numpy==1.24.3
+
+# === HTTP CLIENT ===
+httpx==0.24.1
+urllib3==2.0.4
+
+# === LOGGING AND MONITORING ===
+structlog==23.1.0
+colorlog==6.7.0
+
+# === UTILITIES ===
+click==8.1.7
+python-dateutil==2.8.2
+pytz==2023.3
+
+# === DEVELOPMENT (OPTIONAL) ===
+pytest==7.4.2
+pytest-mock==3.11.1
+black==23.7.0
+flake8==6.0.0

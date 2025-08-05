@@ -1,0 +1,58 @@
+# energy_ia_api_COPY/requirements.txt
+# 🏢 DEPENDENCIAS VERIFICADAS MILIMÉTRICAMENTE - ENERGY IA API COPY
+# ✅ SOLO DEPENDENCIAS REALMENTE UTILIZADAS EN EL CÓDIGO
+
+# === FLASK FRAMEWORK CORE ===
+Flask>=2.3.0
+Flask-Cors>=4.0.0
+
+# === SERVIDOR PRODUCCIÓN ===
+gunicorn>=21.2.0
+
+# === GOOGLE CLOUD PLATFORM - VERIFICADO EN CÓDIGO ===
+google-cloud-aiplatform>=1.35.0
+google-cloud-bigquery>=3.12.0
+google-auth>=2.22.0
+
+# === FIREBASE - VERIFICADO EN __init__.py ===
+firebase-admin>=6.2.0
+
+# === GOOGLE GENERATIVE AI - VERIFICADO EN generative_chat_service.py ===
+google-generativeai>=0.3.2
+
+# === AUTENTICACIÓN JWT - VERIFICADO EN chatbot_routes.py ===
+PyJWT>=2.8.0
+
+# === MACHINE LEARNING - IMPLEMENTACIÓN COMPLETA EMPRESARIAL ===
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+scipy>=1.11.0
+
+# === DEEP LEARNING FRAMEWORKS (ELIMINADAS INTENCIONALMENTE 2025-08-04) ===
+# tensorflow-cpu>=2.13.0
+# torch>=2.0.0
+# torchvision>=0.15.0
+# transformers>=4.33.0
+# huggingface-hub>=0.16.0
+# keras>=2.13.0
+# xgboost>=1.7.0
+# lightgbm>=4.0.0
+
+# === PROCESAMIENTO DE TEXTO (ELIMINADAS INTENCIONALMENTE 2025-08-04) ===
+# nltk>=3.8.0
+# spacy>=3.6.0
+# textblob>=0.17.0
+
+# === PROCESAMIENTO DE IMÁGENES (ELIMINADAS INTENCIONALMENTE 2025-08-04) ===
+# Pillow>=10.0.0
+# opencv-python-headless>=4.8.0
+
+# === VERTEX AI ESPECÍFICO - VERSIONES EXACTAS VERIFICADAS ===
+google-cloud-pipeline-components==2.20.1
+kfp==2.6.0
+
+# === UTILIDADES VERIFICADAS ===
+python-dotenv>=1.0.0
+requests>=2.31.0
+aiohttp>=3.8.0

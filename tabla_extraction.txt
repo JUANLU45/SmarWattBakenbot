@@ -1,0 +1,33 @@
+=== C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\.venv\Lib\site-packages\flask\config.py ===
+=== C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\.venv\Lib\site-packages\google\api_core\gapic_v1\config.py ===
+=== C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\.venv\Lib\site-packages\gunicorn\config.py ===
+=== C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\.venv\Lib\site-packages\h2\config.py ===
+=== C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\.venv\Lib\site-packages\setuptools\_distutils\command\config.py ===
+=== C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\energy_ia_api_COPY\app\config.py ===
+
+    BQ_MARKET_TARIFFS_TABLE_ID = (
+    BQ_RECOMMENDATION_LOG_TABLE_ID = os.environ.get(
+    BQ_CONSUMPTION_LOG_TABLE_ID = os.environ.get(
+    BQ_UPLOADED_DOCS_TABLE_ID = os.environ.get(
+    BQ_CONVERSATIONS_TABLE_ID = os.environ.get(
+    BQ_FEEDBACK_TABLE_ID = os.environ.get("BQ_FEEDBACK_TABLE_ID", "feedback_log")
+    BQ_USER_PROFILES_TABLE_ID = os.environ.get(
+    BQ_AI_PREDICTIONS_TABLE_ID = os.environ.get(
+    BQ_AI_BUSINESS_METRICS_TABLE_ID = os.environ.get(
+    BQ_AI_SENTIMENT_TABLE_ID = os.environ.get(
+=== C:\Smarwatt_2\SmarWatt_2\backend\sevicio chatbot\servicios\expert_bot_api_COPY\app\config.py ===
+    BQ_CONVERSATIONS_TABLE_ID = os.environ.get(
+    BQ_FEEDBACK_TABLE_ID = os.environ.get("BQ_FEEDBACK_TABLE_ID", "feedback_log")
+    BQ_CONSUMPTION_LOG_TABLE_ID = os.environ.get(
+    BQ_UPLOADED_DOCS_TABLE_ID = os.environ.get(
+    BQ_USER_PROFILES_TABLE_ID = os.environ.get(
+    BQ_RECOMMENDATION_LOG_TABLE_ID = os.environ.get(
+    BQ_MARKET_TARIFFS_TABLE_ID = os.environ.get(
+    BQ_AI_SENTIMENT_TABLE_ID = os.environ.get(
+    BQ_AI_PATTERNS_TABLE_ID = os.environ.get(
+    BQ_AI_OPTIMIZATION_TABLE_ID = os.environ.get(
+    BQ_AI_PREDICTIONS_TABLE_ID = os.environ.get(
+    BQ_AI_BUSINESS_METRICS_TABLE_ID = os.environ.get(
+    BQ_ASYNC_TASKS_TABLE_ID = os.environ.get("BQ_ASYNC_TASKS_TABLE_ID", "async_tasks")
+    BQ_WORKER_METRICS_TABLE_ID = os.environ.get(
+
