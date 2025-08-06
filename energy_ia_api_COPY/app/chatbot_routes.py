@@ -879,6 +879,7 @@ def send_chat_message():
             # Usar contexto mínimo como fallback
             user_context = {
                 "user_id": user_id,
+                "user_name": g.user.get("displayName", "") or g.user.get("email", ""),
                 "data_completeness": 0,
                 "fallback_mode": True,
             }
