@@ -239,13 +239,19 @@ class EnterpriseVertexAIService:
         # Obtener consumo promedio (avg_kwh) de múltiples fuentes posibles
         avg_kwh = None
 
-        # Método 1: Campo directo
-        if user_profile.get("avg_kwh"):
+        # Método 1: Campo directo avg_kwh_last_year (BigQuery/Firestore real)
+        if user_profile.get("avg_kwh_last_year"):
+            avg_kwh = user_profile["avg_kwh_last_year"]
+        # Método 2: Campo directo avg_kwh (legacy)
+        elif user_profile.get("avg_kwh"):
             avg_kwh = user_profile["avg_kwh"]
-        # Método 2: Desde energy_profile.monthly_consumption_kwh
+        # Método 3: Campo monthly_consumption_kwh directo
+        elif user_profile.get("monthly_consumption_kwh"):
+            avg_kwh = user_profile["monthly_consumption_kwh"]
+        # Método 4: Desde energy_profile.monthly_consumption_kwh
         elif user_profile.get("energy_profile", {}).get("monthly_consumption_kwh"):
             avg_kwh = user_profile["energy_profile"]["monthly_consumption_kwh"]
-        # Método 3: Calcular desde peak + off_peak
+        # Método 5: Calcular desde peak + off_peak
         elif user_profile.get("energy_profile", {}).get(
             "peak_consumption_kwh"
         ) and user_profile.get("energy_profile", {}).get("off_peak_consumption_kwh"):
@@ -255,7 +261,7 @@ class EnterpriseVertexAIService:
 
         if not avg_kwh or avg_kwh <= 0:
             raise AppError(
-                "Consumo energético requerido: especifica 'avg_kwh', 'energy_profile.monthly_consumption_kwh' o 'peak_consumption_kwh + off_peak_consumption_kwh'",
+                "Consumo energético requerido: especifica 'avg_kwh_last_year', 'monthly_consumption_kwh', 'avg_kwh', 'energy_profile.monthly_consumption_kwh' o 'peak_consumption_kwh + off_peak_consumption_kwh'",
                 400,
             )
 
@@ -1285,7 +1291,7 @@ class EnterpriseVertexAIService:
             balance_score = 0.0
             price_benefit = 0.0
             optimization_potential = 0.0
-            
+
             peak_percent = user_profile.get("peak_percent", 50)
 
             price_peak = float(tariff.get("kwh_price_peak", 0))

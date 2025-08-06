@@ -6,12 +6,14 @@ import logging
 import json
 import time
 import jwt
-from datetime import datetime
+import datetime
+from datetime import timezone
 from utils.timezone_utils import now_spanish_iso, now_spanish
 from typing import Dict, List, Optional, Any
 from flask import Blueprint, request, jsonify, g, current_app
 import requests
 from google.cloud import bigquery
+from firebase_admin import firestore
 
 from smarwatt_auth import token_required
 from utils.error_handlers import AppError
@@ -35,12 +37,19 @@ class EnterpriseChatbotService:
         self.dataset_id = current_app.config["BQ_DATASET_ID"]
         self.conversations_table = current_app.config["BQ_CONVERSATIONS_TABLE_ID"]
         self.ai_sentiment_table = current_app.config["BQ_AI_SENTIMENT_TABLE_ID"]
+        self.bq_user_profiles_table_id = current_app.config["BQ_USER_PROFILES_TABLE_ID"]
+
+        # Inicializar Firestore para sincronización automática
+        self.db = firestore.client()
+
         self.expert_bot_url = current_app.config.get("EXPERT_BOT_API_URL")
         if not self.expert_bot_url:
             logger.error("❌ EXPERT_BOT_API_URL no configurada en producción")
             raise ValueError("EXPERT_BOT_API_URL debe estar configurada")
 
-        logger.info("🏢 EnterpriseChatbotService inicializado")
+        logger.info(
+            "🏢 EnterpriseChatbotService inicializado con sincronización automática"
+        )
 
     def get_user_context_robust(
         self, user_token: str, timeout: int = 5
@@ -156,6 +165,47 @@ class EnterpriseChatbotService:
             "data_completeness": self._calculate_data_completeness(profile_data),
             "available_sources": self._get_available_sources(profile_data),
         }
+
+        # 🏢 SINCRONIZACIÓN AUTOMÁTICA EMPRESARIAL - IDÉNTICA A EXPERT_BOT_API
+        # Sincronizar datos del usuario en BigQuery y Firestore automáticamente
+        user_id = profile_data.get("user_id")
+        if user_id and (
+            profile_data.get("consumption_kwh")
+            or profile_data.get("monthly_consumption_kwh")
+            or last_invoice_data
+        ):
+            try:
+                logger.info(
+                    f"🔄 Iniciando sincronización automática para usuario: {user_id}"
+                )
+
+                # Sincronizar en BigQuery
+                sync_bq_success = self._insert_or_update_user_profile_in_bigquery(
+                    user_id, profile_data
+                )
+
+                # Sincronizar en Firestore user_profiles_enriched
+                sync_fs_success = (
+                    self._create_or_update_firestore_user_profiles_collection(
+                        user_id, profile_data
+                    )
+                )
+
+                if sync_bq_success and sync_fs_success:
+                    logger.info(
+                        f"✅ Sincronización automática completada exitosamente para {user_id}"
+                    )
+                else:
+                    logger.warning(
+                        f"⚠️ Sincronización parcial para {user_id} - BQ: {sync_bq_success}, FS: {sync_fs_success}"
+                    )
+
+            except Exception as e:
+                logger.error(
+                    f"❌ Error en sincronización automática para {user_id}: {str(e)}"
+                )
+                # No interrumpir el flujo del chatbot por errores de sincronización
+                pass
 
         return context
 
@@ -827,6 +877,284 @@ CONSIDERA EL CLIMA EN TUS RECOMENDACIONES DE CONSUMO ENERGÉTICO.
         except Exception as e:
             logger.error(f"Error en comunicación con expert-bot: {str(e)}")
             return {"error": f"Communication error: {str(e)}"}
+
+    def _safe_bool(self, value: Any, default: bool = False) -> bool:
+        """Convierte un valor a booleano de forma segura"""
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, str):
+            return value.lower() in ("true", "1", "yes", "on")
+        if isinstance(value, (int, float)):
+            return bool(value)
+        return default
+
+    def _insert_or_update_user_profile_in_bigquery(
+        self, user_id: str, profile_data: Dict[str, Any]
+    ) -> bool:
+        """🏢 Insertar o actualizar perfil de usuario en BigQuery user_profiles_enriched - IDÉNTICO A EXPERT_BOT_API"""
+        try:
+            # Obtener displayName y email de Firestore users collection
+            user_doc = self.db.collection("users").document(user_id).get()
+            user_firestore_data = user_doc.to_dict() if user_doc.exists else {}
+
+            current_timestamp = datetime.datetime.now(datetime.timezone.utc)
+
+            # Preparar datos con TODOS los campos del esquema BigQuery + last_invoice_data (REQUERIDO)
+            row_data = {
+                "user_id": user_id,
+                "last_update_timestamp": current_timestamp,
+                "avg_kwh_last_year": profile_data.get("avg_kwh_last_year")
+                or profile_data.get("kwh_consumidos")
+                or profile_data.get("monthly_consumption_kwh")
+                or profile_data.get("consumption_kwh")
+                or 0.0,
+                "peak_percent_avg": profile_data.get("peak_percent_avg")
+                or profile_data.get("peak_percent_from_invoice")
+                or 0.0,
+                "contracted_power_kw": profile_data.get("contracted_power_kw")
+                or profile_data.get("potencia_contratada_kw")
+                or 0.0,
+                "num_inhabitants": profile_data.get("num_inhabitants") or 1,
+                "home_type": profile_data.get("home_type") or "apartment",
+                "heating_type": profile_data.get("heating_type") or "gas",
+                "has_ac": self._safe_bool(profile_data.get("has_ac"), False),
+                "has_pool": self._safe_bool(profile_data.get("has_pool"), False),
+                "is_teleworker": self._safe_bool(
+                    profile_data.get("is_teleworker"), False
+                ),
+                "post_code_prefix": (
+                    profile_data.get("post_code_prefix")
+                    or profile_data.get("codigo_postal", "")[:2]
+                    if profile_data.get("codigo_postal")
+                    else ""
+                ),
+                "has_solar_panels": self._safe_bool(
+                    profile_data.get("has_solar_panels"), False
+                ),
+                "consumption_kwh": profile_data.get("consumption_kwh")
+                or profile_data.get("kwh_consumidos")
+                or profile_data.get("monthly_consumption_kwh")
+                or 0.0,
+                "monthly_consumption_kwh": profile_data.get("monthly_consumption_kwh")
+                or profile_data.get("kwh_consumidos")
+                or profile_data.get("consumption_kwh")
+                or 0.0,
+                "timestamp": current_timestamp,
+                # CAMPO ADICIONAL REQUERIDO POR EL CÓDIGO - AÑADIR A BIGQUERY
+                "last_invoice_data": json.dumps(profile_data) if profile_data else "{}",
+            }
+
+            # Usar MERGE para insertar o actualizar (INCLUYENDO last_invoice_data)
+            merge_query = f"""
+                MERGE `{self.project_id}.{self.dataset_id}.{self.bq_user_profiles_table_id}` AS target
+                USING (
+                    SELECT 
+                        @user_id as user_id,
+                        @last_update_timestamp as last_update_timestamp,
+                        @avg_kwh_last_year as avg_kwh_last_year,
+                        @peak_percent_avg as peak_percent_avg,
+                        @contracted_power_kw as contracted_power_kw,
+                        @num_inhabitants as num_inhabitants,
+                        @home_type as home_type,
+                        @heating_type as heating_type,
+                        @has_ac as has_ac,
+                        @has_pool as has_pool,
+                        @is_teleworker as is_teleworker,
+                        @post_code_prefix as post_code_prefix,
+                        @has_solar_panels as has_solar_panels,
+                        @consumption_kwh as consumption_kwh,
+                        @monthly_consumption_kwh as monthly_consumption_kwh,
+                        @timestamp as timestamp,
+                        @last_invoice_data as last_invoice_data
+                ) AS source
+                ON target.user_id = source.user_id
+                WHEN MATCHED THEN
+                    UPDATE SET
+                        last_update_timestamp = source.last_update_timestamp,
+                        avg_kwh_last_year = source.avg_kwh_last_year,
+                        peak_percent_avg = source.peak_percent_avg,
+                        contracted_power_kw = source.contracted_power_kw,
+                        num_inhabitants = source.num_inhabitants,
+                        home_type = source.home_type,
+                        heating_type = source.heating_type,
+                        has_ac = source.has_ac,
+                        has_pool = source.has_pool,
+                        is_teleworker = source.is_teleworker,
+                        post_code_prefix = source.post_code_prefix,
+                        has_solar_panels = source.has_solar_panels,
+                        consumption_kwh = source.consumption_kwh,
+                        monthly_consumption_kwh = source.monthly_consumption_kwh,
+                        timestamp = source.timestamp,
+                        last_invoice_data = source.last_invoice_data
+                WHEN NOT MATCHED THEN
+                    INSERT (
+                        user_id, last_update_timestamp, avg_kwh_last_year, peak_percent_avg, 
+                        contracted_power_kw, num_inhabitants, home_type, heating_type, 
+                        has_ac, has_pool, is_teleworker, post_code_prefix, has_solar_panels, 
+                        consumption_kwh, monthly_consumption_kwh, timestamp, last_invoice_data
+                    )
+                    VALUES (
+                        source.user_id, source.last_update_timestamp, source.avg_kwh_last_year, source.peak_percent_avg,
+                        source.contracted_power_kw, source.num_inhabitants, source.home_type, source.heating_type,
+                        source.has_ac, source.has_pool, source.is_teleworker, source.post_code_prefix, source.has_solar_panels,
+                        source.consumption_kwh, source.monthly_consumption_kwh, source.timestamp, source.last_invoice_data
+                    )
+            """
+
+            job_config = bigquery.QueryJobConfig(
+                query_parameters=[
+                    bigquery.ScalarQueryParameter(
+                        "user_id", "STRING", row_data["user_id"]
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "last_update_timestamp",
+                        "TIMESTAMP",
+                        row_data["last_update_timestamp"],
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "avg_kwh_last_year", "NUMERIC", row_data["avg_kwh_last_year"]
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "peak_percent_avg", "NUMERIC", row_data["peak_percent_avg"]
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "contracted_power_kw",
+                        "NUMERIC",
+                        row_data["contracted_power_kw"],
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "num_inhabitants", "INTEGER", row_data["num_inhabitants"]
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "home_type", "STRING", row_data["home_type"]
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "heating_type", "STRING", row_data["heating_type"]
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "has_ac", "BOOLEAN", row_data["has_ac"]
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "has_pool", "BOOLEAN", row_data["has_pool"]
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "is_teleworker", "BOOLEAN", row_data["is_teleworker"]
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "post_code_prefix", "STRING", row_data["post_code_prefix"]
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "has_solar_panels", "BOOLEAN", row_data["has_solar_panels"]
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "consumption_kwh", "FLOAT", row_data["consumption_kwh"]
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "monthly_consumption_kwh",
+                        "FLOAT",
+                        row_data["monthly_consumption_kwh"],
+                    ),
+                    bigquery.ScalarQueryParameter(
+                        "timestamp", "TIMESTAMP", row_data["timestamp"]
+                    ),
+                    # NUEVO PARÁMETRO REQUERIDO
+                    bigquery.ScalarQueryParameter(
+                        "last_invoice_data", "STRING", row_data["last_invoice_data"]
+                    ),
+                ]
+            )
+
+            query_job = self.bq_client.query(merge_query, job_config=job_config)
+            query_job.result()  # Esperar a que termine
+
+            logger.info(
+                f"🏢 Perfil de usuario actualizado en BigQuery con last_invoice_data: {user_id}"
+            )
+            return True
+
+        except Exception as e:
+            logger.error(
+                f"Error insertando/actualizando perfil en BigQuery para {user_id}: {e}"
+            )
+            return False
+
+    def _create_or_update_firestore_user_profiles_collection(
+        self, user_id: str, profile_data: Dict[str, Any]
+    ) -> bool:
+        """🏢 Crear/actualizar colección user_profiles_enriched en Firestore idéntica a BigQuery - IDÉNTICO A EXPERT_BOT_API"""
+        try:
+            # Obtener displayName y email de Firestore users collection
+            user_doc = self.db.collection("users").document(user_id).get()
+            user_firestore_data = user_doc.to_dict() if user_doc.exists else {}
+
+            display_name = (
+                user_firestore_data.get("displayName", "")
+                if user_firestore_data
+                else ""
+            )
+            email = user_firestore_data.get("email", "") if user_firestore_data else ""
+
+            current_timestamp = datetime.datetime.now(datetime.timezone.utc)
+
+            # Crear estructura IDÉNTICA al esquema de BigQuery + last_invoice_data
+            user_profile_enriched_data = {
+                "user_id": user_id,
+                "last_update_timestamp": current_timestamp,
+                "avg_kwh_last_year": profile_data.get("avg_kwh_last_year")
+                or profile_data.get("kwh_consumidos")
+                or profile_data.get("monthly_consumption_kwh")
+                or profile_data.get("consumption_kwh")
+                or 0.0,
+                "peak_percent_avg": profile_data.get("peak_percent_avg")
+                or profile_data.get("peak_percent_from_invoice")
+                or 0.0,
+                "contracted_power_kw": profile_data.get("contracted_power_kw")
+                or profile_data.get("potencia_contratada_kw")
+                or 0.0,
+                "num_inhabitants": profile_data.get("num_inhabitants") or 1,
+                "home_type": profile_data.get("home_type") or "apartment",
+                "heating_type": profile_data.get("heating_type") or "gas",
+                "has_ac": profile_data.get("has_ac", False),
+                "has_pool": profile_data.get("has_pool", False),
+                "is_teleworker": profile_data.get("is_teleworker", False),
+                "post_code_prefix": (
+                    profile_data.get("post_code_prefix")
+                    or profile_data.get("codigo_postal", "")[:2]
+                    if profile_data.get("codigo_postal")
+                    else ""
+                ),
+                "has_solar_panels": profile_data.get("has_solar_panels", False),
+                "consumption_kwh": profile_data.get("consumption_kwh")
+                or profile_data.get("kwh_consumidos")
+                or profile_data.get("monthly_consumption_kwh")
+                or 0.0,
+                "monthly_consumption_kwh": profile_data.get("monthly_consumption_kwh")
+                or profile_data.get("kwh_consumidos")
+                or profile_data.get("consumption_kwh")
+                or 0.0,
+                "timestamp": current_timestamp,
+                "last_invoice_data": profile_data,  # CAMPO REQUERIDO AÑADIDO
+                # Campos adicionales de Firestore (displayName y email desde users collection)
+                "displayName": display_name,
+                "email": email,
+            }
+
+            # Crear/actualizar documento en colección user_profiles_enriched
+            user_profiles_ref = self.db.collection("user_profiles_enriched").document(
+                user_id
+            )
+            user_profiles_ref.set(user_profile_enriched_data, merge=True)
+
+            logger.info(
+                f"🏢 Colección user_profiles_enriched actualizada en Firestore: {user_id}"
+            )
+            return True
+
+        except Exception as e:
+            logger.error(
+                f"Error creando/actualizando colección user_profiles_enriched en Firestore para {user_id}: {e}"
+            )
+            return False
 
 
 # Instancia global del servicio
