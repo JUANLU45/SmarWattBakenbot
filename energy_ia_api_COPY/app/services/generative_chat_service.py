@@ -213,22 +213,33 @@ class EnterpriseGenerativeChatService:
 
             # 📊 COMUNICACIÓN CON EXPERT_BOT_API SI ES NECESARIO
             if self._should_consult_expert_bot(user_message, user_context):
-                expert_response = self._consult_expert_bot(user_message, user_context)
-                enhanced_message = self._integrate_expert_response(
-                    enhanced_message, expert_response
-                )
+                try:
+                    expert_response = self._consult_expert_bot(
+                        user_message, user_context
+                    )
+                    enhanced_message = self._integrate_expert_response(
+                        enhanced_message, expert_response
+                    )
+                except Exception as expert_error:
+                    # 🛡️ AISLAMIENTO: No romper conversación si expert-bot falla
+                    logging.warning(f"⚠️ Expert-bot no disponible: {expert_error}")
+                    # Continuar sin consulta expert-bot - conversación fluye normal
 
             # � NUEVA FUNCIONALIDAD: CONSULTA DE PRECIOS EN TIEMPO REAL
             if self._should_consult_market_prices(user_message, user_context):
-                logging.info("🔍 Detectada consulta de precios - obteniendo datos de mercado")
+                logging.info(
+                    "🔍 Detectada consulta de precios - obteniendo datos de mercado"
+                )
                 market_data = self._get_current_market_prices()
-                
+
                 if market_data:
                     price_info = self._format_market_prices_for_chat(market_data)
                     if price_info:
                         # Añadir información de precios al contexto
                         enhanced_message = f"{enhanced_message}\n\n[DATOS ACTUALES DEL MERCADO ELÉCTRICO]:\n{price_info}"
-                        logging.info("✅ Datos de mercado añadidos al contexto del chat")
+                        logging.info(
+                            "✅ Datos de mercado añadidos al contexto del chat"
+                        )
                     else:
                         logging.warning("⚠️ No se pudo formatear información de precios")
                 else:
@@ -374,9 +385,13 @@ class EnterpriseGenerativeChatService:
                 )
 
             return {
-                "response_text": "Disculpa, he tenido un problema interno. Por favor, inténtalo de nuevo.",
+                "response_text": "¡Hola! Soy tu asistente experto en energía. ¿En qué puedo ayudarte hoy?",
                 "chat_history": [],
-                "enterprise_metrics": {"error": True, "error_message": str(e)},
+                "enterprise_metrics": {
+                    "error": True,
+                    "error_message": str(e),
+                    "fallback_response": True,
+                },
             }
 
     def _analyze_message_sentiment(self, message: str) -> Dict[str, Any]:
@@ -550,31 +565,47 @@ class EnterpriseGenerativeChatService:
                     )
 
             # 🧠 INSTRUCCIONES INTELIGENTES SEGÚN TIPO DE CONVERSACIÓN
-            conversation_type = self._detect_conversation_type(user_message, user_context)
-            data_completeness = self._calculate_data_completeness(user_context) if user_context else 0
+            conversation_type = self._detect_conversation_type(
+                user_message, user_context
+            )
+            data_completeness = (
+                self._calculate_data_completeness(user_context) if user_context else 0
+            )
             user_name = user_context.get("user_name") if user_context else None
-            
+
             # Aplicar instrucciones CONTEXTUALES según la conversación
             if conversation_type == "greeting":
                 # SALUDOS - Conversación natural y amigable
                 context_parts.append("\n=== 🤝 INSTRUCCIONES PARA SALUDO NATURAL ===")
                 time_greeting = self._get_time_based_greeting()
                 if user_name:
-                    context_parts.append(f"1. SALUDA CALUROSAMENTE: '¡{time_greeting} {user_name}!'")
+                    context_parts.append(
+                        f"1. SALUDA CALUROSAMENTE: '¡{time_greeting} {user_name}!'"
+                    )
                 else:
-                    context_parts.append(f"1. SALUDA CALUROSAMENTE: '¡{time_greeting}!'")
-                context_parts.append("2. PREGUNTA amigablemente: '¿En qué puedo ayudarte con la energía?'")
+                    context_parts.append(
+                        f"1. SALUDA CALUROSAMENTE: '¡{time_greeting}!'"
+                    )
+                context_parts.append(
+                    "2. PREGUNTA amigablemente: '¿En qué puedo ayudarte con la energía?'"
+                )
                 context_parts.append("3. MANTÉN tono conversacional y cercano")
-                context_parts.append("4. NO menciones datos específicos a menos que pregunten")
-                
+                context_parts.append(
+                    "4. NO menciones datos específicos a menos que pregunten"
+                )
+
             elif conversation_type == "personal_analysis" and data_completeness >= 50:
                 # ANÁLISIS PERSONAL - Usar todos los datos disponibles
-                context_parts.append("\n=== 🎯 INSTRUCCIONES ANÁLISIS PERSONALIZADO ===")
+                context_parts.append(
+                    "\n=== 🎯 INSTRUCCIONES ANÁLISIS PERSONALIZADO ==="
+                )
                 context_parts.append(f"1. SALUDA por nombre: {user_name}")
-                context_parts.append("2. USA específicamente su comercializadora, coste mensual y tarifa")
+                context_parts.append(
+                    "2. USA específicamente su comercializadora, coste mensual y tarifa"
+                )
                 context_parts.append("3. APLICA sus cifras exactas de factura")
                 context_parts.append("4. CALCULA ahorros con SUS datos reales")
-                
+
             elif conversation_type == "general_energy":
                 # TEMAS GENERALES - Expertise sin bombardeo personal
                 context_parts.append("\n=== 🌟 INSTRUCCIONES TEMA GENERAL ENERGÍA ===")
@@ -582,33 +613,47 @@ class EnterpriseGenerativeChatService:
                     context_parts.append(f"1. SALUDA brevemente: 'Hola {user_name}'")
                 context_parts.append("2. RESPONDE como experto en energía")
                 context_parts.append("3. INCLUYE consejos prácticos y útiles")
-                context_parts.append("4. SI es relevante, menciona sutilmente sus datos")
+                context_parts.append(
+                    "4. SI es relevante, menciona sutilmente sus datos"
+                )
                 context_parts.append("5. INVITA a seguir charlando sobre el tema")
-                
+
             elif conversation_type == "casual_chat":
                 # CHARLA CASUAL - Conversacional con expertise disponible
                 context_parts.append("\n=== 💬 INSTRUCCIONES CONVERSACIÓN CASUAL ===")
                 if user_name:
                     context_parts.append(f"1. SALUDA naturalmente: {user_name}")
                 context_parts.append("2. RESPONDE de forma conversacional y amigable")
-                context_parts.append("3. MUESTRA expertise energético cuando sea natural")
+                context_parts.append(
+                    "3. MUESTRA expertise energético cuando sea natural"
+                )
                 context_parts.append("4. INVITA a profundizar en temas de interés")
-                
+
             elif data_completeness < 20 and user_name:
                 # USUARIO NUEVO - Tratamiento VIP conversacional
                 context_parts.append("\n=== 🥇 INSTRUCCIONES USUARIO VIP (NUEVO) ===")
                 context_parts.append(f"1. SALUDA con entusiasmo: 'Hola {user_name}!'")
-                context_parts.append("2. CONVERSACIÓN natural sobre energía SIN pedir datos")
+                context_parts.append(
+                    "2. CONVERSACIÓN natural sobre energía SIN pedir datos"
+                )
                 context_parts.append("3. RESPONDE expertamente pero sin presionar")
-                context_parts.append("4. SOLO si pregunta por análisis personal, menciona SUTILMENTE valor de más datos")
-                context_parts.append("5. ENFÓCATE en crear buena experiencia y confianza")
-                
+                context_parts.append(
+                    "4. SOLO si pregunta por análisis personal, menciona SUTILMENTE valor de más datos"
+                )
+                context_parts.append(
+                    "5. ENFÓCATE en crear buena experiencia y confianza"
+                )
+
             else:
                 # FALLBACK - Instrucciones balanceadas
-                context_parts.append("\n=== ⚖️ INSTRUCCIONES CONVERSACIÓN BALANCEADA ===")
+                context_parts.append(
+                    "\n=== ⚖️ INSTRUCCIONES CONVERSACIÓN BALANCEADA ==="
+                )
                 if user_name:
                     context_parts.append(f"1. SALUDA por nombre: {user_name}")
-                context_parts.append("2. ADAPTA nivel de personalización según pregunta")
+                context_parts.append(
+                    "2. ADAPTA nivel de personalización según pregunta"
+                )
                 context_parts.append("3. MANTÉN conversación natural y fluida")
                 context_parts.append("4. USA datos cuando aporten valor real")
 
@@ -871,47 +916,83 @@ class EnterpriseGenerativeChatService:
         Permite chatbot conversacional que adapta su expertise según contexto
         """
         message_lower = user_message.lower().strip()
-        
+
         # 1. SALUDOS SIMPLES - Conversación social amigable
         greeting_patterns = [
-            "hola", "buenos días", "buenas tardes", "buenas noches", 
-            "hey", "qué tal", "que tal", "cómo estás", "como estas",
-            "saludos", "buenas", "buen día", "buen dia"
+            "hola",
+            "buenos días",
+            "buenas tardes",
+            "buenas noches",
+            "hey",
+            "qué tal",
+            "que tal",
+            "cómo estás",
+            "como estas",
+            "saludos",
+            "buenas",
+            "buen día",
+            "buen dia",
         ]
-        
-        if any(pattern in message_lower for pattern in greeting_patterns) and len(message_lower) < 30:
+
+        if (
+            any(pattern in message_lower for pattern in greeting_patterns)
+            and len(message_lower) < 30
+        ):
             return "greeting"
-        
+
         # 2. PREGUNTAS ESPECÍFICAS DE DATOS - Usar personalización máxima
         specific_data_patterns = [
-            "mi factura", "mi consumo", "mi tarifa", "mi comercializadora",
-            "cuánto gasto", "cuanto gasto", "mis datos", "mi situación",
-            "qué ahorro", "que ahorro", "cuánto pago", "cuanto pago"
+            "mi factura",
+            "mi consumo",
+            "mi tarifa",
+            "mi comercializadora",
+            "cuánto gasto",
+            "cuanto gasto",
+            "mis datos",
+            "mi situación",
+            "qué ahorro",
+            "que ahorro",
+            "cuánto pago",
+            "cuanto pago",
         ]
-        
+
         if any(pattern in message_lower for pattern in specific_data_patterns):
             return "personal_analysis"
-        
+
         # 3. TEMAS GENERALES DE ENERGÍA - Expertise sin bombardeo
         general_energy_topics = [
-            "placas solares", "paneles solares", "energía renovable", "energia renovable",
-            "eficiencia energética", "eficiencia energetica", "consejos", "tips",
-            "cómo ahorrar", "como ahorrar", "qué es", "que es"
+            "placas solares",
+            "paneles solares",
+            "energía renovable",
+            "energia renovable",
+            "eficiencia energética",
+            "eficiencia energetica",
+            "consejos",
+            "tips",
+            "cómo ahorrar",
+            "como ahorrar",
+            "qué es",
+            "que es",
         ]
-        
+
         if any(topic in message_lower for topic in general_energy_topics):
             return "general_energy"
-        
+
         # 4. PREGUNTAS DE PRECIOS - Market data específica
         price_keywords = ["precio", "coste", "cuesta", "cuánto está", "cuanto esta"]
         if any(keyword in message_lower for keyword in price_keywords):
             return "price_inquiry"
-        
+
         # 5. RECOMENDACIONES - Expert bot consultation
-        recommendation_keywords = ["recomienda", "recomendación", "mejor tarifa", "cambiar"]
+        recommendation_keywords = [
+            "recomienda",
+            "recomendación",
+            "mejor tarifa",
+            "cambiar",
+        ]
         if any(keyword in message_lower for keyword in recommendation_keywords):
             return "recommendation_request"
-        
+
         # 6. DEFAULT - Conversación casual con expertise disponible
         return "casual_chat"
 
@@ -923,12 +1004,12 @@ class EnterpriseGenerativeChatService:
         try:
             from datetime import datetime
             import pytz
-            
+
             # Zona horaria española
-            madrid_tz = pytz.timezone('Europe/Madrid')
+            madrid_tz = pytz.timezone("Europe/Madrid")
             current_time = datetime.now(madrid_tz)
             hour = current_time.hour
-            
+
             if 5 <= hour < 12:
                 return "Buenos días"
             elif 12 <= hour < 20:
@@ -1023,7 +1104,7 @@ class EnterpriseGenerativeChatService:
         price_specific_keywords = [
             "precio de la luz",
             "precio actual",
-            "precio energía", 
+            "precio energía",
             "precio electricidad",
             "cuánto cuesta el kwh",
             "cuanto cuesta el kwh",
@@ -1044,31 +1125,38 @@ class EnterpriseGenerativeChatService:
             "pvpc hoy",
             "pvpc actual",
             "tarifa pvpc",
-            "precio pvpc"
+            "precio pvpc",
         ]
 
         # Detectar preguntas directas de precio
-        has_price_query = any(keyword in message_lower for keyword in price_specific_keywords)
+        has_price_query = any(
+            keyword in message_lower for keyword in price_specific_keywords
+        )
 
         # Patrones de pregunta específicos de precio
         price_patterns = [
             "cuánto cuesta",
-            "cuanto cuesta", 
+            "cuanto cuesta",
             "a cuánto está",
             "a cuanto esta",
             "qué precio",
             "que precio",
             "dime el precio",
-            "precio de"
+            "precio de",
         ]
 
         has_price_pattern = any(pattern in message_lower for pattern in price_patterns)
 
         # EXCLUIR si claramente pide recomendaciones
         excludes_recommendations = not any(
-            exclude in message_lower for exclude in [
-                "recomienda", "recomendacion", "mejor tarifa", 
-                "que tarifa", "cambiar tarifa", "comparar tarifas"
+            exclude in message_lower
+            for exclude in [
+                "recomienda",
+                "recomendacion",
+                "mejor tarifa",
+                "que tarifa",
+                "cambiar tarifa",
+                "comparar tarifas",
             ]
         )
 
@@ -1140,7 +1228,7 @@ class EnterpriseGenerativeChatService:
         try:
             from flask import g
 
-            # Verificar token de autorización  
+            # Verificar token de autorización
             if not hasattr(g, "token") or not g.token:
                 logging.warning("⚠️ No hay token disponible para consultar precios")
                 return {}
@@ -1149,7 +1237,9 @@ class EnterpriseGenerativeChatService:
             energy_ia_url = current_app.config.get("ENERGY_IA_API_URL")
             if not energy_ia_url:
                 energy_ia_url = request.url_root.rstrip("/")
-                logging.warning("⚠️ ENERGY_IA_API_URL no configurada - usando URL actual")
+                logging.warning(
+                    "⚠️ ENERGY_IA_API_URL no configurada - usando URL actual"
+                )
 
             market_data_url = f"{energy_ia_url}/api/v1/energy/tariffs/market-data"
 
@@ -1165,7 +1255,9 @@ class EnterpriseGenerativeChatService:
                 logging.info("✅ Datos de precios de mercado obtenidos exitosamente")
                 return result.get("data", {})
             else:
-                logging.warning(f"⚠️ Endpoint market-data respuesta: {response.status_code}")
+                logging.warning(
+                    f"⚠️ Endpoint market-data respuesta: {response.status_code}"
+                )
                 return {}
 
         except Exception as e:
@@ -1183,17 +1275,25 @@ class EnterpriseGenerativeChatService:
         try:
             tariffs = market_data.get("tariffs", [])
             stats = market_data.get("market_statistics", {})
-            
+
             if not tariffs:
                 return ""
 
             # Filtrar tarifas PVPC
             pvpc_tariffs = [t for t in tariffs if t.get("is_pvpc", False)]
-            
+
             # Calcular precios promedio del mercado
-            peak_prices = [float(t["kwh_price_peak"]) for t in tariffs if t.get("kwh_price_peak")]
-            valley_prices = [float(t["kwh_price_valley"]) for t in tariffs if t.get("kwh_price_valley")]
-            flat_prices = [float(t["kwh_price_flat"]) for t in tariffs if t.get("kwh_price_flat")]
+            peak_prices = [
+                float(t["kwh_price_peak"]) for t in tariffs if t.get("kwh_price_peak")
+            ]
+            valley_prices = [
+                float(t["kwh_price_valley"])
+                for t in tariffs
+                if t.get("kwh_price_valley")
+            ]
+            flat_prices = [
+                float(t["kwh_price_flat"]) for t in tariffs if t.get("kwh_price_flat")
+            ]
 
             formatted_info = []
 
@@ -1215,7 +1315,7 @@ class EnterpriseGenerativeChatService:
                 total_tariffs = stats.get("total_tariffs", 0)
                 providers = stats.get("providers", 0)
                 last_updated = stats.get("last_updated", "")
-                
+
                 if total_tariffs and providers:
                     formatted_info.append(
                         f"📊 MERCADO: {total_tariffs} tarifas activas de {providers} comercializadoras"
@@ -1224,8 +1324,13 @@ class EnterpriseGenerativeChatService:
                 if last_updated:
                     try:
                         from datetime import datetime
-                        update_dt = datetime.fromisoformat(last_updated.replace('Z', '+00:00'))
-                        formatted_info.append(f"🕒 Actualizado: {update_dt.strftime('%d/%m/%Y %H:%M')}")
+
+                        update_dt = datetime.fromisoformat(
+                            last_updated.replace("Z", "+00:00")
+                        )
+                        formatted_info.append(
+                            f"🕒 Actualizado: {update_dt.strftime('%d/%m/%Y %H:%M')}"
+                        )
                     except:
                         pass
 
