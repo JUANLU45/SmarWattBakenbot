@@ -711,7 +711,7 @@ class EnterpriseVertexAIService:
     def _save_market_analysis_to_bigquery(
         self, market_analysis: Dict, user_profile: Dict
     ):
-        """Guarda análisis de mercado en BigQuery"""
+        """Guarda análisis de mercado en BigQuery usando tabla ai_business_metrics"""
         try:
             if not self.bigquery_client:
                 return
@@ -720,31 +720,57 @@ class EnterpriseVertexAIService:
                 self.bq_market_analysis_table_id
             )
 
+            # Mapeo perfecto a estructura ai_business_metrics
             row = {
-                "analysis_id": str(uuid.uuid4()),
-                "timestamp_utc": datetime.now(timezone.utc).isoformat(),
-                "user_profile": json.dumps(user_profile),
-                "market_statistics": json.dumps(
-                    market_analysis.get("market_statistics", {})
+                "metric_id": str(uuid.uuid4()),
+                "metric_type": "market_analysis",
+                "metric_value": float(
+                    market_analysis.get("market_statistics", {}).get("total_tariffs", 0)
                 ),
-                "user_market_position": json.dumps(
-                    market_analysis.get("user_market_position", {})
+                "metric_metadata": json.dumps(
+                    {
+                        "user_profile": user_profile,
+                        "market_statistics": market_analysis.get(
+                            "market_statistics", {}
+                        ),
+                        "user_market_position": market_analysis.get(
+                            "user_market_position", {}
+                        ),
+                        "market_trends": market_analysis.get("market_trends", {}),
+                        "total_tariffs_analyzed": market_analysis.get(
+                            "market_statistics", {}
+                        ).get("total_tariffs", 0),
+                        "analysis_timestamp": datetime.now(timezone.utc).isoformat(),
+                        "service": "energy_ia_api_copy",
+                    }
                 ),
-                "market_trends": json.dumps(market_analysis.get("market_trends", {})),
-                "total_tariffs_analyzed": market_analysis.get(
-                    "market_statistics", {}
-                ).get("total_tariffs", 0),
-                "service": "energy_ia_api_copy",
+                "user_segment": user_profile.get("user_segment", "standard"),
+                "time_period": "real_time",
+                "trend_direction": "stable",
+                "business_impact": "high",
+                "category": "energy_analysis",
+                "subcategory": "tariff_market_analysis",
+                "aggregation_level": "user_level",
+                "baseline_value": 0.0,
+                "threshold_min": None,
+                "threshold_max": None,
+                "alert_triggered": False,
+                "data_source": "energy_ia_api_copy",
+                "calculation_method": "vertex_ai_market_analysis",
+                "recorded_at": datetime.now(timezone.utc).isoformat(),
+                "created_at": datetime.now(timezone.utc).isoformat(),
+                "updated_at": None,
+                "user_id": user_profile.get("user_id", "unknown"),
             }
 
             errors = self.bigquery_client.insert_rows_json(table_ref, [row])
             if errors:
-                logger.error(f"❌ Error guardando análisis: {errors}")
+                logger.error(f"❌ Error guardando análisis de mercado: {errors}")
             else:
-                logger.info(f"✅ Análisis de mercado guardado en BigQuery")
+                logger.info(f"✅ Análisis de mercado guardado en AI_BUSINESS_METRICS")
 
         except Exception as e:
-            logger.error(f"❌ Error guardando análisis: {str(e)}")
+            logger.error(f"❌ Error guardando análisis de mercado: {str(e)}")
 
     def _load_enterprise_tariffs_from_bigquery(self) -> List[Dict]:
         """Carga tarifas con algoritmo empresarial"""

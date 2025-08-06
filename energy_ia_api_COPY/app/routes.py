@@ -190,19 +190,22 @@ class EnterpriseTariffRecommenderService:
             # Calcular término variable
             if tariff.get("discriminated_hourly", False):
                 # Tarifa con discriminación horaria
-                peak_cost = peak_kwh * tariff.get("peak_price", 0)
-                valley_cost = valley_kwh * tariff.get("valley_price", 0)
+                peak_cost = peak_kwh * (tariff.get("peak_price") or 0)
+                valley_cost = valley_kwh * (tariff.get("valley_price") or 0)
                 variable_term_annual = peak_cost + valley_cost
             else:
                 # Tarifa sin discriminación horaria
-                variable_term_annual = annual_kwh * tariff.get("variable_term_price", 0)
+                variable_term_annual = annual_kwh * (
+                    tariff.get("variable_term_price") or 0
+                )
 
-            # Aplicar descuentos promocionales
-            total_cost = fixed_term_annual + variable_term_annual
+            # Aplicar descuentos promocionales - Asegurar que total_cost nunca sea None
+            total_cost = (fixed_term_annual or 0) + (variable_term_annual or 0)
 
             if tariff.get("promotion_discount_percentage", 0) > 0:
                 promotion_months = tariff.get("promotion_duration_months", 12)
-                monthly_cost = total_cost / 12
+                # Protección contra división por None
+                monthly_cost = (total_cost or 0) / 12
                 discounted_months_cost = (
                     monthly_cost
                     * (1 - tariff.get("promotion_discount_percentage", 0) / 100)
@@ -220,10 +223,10 @@ class EnterpriseTariffRecommenderService:
             )
 
             return {
-                "annual_cost": round(total_cost, 2),
-                "monthly_cost": round(total_cost / 12, 2),
-                "fixed_term_annual": round(fixed_term_annual, 2),
-                "variable_term_annual": round(variable_term_annual, 2),
+                "annual_cost": round(total_cost or 0, 2),
+                "monthly_cost": round((total_cost or 0) / 12, 2),
+                "fixed_term_annual": round(fixed_term_annual or 0, 2),
+                "variable_term_annual": round(variable_term_annual or 0, 2),
                 "annual_savings": round(annual_savings, 2),
                 "savings_percentage": round(savings_percentage, 2),
                 "peak_kwh_annual": round(peak_kwh, 2),

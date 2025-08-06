@@ -89,6 +89,11 @@ class EnterpriseConfig:
         "BQ_AI_BUSINESS_METRICS_TABLE_ID", "ai_business_metrics"
     )
 
+    # 📈 CONFIGURACIÓN PARA MARKET_ANALYSIS - USA TABLA AI_BUSINESS_METRICS
+    BQ_MARKET_ANALYSIS_TABLE_ID = os.environ.get(
+        "BQ_MARKET_ANALYSIS_TABLE_ID", "ai_business_metrics"
+    )
+
     # 🧠 CONFIGURACIÓN PARA AI_SENTIMENT_ANALYSIS (MISMO QUE EXPERT_BOT_API_COPY)
     BQ_AI_SENTIMENT_TABLE_ID = os.environ.get(
         "BQ_AI_SENTIMENT_TABLE_ID", "ai_sentiment_analysis"

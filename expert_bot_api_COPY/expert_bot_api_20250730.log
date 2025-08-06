@@ -1,0 +1,21 @@
+2025-07-30 20:56:28,105 - expert_bot_api - INFO - Sistema de logging empresarial iniciado correctamente
+2025-07-30 20:56:28,105 - expert_bot_api - WARNING - Variables de entorno faltantes (usando defaults): ['FLASK_CONFIG']
+2025-07-30 20:56:28,105 - expert_bot_api - INFO - Iniciando aplicación con configuración: production
+2025-07-30 20:56:28,105 - expert_bot_api - INFO - Iniciando creación de aplicación con configuración: production
+2025-07-30 20:56:28,108 - app - INFO - Firebase Admin SDK inicializado correctamente para proyecto: smatwatt
+2025-07-30 20:56:28,108 - expert_bot_api - INFO - Firebase Admin SDK configurado correctamente en modo empresarial
+2025-07-30 20:56:28,108 - expert_bot_api - INFO - CORS configurado correctamente para modo empresarial
+2025-07-30 20:56:33,259 - expert_bot_api - INFO - Blueprint de chat registrado correctamente
+2025-07-30 20:56:34,625 - expert_bot_api - INFO - Blueprint de energía registrado correctamente
+2025-07-30 20:56:34,635 - expert_bot_api - INFO - Blueprint de enlaces empresariales registrado correctamente
+2025-07-30 20:56:34,729 - expert_bot_api - INFO - Blueprint de procesamiento asíncrono empresarial registrado correctamente
+2025-07-30 20:56:34,730 - expert_bot_api - INFO - Manejadores de errores empresariales registrados correctamente
+2025-07-30 20:56:34,731 - expert_bot_api - INFO - Aplicación Expert Bot API creada correctamente en modo empresarial
+2025-07-30 20:56:34,732 - expert_bot_api - INFO - Aplicación Expert Bot API inicializada correctamente en modo empresarial
+2025-07-30 20:56:34,732 - expert_bot_api - INFO - Iniciando servidor empresarial en 0.0.0.0:8081
+2025-07-30 20:56:34,732 - expert_bot_api - INFO - Modo debug: False
+2025-07-30 20:56:34,770 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8081
+ * Running on http://192.168.1.41:8081
+2025-07-30 20:56:34,771 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
