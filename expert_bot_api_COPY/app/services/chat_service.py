@@ -1683,12 +1683,61 @@ Soy WattBot, tu asistente energético. Puedo ayudarte con consultas sobre energ�
         # 📝 Análisis del tipo de consulta del usuario
         message_lower = user_message.lower()
 
-        # 🎯 Respuestas contextuales específicas
+        # 🎯 Respuestas contextuales específicas con datos reales
         if "tarifa" in message_lower or "precio" in message_lower:
-            base_response = f"Disculpe, {user_name}, el sistema de comparación de tarifas está temporalmente no disponible."
-            if data_completeness > 0.5:
-                base_response += " Basándome en su perfil energético, le sugiero consultar proveedores locales mientras restablezco el servicio."
-            return base_response
+            try:
+                # 📊 OBTENER DATOS REALES DE MARKET DATA
+                import requests
+
+                headers = {
+                    "Authorization": f"Bearer {current_app.config.get('ENERGY_IA_TOKEN', '')}",
+                    "Content-Type": "application/json",
+                    "X-Enterprise-Request": "true",
+                }
+
+                market_data_url = (
+                    f"{self.energy_ia_api_url}/api/v1/energy/tariffs/market-data"
+                )
+                response = requests.get(market_data_url, headers=headers, timeout=10)
+
+                if response.status_code == 200:
+                    market_data = response.json()
+                    tariffs = market_data.get("data", [])
+
+                    if tariffs:
+                        # 📈 PRESENTAR DATOS REALES AL USUARIO
+                        base_response = f"Hola {user_name}, aquí tienes los precios actuales de energía:\n\n"
+
+                        # Mostrar las mejores 3 tarifas
+                        for i, tariff in enumerate(tariffs[:3]):
+                            provider = tariff.get("provider_name", "Proveedor")
+                            name = tariff.get("tariff_name", "Tarifa")
+                            price_flat = tariff.get("kwh_price_flat")
+                            price_peak = tariff.get("kwh_price_peak")
+
+                            base_response += f"🔸 {provider} - {name}\n"
+                            if price_flat:
+                                base_response += f"   Precio fijo: {price_flat}€/kWh\n"
+                            elif price_peak:
+                                base_response += f"   Precio punta: {price_peak}€/kWh\n"
+                            base_response += "\n"
+
+                        stats = market_data.get("market_stats", {})
+                        if stats:
+                            base_response += f"📊 Mercado: {stats.get('total_tariffs', 0)} tarifas disponibles de {stats.get('providers', 0)} proveedores"
+
+                        return base_response
+                    else:
+                        return f"Hola {user_name}, los datos de tarifas están actualizándose. Inténtalo en unos minutos."
+                else:
+                    logging.warning(
+                        f"Market data endpoint error: {response.status_code}"
+                    )
+                    return f"Disculpe {user_name}, hay un problema temporal con los datos de tarifas. Código: {response.status_code}"
+
+            except Exception as e:
+                logging.error(f"Error obteniendo market data: {str(e)}")
+                return f"Disculpe {user_name}, error temporal accediendo a precios de energía: {str(e)}"
 
         elif "consumo" in message_lower or "factura" in message_lower:
             base_response = f"Le pido disculpas, {user_name}, el análisis de consumo está en mantenimiento."
