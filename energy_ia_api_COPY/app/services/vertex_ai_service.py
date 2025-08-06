@@ -1344,16 +1344,8 @@ class EnterpriseVertexAIService:
                     price_benefit = min(0.4, (price_ratio - 1) * 0.3)
                     return max(0.3, min(0.7, balance_score * 0.5 + price_benefit))
 
-            # Si no se puede calcular, usar la media ponderada de los scores calculados
-            scores = [
-                discrimination_benefit * optimization_potential,
-                current_optimization * 0.9,
-                balance_score * 0.5 + price_benefit,
-            ]
-            valid_scores = [s for s in scores if isinstance(s, float) and s > 0]
-            if valid_scores:
-                return round(sum(valid_scores) / len(valid_scores), 3)
-            return 0.6  # Valor conservador si no hay datos
+            # Si no hay precios válidos, devolver score conservador para tarifas sin discriminación horaria
+            return 0.5
 
         except Exception as e:
             logger.error(f"❌ Error calculando compatibilidad: {str(e)}")
