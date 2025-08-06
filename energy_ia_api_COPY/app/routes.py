@@ -492,9 +492,9 @@ class EnterpriseTariffRecommenderService:
                 ),
                 "timestamp": current_timestamp,
                 "record_date": current_timestamp.date(),
-                "total_savings": recommendation["best_recommendation"]["cost_analysis"][
-                    "annual_savings"
-                ],
+                "total_savings": recommendation["best_recommendation"][
+                    "cost_analysis"
+                ].get("annual_savings", 0),
                 "annual_cost": recommendation["best_recommendation"]["cost_analysis"][
                     "annual_cost"
                 ],
