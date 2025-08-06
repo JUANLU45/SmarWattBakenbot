@@ -1,5 +1,6 @@
 # expert_bot_api_COPY/requirements.txt
 # 🏢 DEPENDENCIAS EMPRESARIALES NIVEL 2025 - EXPERT BOT API COPY
+# 🚀 AUTO-DEPLOY TEST - 2025-08-06
 
 # === CORE FRAMEWORK ===
 Flask>=2.3.0
