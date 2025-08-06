@@ -8,12 +8,14 @@ import time
 import uuid
 from datetime import datetime
 from typing import Dict, List, Any, Optional
+from concurrent.futures import ThreadPoolExecutor
 
 # Third-party imports
 import google.generativeai as genai  # type: ignore
 from flask import current_app, request
 from google.cloud import bigquery  # type: ignore
 import requests
+import pytz
 
 # Local imports
 from smarwatt_auth import EnterpriseAuth
@@ -66,14 +68,14 @@ class EnterpriseGenerativeChatService:
             # 🧠 INSTRUCCIONES EMPRESARIALES AVANZADAS PARA GEMINI
             self.system_instruction = self._build_enterprise_system_instruction()
 
-            # Inicializar modelo con configuración empresarial compatible
+            # Inicializar modelo con configuración empresarial optimizada para velocidad
             self.model = genai.GenerativeModel(
                 model_name="gemini-1.5-flash",
                 generation_config=genai.types.GenerationConfig(
-                    temperature=0.7,
+                    temperature=0.3,  # ⚡ Optimizado para respuestas más rápidas y consistentes
                     top_p=0.9,
                     top_k=40,
-                    max_output_tokens=2048,
+                    max_output_tokens=800,  # ⚡ Optimizado para respuestas más concisas
                 ),
                 safety_settings=[
                     {
@@ -211,39 +213,77 @@ class EnterpriseGenerativeChatService:
             # 🔧 INCORPORAR INSTRUCCIONES DEL SISTEMA (COMPATIBLE CON VERSIÓN ACTUAL)
             enhanced_message = f"{self.system_instruction}\n\n{enhanced_message}"
 
-            # 📊 COMUNICACIÓN CON EXPERT_BOT_API SI ES NECESARIO
-            if self._should_consult_expert_bot(user_message, user_context):
+            # ⚡ PARALELIZACIÓN OPTIMIZADA DE CONSULTAS HTTP INDEPENDIENTES
+            expert_response = {}
+            market_data = {}
+
+            # Determinar qué consultas realizar
+            should_consult_expert = self._should_consult_expert_bot(
+                user_message, user_context
+            )
+            should_consult_market = self._should_consult_market_prices(
+                user_message, user_context
+            )
+
+            # Ejecutar consultas en paralelo si ambas son necesarias
+            if should_consult_expert and should_consult_market:
+                with ThreadPoolExecutor(max_workers=2) as executor:
+                    # Enviar ambas consultas en paralelo
+                    expert_future = executor.submit(
+                        self._consult_expert_bot, user_message, user_context
+                    )
+                    market_future = executor.submit(self._get_current_market_prices)
+
+                    # Recoger resultados con manejo de errores independiente
+                    try:
+                        expert_response = expert_future.result(
+                            timeout=10
+                        )  # ⚡ Timeout total para expert_bot
+                    except Exception as expert_error:
+                        logging.warning(f"⚠️ Expert-bot no disponible: {expert_error}")
+                        expert_response = {}
+
+                    try:
+                        market_data = market_future.result(
+                            timeout=10
+                        )  # ⚡ Timeout total para market_data
+                    except Exception as market_error:
+                        logging.warning(f"⚠️ Market data no disponible: {market_error}")
+                        market_data = {}
+
+            # Ejecutar consultas individuales si solo se necesita una
+            elif should_consult_expert:
                 try:
                     expert_response = self._consult_expert_bot(
                         user_message, user_context
                     )
-                    enhanced_message = self._integrate_expert_response(
-                        enhanced_message, expert_response
-                    )
                 except Exception as expert_error:
-                    # 🛡️ AISLAMIENTO: No romper conversación si expert-bot falla
                     logging.warning(f"⚠️ Expert-bot no disponible: {expert_error}")
-                    # Continuar sin consulta expert-bot - conversación fluye normal
+                    expert_response = {}
 
-            # � NUEVA FUNCIONALIDAD: CONSULTA DE PRECIOS EN TIEMPO REAL
-            if self._should_consult_market_prices(user_message, user_context):
-                logging.info(
-                    "🔍 Detectada consulta de precios - obteniendo datos de mercado"
+            elif should_consult_market:
+                try:
+                    market_data = self._get_current_market_prices()
+                except Exception as market_error:
+                    logging.warning(f"⚠️ Market data no disponible: {market_error}")
+                    market_data = {}
+
+            # 📊 INTEGRAR RESPUESTA DE EXPERT_BOT SI ESTÁ DISPONIBLE
+            if expert_response:
+                enhanced_message = self._integrate_expert_response(
+                    enhanced_message, expert_response
                 )
-                market_data = self._get_current_market_prices()
 
-                if market_data:
-                    price_info = self._format_market_prices_for_chat(market_data)
-                    if price_info:
-                        # Añadir información de precios al contexto
-                        enhanced_message = f"{enhanced_message}\n\n[DATOS ACTUALES DEL MERCADO ELÉCTRICO]:\n{price_info}"
-                        logging.info(
-                            "✅ Datos de mercado añadidos al contexto del chat"
-                        )
-                    else:
-                        logging.warning("⚠️ No se pudo formatear información de precios")
+            # 💰 INTEGRAR DATOS DE MERCADO SI ESTÁN DISPONIBLES
+            if market_data:
+                logging.info("🔍 Integrando datos de mercado obtenidos")
+                price_info = self._format_market_prices_for_chat(market_data)
+                if price_info:
+                    # Añadir información de precios al contexto
+                    enhanced_message = f"{enhanced_message}\n\n[DATOS ACTUALES DEL MERCADO ELÉCTRICO]:\n{price_info}"
+                    logging.info("✅ Datos de mercado añadidos al contexto del chat")
                 else:
-                    logging.warning("⚠️ No se pudieron obtener datos de mercado")
+                    logging.warning("⚠️ No se pudo formatear información de precios")
 
             # �🚀 ENVÍO A GEMINI CON CONFIGURACIÓN EMPRESARIAL
             response = chat_session.send_message(enhanced_message)
@@ -273,10 +313,6 @@ class EnterpriseGenerativeChatService:
                 response_analysis,
                 response_time,
             )
-
-            # 🧠 ACTUALIZACIÓN DE APRENDIZAJE AUTOMÁTICO CON AI LEARNING SERVICE
-            if user_context is not None:
-                self._update_learning_patterns(user_context, interaction_data)
 
             # 🧠 ACTUALIZACIÓN DE APRENDIZAJE AUTOMÁTICO CON AI LEARNING SERVICE
             if user_context is not None:
@@ -417,7 +453,7 @@ class EnterpriseGenerativeChatService:
                             "Content-Type": "application/json",
                             "Authorization": f"Bearer {current_app.config.get('INTERNAL_SERVICE_TOKEN', '')}",
                         },
-                        timeout=5,
+                        timeout=3,  # ⚡ Timeout optimizado para sentiment analysis
                     )
 
                     if response.status_code == 200:
@@ -1204,7 +1240,9 @@ class EnterpriseGenerativeChatService:
                 "Content-Type": "application/json",
             }
 
-            response = requests.get(recommendations_url, headers=headers, timeout=15)
+            response = requests.get(
+                recommendations_url, headers=headers, timeout=8
+            )  # ⚡ Timeout optimizado para recomendaciones
 
             if response.status_code == 200:
                 result: Dict[str, Any] = response.json()
@@ -1248,7 +1286,9 @@ class EnterpriseGenerativeChatService:
                 "Content-Type": "application/json",
             }
 
-            response = requests.get(market_data_url, headers=headers, timeout=15)
+            response = requests.get(
+                market_data_url, headers=headers, timeout=8
+            )  # ⚡ Timeout optimizado para market data
 
             if response.status_code == 200:
                 result: Dict[str, Any] = response.json()
