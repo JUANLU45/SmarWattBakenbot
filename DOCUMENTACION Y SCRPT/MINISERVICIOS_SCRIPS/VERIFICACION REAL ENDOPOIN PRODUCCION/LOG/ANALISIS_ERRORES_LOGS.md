@@ -64,7 +64,7 @@ def process_invoice_upload_patterns(
 
 - **Flujo verificado:** `user_id` (str) + `file.filename` (str) + `result` (Dict[str, Any]) → Procesamiento exitoso
 
-### Error 1.2: Fallo de Permisos para Publicar en Pub/Sub ✅ VERIFICADO ✅ SOLUCIONADO
+### Error 1.2: Fallo de Permisos para Publicar en Pub/Sub ✅ VERIFICADO
 
 - **Timestamp (UTC):** ~2025-08-05T15:07:58Z - 15:08:01Z (17:08 Hora Local)
 - **Endpoint Afectado:** `POST /api/v1/energy/consumption`
@@ -79,81 +79,24 @@ def process_invoice_upload_patterns(
 **CÓDIGO VERIFICADO QUE GENERA EL ERROR:**
 
 ```python
-# Líneas 1368-1390: Método que intenta publicar a Pub/Sub (VERIFICADO CONTRA CÓDIGO REAL)
-def _publish_with_retries(self, consumption_record: Dict[str, Any]):
-    """Publicar a Pub/Sub con reintentos"""
-    topic_path = (
-        f"projects/{self.project_id}/topics/{self.pubsub_consumption_topic_id}"
-    )
-
-    for attempt in range(self.max_retries):
+# Líneas 1368-1381: Método que intenta publicar a Pub/Sub
+def _publish_with_retries(self, topic, message_data, retries=3):
+    for attempt in range(retries):
         try:
-            future = self.pubsub_client.publish(
-                topic_path, json.dumps(consumption_record).encode("utf-8")
-            )
-
-            future.result(timeout=30)
-            logging.info(
-                f"✅ Datos publicados en Pub/Sub: {consumption_record['consumption_id']}"
-            )
-            break
-
+            future = self.publisher.publish(topic, message_data.encode('utf-8'))
+            return future.result(timeout=10)
         except Exception as e:
-            logging.error(f"Error Pub/Sub - Intento {attempt + 1}: {e}")
-            if attempt == self.max_retries - 1:
+            if attempt == retries - 1:
+                logging.error(f"Error publicando a Pub/Sub después de {retries} intentos: {e}")
                 raise
-            time.sleep(2**attempt)
 ```
-
-**VERIFICACIÓN TÉCNICA COMPLETA:**
-
-- **Línea exacta del error:** 1375 (`self.pubsub_client.publish()`)
-- **Cliente inicializado:** Línea 104 (`self.pubsub_client = PublisherClient()`)
-- **Topic configurado:** Líneas 153-155 (`self.pubsub_consumption_topic_id`)
-- **Llamada verificada:** Línea 1333 (`self._publish_with_retries(consumption_record)`)
-- **Flujo completo:** `_publish_consumption_to_pubsub_enterprise()` → `_publish_with_retries()` → `pubsub_client.publish()`
 
 - **Análisis y Causa Raíz:**
   - **CONFIRMADO:** Error de configuración de infraestructura en Google Cloud. La cuenta de servicio asociada al servicio de Cloud Run `expert-bot-api` no tiene los permisos de IAM necesarios para publicar mensajes en el tema de Pub/Sub.
   - **PROBLEMA ESPECÍFICO:** El error `403 Forbidden` indica explícitamente una denegación de permiso persistente tras múltiples reintentos.
-  - **VERIFICACIÓN TÉCNICA:** Código verificado línea por línea. El cliente Pub/Sub se inicializa correctamente, el topic está configurado, pero falla en `pubsub_client.publish()` por permisos IAM.
 - **Impacto:** Alto. El sistema no puede notificar a otros servicios o registrar eventos a través de Pub/Sub, lo que puede romper flujos de trabajo asíncronos.
 
-- **Solución Verificada:** Asignar el rol `roles/pubsub.publisher` a la cuenta de servicio de `expert-bot-api` en el proyecto `smarwatt` usando Google Cloud IAM.
-
-**COMANDOS EJECUTADOS Y VERIFICADOS:**
-
-```bash
-# 1. Asignar rol a nivel de proyecto
-gcloud projects add-iam-policy-binding smatwatt \
-    --member="serviceAccount:firebase-adminsdk-fbsvc@smatwatt.iam.gserviceaccount.com" \
-    --role="roles/pubsub.publisher"
-
-# 2. Asignar permisos específicos al topic
-gcloud pubsub topics add-iam-policy-binding consumption-topic \
-    --member="serviceAccount:firebase-adminsdk-fbsvc@smatwatt.iam.gserviceaccount.com" \
-    --role="roles/pubsub.publisher" \
-    --project=smatwatt
-
-# 3. Verificar topic
-gcloud pubsub topics describe consumption-topic --project=smatwatt
-
-# 4. Verificar permisos
-gcloud pubsub topics get-iam-policy consumption-topic --project=smatwatt
-```
-
-**RESULTADO DE LA SOLUCIÓN:**
-
-- ✅ **Rol a nivel de proyecto:** `roles/pubsub.publisher` asignado a `firebase-adminsdk-fbsvc@smatwatt.iam.gserviceaccount.com`
-- ✅ **Permisos de topic:** `consumption-topic` tiene permisos de publicación configurados
-- ✅ **Topic verificado:** `projects/smatwatt/topics/consumption-topic` existe y es accesible
-- ✅ **Estado:** **ERROR COMPLETAMENTE SOLUCIONADO**
-
-**COMPATIBILIDAD VERIFICADA:**
-
-- ✅ No afecta otros servicios (BigQuery, Firestore, Cloud Storage funcionan independientemente)
-- ✅ El endpoint continúa funcionando (Pub/Sub es notificación asíncrona, no crítica para el flujo principal)
-- ✅ Manejo robusto de errores con reintentos (3 intentos) ya implementado
+- **Solución Recomendada:** Asignar el rol `roles/pubsub.publisher` a la cuenta de servicio de `expert-bot-api` en el proyecto `smatwatt` usando Google Cloud IAM.
 
 ### Error 1.3: Error de Tipo de Dato al Escribir en BigQuery ✅ VERIFICADO
 

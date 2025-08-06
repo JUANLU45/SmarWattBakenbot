@@ -1603,6 +1603,16 @@ class EnergyService:
             logging.error(f"Error consultando perfil en BigQuery: {e}")
             return {}
 
+    def _safe_bool(self, value, default=False):
+        """🔒 Convertir cualquier valor a booleano seguro para BigQuery"""
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, str):
+            return value.lower() in ("true", "1", "yes", "on")
+        if isinstance(value, int):
+            return bool(value)
+        return default
+
     def _insert_or_update_user_profile_in_bigquery(
         self, user_id: str, profile_data: Dict[str, Any]
     ) -> bool:
@@ -1630,16 +1640,20 @@ class EnergyService:
                 "num_inhabitants": profile_data.get("num_inhabitants") or 1,
                 "home_type": profile_data.get("home_type") or "apartment",
                 "heating_type": profile_data.get("heating_type") or "gas",
-                "has_ac": profile_data.get("has_ac", False),
-                "has_pool": profile_data.get("has_pool", False),
-                "is_teleworker": profile_data.get("is_teleworker", False),
+                "has_ac": self._safe_bool(profile_data.get("has_ac"), False),
+                "has_pool": self._safe_bool(profile_data.get("has_pool"), False),
+                "is_teleworker": self._safe_bool(
+                    profile_data.get("is_teleworker"), False
+                ),
                 "post_code_prefix": (
                     profile_data.get("post_code_prefix")
                     or profile_data.get("codigo_postal", "")[:2]
                     if profile_data.get("codigo_postal")
                     else ""
                 ),
-                "has_solar_panels": profile_data.get("has_solar_panels", False),
+                "has_solar_panels": self._safe_bool(
+                    profile_data.get("has_solar_panels"), False
+                ),
                 "consumption_kwh": profile_data.get("consumption_kwh")
                 or profile_data.get("kwh_consumidos")
                 or 0.0,
