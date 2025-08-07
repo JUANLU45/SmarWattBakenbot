@@ -172,10 +172,11 @@ class EnterpriseTariffRecommenderService:
     def calculate_annual_cost(self, tariff: Dict, consumption_profile: Dict) -> Dict:
         """Calcula el costo anual exacto para una tarifa específica"""
         try:
-            # Extraer datos del perfil
-            avg_kwh = consumption_profile.get("avg_kwh", 0)
-            contracted_power_kw = consumption_profile.get("contracted_power_kw", 0)
-            peak_percent = consumption_profile.get("peak_percent", 50) / 100
+            # Extraer datos del perfil - Protección contra valores None
+            avg_kwh = consumption_profile.get("avg_kwh", 0) or 0
+            contracted_power_kw = consumption_profile.get("contracted_power_kw", 0) or 0
+            peak_percent_raw = consumption_profile.get("peak_percent", 50) or 50
+            peak_percent = peak_percent_raw / 100
 
             # Calcular consumo anual
             annual_kwh = avg_kwh * 12
@@ -448,7 +449,7 @@ class EnterpriseTariffRecommenderService:
 
             # Generar ID único para la recomendación
             recommendation_id = f"rec_{user_id}_{int(now_spanish().timestamp())}"
-            current_timestamp = now_spanish()
+            current_timestamp = now_spanish_iso()
 
             log_data = {
                 "recommendation_id": recommendation_id,
@@ -491,7 +492,7 @@ class EnterpriseTariffRecommenderService:
                     "total_consumption_kwh", 0
                 ),
                 "timestamp": current_timestamp,
-                "record_date": current_timestamp.date(),
+                "record_date": now_spanish().date().isoformat(),
                 "total_savings": recommendation["best_recommendation"][
                     "cost_analysis"
                 ].get("annual_savings", 0),

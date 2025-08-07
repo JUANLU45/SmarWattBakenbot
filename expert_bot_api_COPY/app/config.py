@@ -43,9 +43,11 @@ class Config:
 
     # URL para la comunicación con el microservicio de IA
     ENV = os.environ.get("FLASK_CONFIG", "production").lower()
-    ENERGY_IA_API_URL = os.environ.get("ENERGY_IA_API_URL")
+    ENERGY_IA_API_URL = os.environ.get(
+        "ENERGY_IA_API_URL", "https://energy-ia-api-1010012211318.europe-west1.run.app"
+    )
 
-    # Validación empresarial: ENERGY_IA_API_URL es obligatorio en producción
+    # Validación empresarial: ENERGY_IA_API_URL siempre debe estar disponible
     if not ENERGY_IA_API_URL:
         raise ValueError(
             "ENERGY_IA_API_URL debe ser configurada como variable de entorno"

@@ -1192,6 +1192,32 @@ class EnergyService:
             else:
                 return "low_potential"
         return "unknown_potential"
+    
+    def _calculate_real_quality_score(self, data: Dict[str, Any]) -> float:
+        """Calcular score de calidad real basado en completitud de datos"""
+        if not data:
+            return 0.0
+            
+        # Campos críticos
+        critical_fields = ["kwh_consumidos", "potencia_contratada_kw", "coste_total"]
+        critical_complete = sum(1 for field in critical_fields if data.get(field) is not None)
+        
+        # Campos importantes  
+        important_fields = ["fecha_periodo", "tariff_name_from_invoice", "codigo_postal"]
+        important_complete = sum(1 for field in important_fields if data.get(field) is not None)
+        
+        # Campos adicionales
+        additional_fields = ["cups", "distribuidora", "comercializadora"]
+        additional_complete = sum(1 for field in additional_fields if data.get(field) is not None)
+        
+        # Calcular score ponderado
+        score = (
+            (critical_complete / len(critical_fields)) * 0.6 +
+            (important_complete / len(important_fields)) * 0.3 +
+            (additional_complete / len(additional_fields)) * 0.1
+        )
+        
+        return min(1.0, score)
 
     def _upload_original_document_to_gcs_enterprise(
         self, user_id: str, file_content: bytes, filename: str, mime_type: str
@@ -1242,7 +1268,7 @@ class EnergyService:
         mime_type: str,
         gcs_path: str,
         extraction_result: InvoiceExtractionResult,
-    ):
+    ) -> None:
         """🏢 Logging empresarial a BigQuery con métricas"""
 
         try:
@@ -1298,7 +1324,7 @@ class EnergyService:
 
     def _publish_consumption_to_pubsub_enterprise(
         self, user_id: str, extraction_result: InvoiceExtractionResult
-    ):
+    ) -> None:
         """🏢 Publicación empresarial a Pub/Sub con enriquecimiento"""
 
         try:
@@ -1310,7 +1336,8 @@ class EnergyService:
                 return
 
             # Preparar timestamp
-            timestamp_utc = self._parse_invoice_date(data.get("fecha_periodo"))
+            fecha_periodo = data.get("fecha_periodo")
+            timestamp_utc = self._parse_invoice_date(fecha_periodo if fecha_periodo else "")
 
             # Crear registro enriquecido
             consumption_record = {
@@ -1378,7 +1405,7 @@ class EnergyService:
 
         return filled_fields / total_fields if total_fields > 0 else 0.0
 
-    def _publish_with_retries(self, consumption_record: Dict[str, Any]):
+    def _publish_with_retries(self, consumption_record: Dict[str, Any]) -> None:
         """Publicar a Pub/Sub con reintentos"""
         topic_path = (
             f"projects/{self.project_id}/topics/{self.pubsub_consumption_topic_id}"
@@ -1404,7 +1431,7 @@ class EnergyService:
 
     def _update_user_energy_profile_enterprise(
         self, user_id: str, extraction_result: InvoiceExtractionResult
-    ):
+    ) -> None:
         """🏢 Actualización empresarial del perfil energético"""
 
         try:
@@ -1721,8 +1748,8 @@ class EnergyService:
         self,
         extraction_result: Optional[InvoiceExtractionResult],
         success: bool,
-        error: str = None,
-    ):
+        error: Optional[str] = None,
+    ) -> None:
         """Actualizar métricas de extracción"""
 
         self.performance_metrics["total_invoices_processed"] += 1
@@ -2397,6 +2424,537 @@ class EnergyService:
         """Calcular impacto empresarial real basado en datos"""
         if not data:
             return "low_value"
+        
+        # Evaluar basado en datos disponibles
+        if data.get("kwh_consumidos") and data.get("coste_total"):
+            return "high_value"
+        elif data.get("kwh_consumidos") or data.get("potencia_contratada_kw"):
+            return "medium_value"
+        else:
+            return "low_value"
+
+    def sync_firestore_to_bigquery_robust(self, user_id: Optional[str] = None) -> Dict[str, Any]:
+        """🏢 SINCRONIZACIÓN ROBUSTA FIRESTORE -> BIGQUERY TOTALMENTE COMPATIBLE
+        
+        Esta función maneja:
+        1. Usuarios existentes (migración completa de datos)
+        2. Usuarios nuevos (sincronización automática)
+        3. Preserva TODOS los nombres de campos existentes
+        4. Compatibilidad total con esquemas de BigQuery y Firestore
+        5. Manejo robusto de errores sin afectar operación
+        
+        Args:
+            user_id: ID específico del usuario a sincronizar. Si es None, sincroniza todos.
+            
+        Returns:
+            Dict con resultados de sincronización detallados
+        """
+        
+        try:
+            start_time = time.time()
+            results = {
+                "status": "success",
+                "total_users_processed": 0,
+                "successful_syncs": 0,
+                "failed_syncs": 0,
+                "existing_users_migrated": 0,
+                "new_users_synced": 0,
+                "errors": [],
+                "processing_time": 0,
+                "sync_timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()
+            }
+            
+            logging.info("🏢 INICIANDO SINCRONIZACIÓN ROBUSTA FIRESTORE -> BIGQUERY")
+            
+            # Obtener usuarios de Firestore
+            if user_id:
+                # Sincronizar usuario específico
+                users_to_sync = [user_id]
+                logging.info(f"🎯 Sincronizando usuario específico: {user_id}")
+            else:
+                # Obtener todos los usuarios de Firestore
+                users_to_sync = self._get_all_firestore_users()
+                logging.info(f"📊 Sincronizando {len(users_to_sync)} usuarios totales")
+            
+            results["total_users_processed"] = len(users_to_sync)
+            
+            # Procesar cada usuario
+            for current_user_id in users_to_sync:
+                try:
+                    sync_result = self._sync_single_user_robust(current_user_id)
+                    
+                    if sync_result["success"]:
+                        results["successful_syncs"] += 1
+                        
+                        if sync_result["was_existing_user"]:
+                            results["existing_users_migrated"] += 1
+                        else:
+                            results["new_users_synced"] += 1
+                            
+                        logging.info(f"✅ Usuario {current_user_id} sincronizado exitosamente")
+                    else:
+                        results["failed_syncs"] += 1
+                        results["errors"].append({
+                            "user_id": current_user_id,
+                            "error": sync_result["error"],
+                            "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()
+                        })
+                        logging.error(f"❌ Error sincronizando usuario {current_user_id}: {sync_result['error']}")
+                        
+                except Exception as user_error:
+                    results["failed_syncs"] += 1
+                    error_msg = f"Error procesando usuario {current_user_id}: {str(user_error)}"
+                    results["errors"].append({
+                        "user_id": current_user_id,
+                        "error": error_msg,
+                        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()
+                    })
+                    logging.error(f"🚨 {error_msg}")
+                    continue
+            
+            # Calcular tiempo total
+            results["processing_time"] = time.time() - start_time
+            
+            # Log final
+            logging.info(f"""
+            🏢 SINCRONIZACIÓN COMPLETADA:
+            ✅ Exitosos: {results['successful_syncs']}
+            ❌ Fallidos: {results['failed_syncs']}
+            🔄 Usuarios existentes migrados: {results['existing_users_migrated']}
+            🆕 Usuarios nuevos sincronizados: {results['new_users_synced']}
+            ⏱️  Tiempo total: {results['processing_time']:.2f}s
+            """)
+            
+            return results
+            
+        except Exception as e:
+            error_msg = f"Error crítico en sincronización robusta: {str(e)}"
+            logging.error(f"🚨 {error_msg}")
+            return {
+                "status": "critical_error",
+                "error": error_msg,
+                "processing_time": time.time() - start_time if 'start_time' in locals() else 0,
+                "sync_timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()
+            }
+    
+    def _get_all_firestore_users(self) -> List[str]:
+        """Obtener todos los user_ids de Firestore user_profiles_enriched"""
+        
+        try:
+            # Obtener todos los documentos de la colección user_profiles_enriched
+            users_ref = self.db.collection("user_profiles_enriched")
+            docs = users_ref.stream()
+            
+            user_ids = []
+            for doc in docs:
+                user_ids.append(doc.id)
+            
+            logging.info(f"🔍 Encontrados {len(user_ids)} usuarios en Firestore")
+            return user_ids
+            
+        except Exception as e:
+            logging.error(f"Error obteniendo usuarios de Firestore: {e}")
+            return []
+    
+    def _sync_single_user_robust(self, user_id: str) -> Dict[str, Any]:
+        """Sincronizar un usuario específico de Firestore a BigQuery con robustez total"""
+        
+        try:
+            # Verificar si ya existe en BigQuery
+            existing_user = self._check_user_exists_in_bigquery(user_id)
+            was_existing_user = existing_user is not None
+            
+            # Obtener datos completos de Firestore
+            firestore_data = self._get_complete_firestore_user_data(user_id)
+            
+            if not firestore_data:
+                return {
+                    "success": False,
+                    "error": "No se encontraron datos en Firestore para este usuario",
+                    "was_existing_user": was_existing_user
+                }
+            
+            # Mapear datos de Firestore al esquema exacto de BigQuery
+            bigquery_record = self._map_firestore_to_bigquery_schema(firestore_data, user_id)
+            
+            # Insertar o actualizar en BigQuery
+            if was_existing_user:
+                # Actualizar registro existente
+                insert_result = self._update_user_in_bigquery(user_id, bigquery_record)
+            else:
+                # Insertar nuevo registro
+                insert_result = self._insert_user_in_bigquery(bigquery_record)
+            
+            if insert_result["success"]:
+                return {
+                    "success": True,
+                    "was_existing_user": was_existing_user,
+                    "action": "updated" if was_existing_user else "inserted",
+                    "fields_synced": insert_result.get("fields_synced", 0)
+                }
+            else:
+                return {
+                    "success": False,
+                    "error": insert_result["error"],
+                    "was_existing_user": was_existing_user
+                }
+                
+        except Exception as e:
+            return {
+                "success": False,
+                "error": f"Error en sincronización individual: {str(e)}",
+                "was_existing_user": False
+            }
+    
+    def _check_user_exists_in_bigquery(self, user_id: str) -> Optional[Dict[str, Any]]:
+        """Verificar si el usuario ya existe en BigQuery USER_PROFILES_ENRICHED"""
+        
+        try:
+            query = f"""
+                SELECT user_id, last_update_timestamp
+                FROM `{self.project_id}.{self.bq_dataset_id}.user_profiles_enriched`
+                WHERE user_id = @user_id
+                LIMIT 1
+            """
+            
+            job_config = bigquery.QueryJobConfig(
+                query_parameters=[
+                    bigquery.ScalarQueryParameter("user_id", "STRING", user_id)
+                ]
+            )
+            
+            query_job = self.bigquery_client.query(query, job_config=job_config)
+            results = list(query_job.result())
+            
+            if results:
+                return {
+                    "user_id": results[0].user_id,
+                    "last_update_timestamp": results[0].last_update_timestamp
+                }
+            
+            return None
+            
+        except Exception as e:
+            logging.error(f"Error verificando usuario en BigQuery: {e}")
+            return None
+    
+    def _get_complete_firestore_user_data(self, user_id: str) -> Optional[Dict[str, Any]]:
+        """Obtener datos completos del usuario desde Firestore user_profiles_enriched"""
+        
+        try:
+            # Obtener documento del usuario
+            user_doc_ref = self.db.collection("user_profiles_enriched").document(user_id)
+            user_doc = user_doc_ref.get()
+            
+            if not user_doc.exists:
+                logging.warning(f"Usuario {user_id} no encontrado en Firestore")
+                return None
+            
+            firestore_data = user_doc.to_dict()
+            
+            # Enriquecer con user_id si no está presente
+            if "user_id" not in firestore_data:
+                firestore_data["user_id"] = user_id
+            
+            logging.info(f"🔍 Datos obtenidos de Firestore para {user_id}: {len(firestore_data)} campos")
+            return firestore_data
+            
+        except Exception as e:
+            logging.error(f"Error obteniendo datos de Firestore para {user_id}: {e}")
+            return None
+    
+    def _map_firestore_to_bigquery_schema(self, firestore_data: Dict[str, Any], user_id: str) -> Dict[str, Any]:
+        """Mapear datos de Firestore al esquema EXACTO de BigQuery USER_PROFILES_ENRICHED
+        
+        ESQUEMA BIGQUERY USER_PROFILES_ENRICHED (17 campos):
+        1. user_id (STRING)
+        2. last_update_timestamp (TIMESTAMP)  
+        3. avg_kwh_last_year (NUMERIC)
+        4. peak_percent_avg (NUMERIC)
+        5. contracted_power_kw (NUMERIC) 
+        6. num_inhabitants (INTEGER)
+        7. home_type (STRING)
+        8. heating_type (STRING)
+        9. has_ac (BOOLEAN)
+        10. has_pool (BOOLEAN)
+        11. is_teleworker (BOOLEAN)
+        12. post_code_prefix (STRING)
+        13. has_solar_panels (BOOLEAN)
+        14. consumption_kwh (FLOAT)
+        15. monthly_consumption_kwh (FLOAT)
+        16. timestamp (TIMESTAMP)
+        17. last_invoice_data (JSON)
+        """
+        
+        try:
+            # Mapeo directo preservando nombres exactos de campos
+            bigquery_record = {
+                "user_id": user_id,
+                "last_update_timestamp": self._convert_to_bigquery_timestamp(
+                    firestore_data.get("last_update_timestamp")
+                ),
+                "avg_kwh_last_year": self._convert_to_numeric(
+                    firestore_data.get("avg_kwh_last_year")
+                ),
+                "peak_percent_avg": self._convert_to_numeric(
+                    firestore_data.get("peak_percent_avg")
+                ),
+                "contracted_power_kw": self._convert_to_numeric(
+                    firestore_data.get("contracted_power_kw")
+                ),
+                "num_inhabitants": self._convert_to_integer(
+                    firestore_data.get("num_inhabitants")
+                ),
+                "home_type": self._convert_to_string(
+                    firestore_data.get("home_type")
+                ),
+                "heating_type": self._convert_to_string(
+                    firestore_data.get("heating_type")
+                ),
+                "has_ac": self._convert_to_boolean(
+                    firestore_data.get("has_ac")
+                ),
+                "has_pool": self._convert_to_boolean(
+                    firestore_data.get("has_pool")
+                ),
+                "is_teleworker": self._convert_to_boolean(
+                    firestore_data.get("is_teleworker")
+                ),
+                "post_code_prefix": self._convert_to_string(
+                    firestore_data.get("post_code_prefix")
+                ),
+                "has_solar_panels": self._convert_to_boolean(
+                    firestore_data.get("has_solar_panels")
+                ),
+                "consumption_kwh": self._convert_to_float(
+                    firestore_data.get("consumption_kwh")
+                ),
+                "monthly_consumption_kwh": self._convert_to_float(
+                    firestore_data.get("monthly_consumption_kwh")
+                ),
+                "timestamp": self._convert_to_bigquery_timestamp(
+                    firestore_data.get("timestamp")
+                ),
+                "last_invoice_data": self._convert_to_json(
+                    firestore_data.get("last_invoice_data")
+                )
+            }
+            
+            # Contar campos no nulos para logging
+            non_null_fields = sum(1 for v in bigquery_record.values() if v is not None)
+            logging.info(f"📊 Mapeo completado para {user_id}: {non_null_fields}/17 campos con datos")
+            
+            return bigquery_record
+            
+        except Exception as e:
+            logging.error(f"Error mapeando datos para {user_id}: {e}")
+            raise
+    
+    def _convert_to_bigquery_timestamp(self, value: Any) -> Optional[str]:
+        """Convertir valor a timestamp compatible con BigQuery"""
+        
+        if value is None:
+            return None
+        
+        try:
+            # Si es un objeto datetime de Firestore
+            if hasattr(value, 'timestamp'):
+                return datetime.datetime.fromtimestamp(value.timestamp(), datetime.timezone.utc).isoformat()
+            
+            # Si es string ISO
+            if isinstance(value, str):
+                try:
+                    # Intentar parsear como ISO
+                    parsed_dt = datetime.datetime.fromisoformat(value.replace('Z', '+00:00'))
+                    return parsed_dt.isoformat()
+                except ValueError:
+                    pass
+            
+            # Si es datetime Python
+            if isinstance(value, datetime.datetime):
+                return value.isoformat()
+            
+            # Fallback: timestamp actual
+            return datetime.datetime.now(datetime.timezone.utc).isoformat()
+            
+        except Exception as e:
+            logging.warning(f"Error convirtiendo timestamp {value}: {e}")
+            return datetime.datetime.now(datetime.timezone.utc).isoformat()
+    
+    def _convert_to_numeric(self, value: Any) -> Optional[float]:
+        """Convertir valor a NUMERIC compatible con BigQuery"""
+        
+        if value is None:
+            return None
+        
+        try:
+            if isinstance(value, (int, float)):
+                return float(value)
+            if isinstance(value, str):
+                return float(value)
+            return None
+        except (ValueError, TypeError):
+            return None
+    
+    def _convert_to_integer(self, value: Any) -> Optional[int]:
+        """Convertir valor a INTEGER compatible con BigQuery"""
+        
+        if value is None:
+            return None
+        
+        try:
+            if isinstance(value, bool):
+                return int(value)
+            if isinstance(value, (int, float)):
+                return int(value)
+            if isinstance(value, str):
+                return int(float(value))  # Manejar strings como "1.0"
+            return None
+        except (ValueError, TypeError):
+            return None
+    
+    def _convert_to_string(self, value: Any) -> Optional[str]:
+        """Convertir valor a STRING compatible con BigQuery"""
+        
+        if value is None:
+            return None
+        
+        try:
+            return str(value).strip() if str(value).strip() else None
+        except:
+            return None
+    
+    def _convert_to_boolean(self, value: Any) -> Optional[bool]:
+        """Convertir valor a BOOLEAN compatible con BigQuery"""
+        
+        if value is None:
+            return None
+        
+        try:
+            if isinstance(value, bool):
+                return value
+            if isinstance(value, str):
+                return value.lower() in ['true', '1', 'yes', 'si', 'sí']
+            if isinstance(value, (int, float)):
+                return bool(value)
+            return None
+        except:
+            return None
+    
+    def _convert_to_float(self, value: Any) -> Optional[float]:
+        """Convertir valor a FLOAT compatible con BigQuery"""
+        
+        if value is None:
+            return None
+        
+        try:
+            if isinstance(value, (int, float)):
+                return float(value)
+            if isinstance(value, str):
+                return float(value)
+            return None
+        except (ValueError, TypeError):
+            return None
+    
+    def _convert_to_json(self, value: Any) -> Optional[dict]:
+        """Convertir valor a JSON compatible con BigQuery preservando estructura exacta"""
+        
+        if value is None:
+            return None
+        
+        try:
+            # Si ya es dict, devolverlo directamente (NO usar json.dumps)
+            if isinstance(value, dict):
+                return value
+            
+            # Si es string JSON, parsearlo
+            if isinstance(value, str):
+                try:
+                    return json.loads(value)
+                except json.JSONDecodeError:
+                    return {"raw_value": value}
+            
+            # Para otros tipos, crear estructura JSON
+            return {"converted_value": str(value)}
+            
+        except Exception as e:
+            logging.warning(f"Error convirtiendo a JSON {value}: {e}")
+            return {"error": f"conversion_failed: {str(e)}"}
+    
+    def _insert_user_in_bigquery(self, bigquery_record: Dict[str, Any]) -> Dict[str, Any]:
+        """Insertar nuevo usuario en BigQuery USER_PROFILES_ENRICHED"""
+        
+        try:
+            table_ref = self.bigquery_client.dataset(self.bq_dataset_id).table("user_profiles_enriched")
+            
+            # Insertar registro
+            errors = self.bigquery_client.insert_rows_json(table_ref, [bigquery_record])
+            
+            if errors:
+                error_msg = f"Errores insertando en BigQuery: {errors}"
+                logging.error(error_msg)
+                return {"success": False, "error": error_msg}
+            
+            fields_synced = sum(1 for v in bigquery_record.values() if v is not None)
+            logging.info(f"✅ Usuario {bigquery_record['user_id']} insertado en BigQuery - {fields_synced} campos")
+            
+            return {"success": True, "fields_synced": fields_synced, "action": "inserted"}
+            
+        except Exception as e:
+            error_msg = f"Error insertando usuario en BigQuery: {str(e)}"
+            logging.error(error_msg)
+            return {"success": False, "error": error_msg}
+    
+    def _update_user_in_bigquery(self, user_id: str, bigquery_record: Dict[str, Any]) -> Dict[str, Any]:
+        """Actualizar usuario existente en BigQuery usando MERGE"""
+        
+        try:
+            # Usar MERGE para actualizar registro existente
+            fields_to_update = []
+            update_values = []
+            
+            for field, value in bigquery_record.items():
+                if field != "user_id" and value is not None:
+                    if isinstance(value, str):
+                        update_values.append(f"{field} = '{value}'")
+                    elif isinstance(value, bool):
+                        update_values.append(f"{field} = {str(value).lower()}")
+                    elif isinstance(value, dict):
+                        # Para JSON, usar formato correcto
+                        json_str = json.dumps(value).replace("'", "\\'")
+                        update_values.append(f"{field} = PARSE_JSON('{json_str}')")
+                    else:
+                        update_values.append(f"{field} = {value}")
+                    fields_to_update.append(field)
+            
+            if not update_values:
+                return {"success": False, "error": "No hay campos para actualizar"}
+            
+            # Query de actualización
+            update_query = f"""
+                UPDATE `{self.project_id}.{self.bq_dataset_id}.user_profiles_enriched`
+                SET {', '.join(update_values)}
+                WHERE user_id = @user_id
+            """
+            
+            job_config = bigquery.QueryJobConfig(
+                query_parameters=[
+                    bigquery.ScalarQueryParameter("user_id", "STRING", user_id)
+                ]
+            )
+            
+            query_job = self.bigquery_client.query(update_query, job_config=job_config)
+            query_job.result()  # Esperar a que termine
+            
+            logging.info(f"✅ Usuario {user_id} actualizado en BigQuery - {len(fields_to_update)} campos")
+            
+            return {"success": True, "fields_synced": len(fields_to_update), "action": "updated"}
+            
+        except Exception as e:
+            error_msg = f"Error actualizando usuario en BigQuery: {str(e)}"
+            logging.error(error_msg)
+            # Intentar inserción como fallback
+            return self._insert_user_in_bigquery(bigquery_record)
 
         # Analizar coste para determinar impacto
         coste = data.get("coste_total", 0)
