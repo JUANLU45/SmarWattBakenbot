@@ -772,7 +772,9 @@ class AILearningService:
                     "emotional_indicators": json.dumps(
                         sentiment_analysis.emotional_indicators
                     ),
-                    "analyzed_at": datetime.datetime.now(datetime.timezone.utc),
+                    "analyzed_at": datetime.datetime.now(
+                        datetime.timezone.utc
+                    ).isoformat(),
                 }
 
                 self._log_to_bigquery_enterprise(
