@@ -227,12 +227,23 @@ class EnterpriseGenerativeChatService:
 
             # Ejecutar consultas en paralelo si ambas son necesarias
             if should_consult_expert and should_consult_market:
+                # ⚡ EXTRAER CONTEXTO FLASK ANTES DEL THREADPOOL
+                from flask import g, current_app, request
+
+                # Extraer valores del contexto Flask de forma segura
+                auth_token = g.token if hasattr(g, "token") else None
+                api_url = current_app.config.get("ENERGY_IA_API_URL")
+                if not api_url:
+                    api_url = request.url_root.rstrip("/")
+
                 with ThreadPoolExecutor(max_workers=2) as executor:
                     # Enviar ambas consultas en paralelo
                     expert_future = executor.submit(
                         self._consult_expert_bot, user_message, user_context
                     )
-                    market_future = executor.submit(self._get_current_market_prices)
+                    market_future = executor.submit(
+                        self._get_market_prices_with_context, auth_token, api_url
+                    )
 
                     # Recoger resultados con manejo de errores independiente
                     try:
@@ -263,7 +274,17 @@ class EnterpriseGenerativeChatService:
 
             elif should_consult_market:
                 try:
-                    market_data = self._get_current_market_prices()
+                    # ⚡ EXTRAER CONTEXTO FLASK PARA MODO SECUENCIAL
+                    from flask import g, current_app, request
+
+                    auth_token = g.token if hasattr(g, "token") else None
+                    api_url = current_app.config.get("ENERGY_IA_API_URL")
+                    if not api_url:
+                        api_url = request.url_root.rstrip("/")
+
+                    market_data = self._get_market_prices_with_context(
+                        auth_token, api_url
+                    )
                 except Exception as market_error:
                     logging.warning(f"⚠️ Market data no disponible: {market_error}")
                     market_data = {}
@@ -1283,6 +1304,44 @@ class EnterpriseGenerativeChatService:
 
             headers = {
                 "Authorization": f"Bearer {g.token}",
+                "Content-Type": "application/json",
+            }
+
+            response = requests.get(
+                market_data_url, headers=headers, timeout=8
+            )  # ⚡ Timeout optimizado para market data
+
+            if response.status_code == 200:
+                result: Dict[str, Any] = response.json()
+                logging.info("✅ Datos de precios de mercado obtenidos exitosamente")
+                return result.get("data", {})
+            else:
+                logging.warning(
+                    f"⚠️ Endpoint market-data respuesta: {response.status_code}"
+                )
+                return {}
+
+        except Exception as e:
+            logging.error(f"❌ Error consultando precios de mercado: {str(e)}")
+            return {}
+
+    def _get_market_prices_with_context(
+        self, auth_token: Optional[str], api_url: str
+    ) -> Dict[str, Any]:
+        """
+        🏢 CONSULTA ESPECÍFICA DE PRECIOS DE MERCADO SIN CONTEXTO FLASK
+        Versión thread-safe que recibe contexto como parámetros
+        """
+        try:
+            # Verificar token de autorización
+            if not auth_token:
+                logging.warning("⚠️ No hay token disponible para consultar precios")
+                return {}
+
+            market_data_url = f"{api_url}/api/v1/energy/tariffs/market-data"
+
+            headers = {
+                "Authorization": f"Bearer {auth_token}",
                 "Content-Type": "application/json",
             }
 
