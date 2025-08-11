@@ -44,7 +44,6 @@ def start_chat_session() -> Tuple[Response, int]:
     Ahora incluye la sincronización de datos asíncrona a BigQuery.
     """
     if request.method == "OPTIONS":
-        # Manejo de CORS pre-flight
         return Response(status=200, headers={
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -56,7 +55,6 @@ def start_chat_session() -> Tuple[Response, int]:
         user_id = user_profile.get("uid")
         logger.info("Iniciando sesión de chat para usuario: %s", user_id)
 
-        # 🚀 SINCRONIZACIÓN ASÍNCRONA 🚀
         if user_id:
             try:
                 data_sync_service = DataSyncService()
@@ -67,10 +65,7 @@ def start_chat_session() -> Tuple[Response, int]:
 
         chat_service = ChatService(current_app.config["ENERGY_IA_API_URL"])
         session_data = chat_service.start_session(user_profile)
-
-        logger.info("Sesión de chat iniciada correctamente para usuario: %s", user_id)
         return jsonify(session_data), 200
-
     except Exception as e:
         logger.error("Error iniciando sesión de chat: %s", e, exc_info=True)
         raise AppError(f"Error interno iniciando sesión de chat: {str(e)}", 500) from e
@@ -79,38 +74,50 @@ def start_chat_session() -> Tuple[Response, int]:
 @chat_bp.route("/message", methods=["POST", "OPTIONS"])
 @token_required
 def post_message() -> Tuple[Response, int]:
-    """
-    Endpoint que recibe cada mensaje del usuario y orquesta la respuesta.
-    """
     if request.method == "OPTIONS":
         return Response(status=200, headers={
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "POST, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
         })
-
     try:
         user_profile = g.user
         json_data = request.get_json()
-
         if not json_data or not json_data.get("message"):
             raise AppError("El campo 'message' es requerido.", 400)
-
         conversation_id = json_data.get("conversation_id") or json_data.get("session_id")
         if not conversation_id:
             raise AppError("Se requiere 'conversation_id' o 'session_id'.", 400)
-
-        user_message = json_data["message"]
         
         chat_service = ChatService(current_app.config["ENERGY_IA_API_URL"])
-        bot_response = chat_service.process_user_message(user_profile, user_message, conversation_id)
-
+        bot_response = chat_service.process_user_message(user_profile, json_data["message"], conversation_id)
         return jsonify(bot_response), 200
-
     except AppError as e:
         raise e
     except Exception as e:
         logger.error("Error procesando mensaje: %s", e, exc_info=True)
         raise AppError(f"Error interno procesando mensaje: {str(e)}", 500) from e
 
-# ... (El resto de los endpoints permanecen sin cambios)
+
+@chat_bp.route("/conversation/<conversation_id>", methods=["DELETE", "OPTIONS"])
+@token_required
+def delete_conversation(conversation_id: str) -> Tuple[Response, int]:
+    if request.method == "OPTIONS":
+        return Response(status=200, headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        })
+    try:
+        user_id = g.user["uid"]
+        logger.info("Solicitud para borrar conversación %s para usuario: %s", conversation_id, user_id)
+        
+        chat_service = ChatService(current_app.config["ENERGY_IA_API_URL"])
+        chat_service.delete_conversation(user_id, conversation_id)
+
+        logger.info("Conversación %s borrada correctamente para usuario: %s", conversation_id, user_id)
+        # Respuesta de éxito clara y consistente según el plan de mejora.
+        return jsonify({"status": "success", "message": "La conversación ha sido eliminada correctamente."}), 200
+    except Exception as e:
+        logger.error("Error borrando conversación %s: %s", conversation_id, e)
+        raise AppError("Error interno al borrar la conversación.", 500) from e
