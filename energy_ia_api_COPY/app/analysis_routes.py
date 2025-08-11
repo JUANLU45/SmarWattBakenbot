@@ -5,15 +5,17 @@ import logging
 from flask import Blueprint, request, jsonify
 from utils.error_handlers import AppError
 from app.services.vertex_ai_service import VertexAIService
+from energy_ia_api_COPY.utils.security import internal_auth_required
 
 logger = logging.getLogger(__name__)
 analysis_bp = Blueprint("analysis_routes", __name__)
 
 @analysis_bp.route("/api/v1/analysis/sentiment", methods=["POST"])
+@internal_auth_required
 def analyze_sentiment_route():
     """
-    Endpoint para realizar el análisis de sentimiento de un texto utilizando Vertex AI.
-    Este es un endpoint interno llamado por otros microservicios.
+    Endpoint interno y seguro para realizar el análisis de sentimiento de un texto.
+    Solo accesible por otros servicios de Google Cloud con un token de ID válido.
     """
     try:
         data = request.get_json()
@@ -21,14 +23,11 @@ def analyze_sentiment_route():
             raise AppError("El campo 'message_text' es requerido.", 400)
 
         message_text = data["message_text"]
-        user_id = data.get("user_id") # Opcional, para logging y contexto futuro
+        user_id = data.get("user_id")
 
-        logger.info(f"Recibida solicitud de análisis de sentimiento para el usuario: {user_id or 'desconocido'}")
+        logger.info(f"Recibida solicitud de análisis de sentimiento interna para el usuario: {user_id or 'desconocido'}")
 
-        # Instanciar el servicio de Vertex AI
         vertex_service = VertexAIService()
-
-        # Llamar al método de análisis de sentimiento real
         sentiment_analysis = vertex_service.analyze_text_sentiment(message_text)
 
         return jsonify({
