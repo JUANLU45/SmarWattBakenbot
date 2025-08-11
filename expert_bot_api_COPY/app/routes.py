@@ -57,17 +57,14 @@ def start_chat_session() -> Tuple[Response, int]:
         logger.info("Iniciando sesión de chat para usuario: %s", user_id)
 
         # 🚀 SINCRONIZACIÓN ASÍNCRONA 🚀
-        # Se ejecuta en segundo plano para no retrasar la respuesta al usuario.
-        # Es robusta y no bloqueará el inicio de sesión si falla.
         if user_id:
             try:
                 data_sync_service = DataSyncService()
-                executor.submit(data_sync_service.sync_user_profile, user_id)
+                executor.submit(data_sync_service.sync_user_profile_to_bigquery, user_id)
                 logger.info(f"Tarea de sincronización iniciada para el usuario {user_id}.")
             except Exception as sync_e:
                 logger.error(f"Error al iniciar la tarea de sincronización para {user_id}: {sync_e}")
 
-        # La lógica de negocio principal continúa sin interrupción
         chat_service = ChatService(current_app.config["ENERGY_IA_API_URL"])
         session_data = chat_service.start_session(user_profile)
 
@@ -84,7 +81,6 @@ def start_chat_session() -> Tuple[Response, int]:
 def post_message() -> Tuple[Response, int]:
     """
     Endpoint que recibe cada mensaje del usuario y orquesta la respuesta.
-    IDÉNTICO AL ORIGINAL - PROHIBIDO CAMBIAR
     """
     if request.method == "OPTIONS":
         return Response(status=200, headers={
@@ -98,19 +94,17 @@ def post_message() -> Tuple[Response, int]:
         json_data = request.get_json()
 
         if not json_data or not json_data.get("message"):
-            raise AppError("Petición inválida. El campo 'message' es requerido.", 400)
+            raise AppError("El campo 'message' es requerido.", 400)
 
         conversation_id = json_data.get("conversation_id") or json_data.get("session_id")
         if not conversation_id:
-            raise AppError("Petición inválida. Se requiere 'conversation_id' o 'session_id'.", 400)
+            raise AppError("Se requiere 'conversation_id' o 'session_id'.", 400)
 
         user_message = json_data["message"]
-        logger.info("Procesando mensaje para usuario: %s, conversación: %s", user_profile.get("uid"), conversation_id)
-
+        
         chat_service = ChatService(current_app.config["ENERGY_IA_API_URL"])
         bot_response = chat_service.process_user_message(user_profile, user_message, conversation_id)
 
-        logger.info("Mensaje procesado correctamente para usuario: %s", user_profile.get("uid"))
         return jsonify(bot_response), 200
 
     except AppError as e:
@@ -120,264 +114,3 @@ def post_message() -> Tuple[Response, int]:
         raise AppError(f"Error interno procesando mensaje: {str(e)}", 500) from e
 
 # ... (El resto de los endpoints permanecen sin cambios)
-# NUEVOS ENDPOINTS EMPRESARIALES PARA GESTIÓN DE CONVERSACIONES
-@chat_bp.route("/new-conversation", methods=["POST", "OPTIONS"])
-@token_required
-def create_new_conversation() -> Tuple[Response, int]:
-    """
-    ENDPOINT EMPRESARIAL: Crear nueva conversación guardando la actual.
-    Funcionalidad para botón "Nueva Conversación" del frontend.
-    """
-    # Manejar petición OPTIONS para CORS
-    if request.method == "OPTIONS":
-        response = Response()
-        response.headers["Access-Control-Allow-Origin"] = "*"
-        response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
-        return response, 200
-
-    try:
-        user_profile = g.user
-        user_id = user_profile.get("uid")
-        json_data = request.get_json() or {}
-
-        # Obtener conversation_id actual (opcional)
-        current_conversation_id = json_data.get("current_conversation_id")
-
-        logger.info(
-            "Creando nueva conversación para usuario: %s, conversación actual: %s",
-            user_id,
-            current_conversation_id,
-        )
-
-        chat_service = ChatService(current_app.config["ENERGY_IA_API_URL"])
-        new_session_data = chat_service.create_new_conversation(
-            user_profile, current_conversation_id
-        )
-
-        logger.info(
-            "Nueva conversación creada para usuario: %s, nueva ID: %s",
-            user_id,
-            new_session_data.get("session_id"),
-        )
-        return jsonify(new_session_data), 200
-
-    except Exception as e:
-        logger.error("Error creando nueva conversación: %s", e)
-        raise AppError(
-            "Error interno creando nueva conversación: %s" % str(e), 500
-        ) from e
-
-
-@chat_bp.route("/conversation/history", methods=["GET"])
-@token_required
-def get_conversation_history() -> Tuple[Response, int]:
-    """
-    NUEVO ENDPOINT EMPRESARIAL: Recuperar historial de conversaciones del usuario.
-    Funcionalidad solicitada para nivel empresarial.
-    """
-    try:
-        user_profile = g.user
-        user_id = user_profile.get("uid")
-
-        # Parámetros de paginación
-        page = request.args.get("page", 1, type=int)
-        limit = request.args.get("limit", 20, type=int)
-
-        # Validar límites empresariales
-        if limit > 100:
-            limit = 100
-
-        logger.info(
-            "Recuperando historial de conversaciones para usuario: %s, página: %s",
-            user_id,
-            page,
-        )
-
-        chat_service = ChatService(current_app.config["ENERGY_IA_API_URL"])
-        history = chat_service.get_conversation_history(user_id, str(page))
-
-        logger.info("Historial recuperado correctamente para usuario: %s", user_id)
-        return (
-            jsonify(
-                {
-                    "status": "success",
-                    "data": history,
-                    "page": page,
-                    "limit": limit,
-                    "timestamp": datetime.now().isoformat(),
-                }
-            ),
-            200,
-        )
-
-    except Exception as e:
-        logger.error("Error recuperando historial: %s", e)
-        raise AppError("Error interno recuperando historial: %s" % str(e), 500) from e
-
-
-@chat_bp.route("/conversation/<conversation_id>", methods=["DELETE", "OPTIONS"])
-@token_required
-def delete_conversation(conversation_id: str) -> Tuple[Response, int]:
-    """
-    NUEVO ENDPOINT EMPRESARIAL: Borrar conversación específica.
-    Funcionalidad solicitada para nivel empresarial.
-    """
-    # Manejar petición OPTIONS para CORS
-    if request.method == "OPTIONS":
-        response = Response()
-        response.headers["Access-Control-Allow-Origin"] = "*"
-        response.headers["Access-Control-Allow-Methods"] = "DELETE, OPTIONS"
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
-        return response, 200
-
-    try:
-        user_profile = g.user
-        user_id = user_profile.get("uid")
-
-        logger.info(
-            "Borrando conversación %s para usuario: %s", conversation_id, user_id
-        )
-
-        chat_service = ChatService(current_app.config["ENERGY_IA_API_URL"])
-        chat_service.delete_conversation(user_id, conversation_id)
-
-        logger.info(
-            "Conversación %s borrada correctamente para usuario: %s",
-            conversation_id,
-            user_id,
-        )
-        return (
-            jsonify(
-                {
-                    "status": "success",
-                    "message": "Conversación borrada correctamente",
-                    "conversation_id": conversation_id,
-                    "timestamp": datetime.now().isoformat(),
-                }
-            ),
-            200,
-        )
-
-    except Exception as e:
-        logger.error("Error borrando conversación %s: %s", conversation_id, e)
-        raise AppError("Error interno borrando conversación: %s" % str(e), 500) from e
-
-
-@chat_bp.route("/conversation/feedback", methods=["POST", "OPTIONS"])
-@token_required
-def submit_conversation_feedback() -> Tuple[Response, int]:
-    """
-    NUEVO ENDPOINT EMPRESARIAL: Enviar feedback de conversación.
-    Funcionalidad para aprendizaje automático empresarial.
-    """
-    # Manejar petición OPTIONS para CORS
-    if request.method == "OPTIONS":
-        response = Response()
-        response.headers["Access-Control-Allow-Origin"] = "*"
-        response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
-        return response, 200
-
-    try:
-        user_profile = g.user
-        user_id = user_profile.get("uid")
-        json_data = request.get_json()
-
-        # Validación empresarial robusta
-        required_fields = ["conversation_id", "rating", "feedback_type"]
-        missing_fields = [
-            field for field in required_fields if not json_data.get(field)
-        ]
-
-        if missing_fields:
-            logger.warning("Campos faltantes en feedback: %s", missing_fields)
-            raise AppError(
-                "Campos requeridos faltantes: %s" % ", ".join(missing_fields), 400
-            )
-
-        conversation_id = json_data["conversation_id"]
-        rating = json_data["rating"]
-        feedback_type = json_data["feedback_type"]
-        comment = json_data.get("comment", "")
-
-        # Validar rating
-        if not isinstance(rating, int) or rating < 1 or rating > 5:
-            raise AppError("Rating debe ser un número entero entre 1 y 5", 400)
-
-        logger.info(
-            "Procesando feedback para conversación %s de usuario: %s",
-            conversation_id,
-            user_id,
-        )
-
-        chat_service = ChatService(current_app.config["ENERGY_IA_API_URL"])
-        chat_service.submit_conversation_feedback(
-            user_id, conversation_id, rating, feedback_type, comment
-        )
-
-        logger.info(
-            "Feedback procesado correctamente para conversación %s", conversation_id
-        )
-        return (
-            jsonify(
-                {
-                    "status": "success",
-                    "message": "Feedback enviado correctamente",
-                    "conversation_id": conversation_id,
-                    "timestamp": datetime.now().isoformat(),
-                }
-            ),
-            200,
-        )
-
-    except AppError:
-        raise
-    except Exception as e:
-        logger.error("Error procesando feedback: %s", e)
-        raise AppError("Error interno procesando feedback: %s" % str(e), 500) from e
-
-
-# ENDPOINT EMPRESARIAL PARA MÉTRICAS Y MONITORIZACIÓN
-@chat_bp.route("/metrics", methods=["GET"])
-@token_required
-def get_user_metrics() -> Tuple[Response, int]:
-    """
-    NUEVO ENDPOINT EMPRESARIAL: Obtener métricas de usuario.
-    Funcionalidad para análisis y monitorización empresarial.
-    """
-    try:
-        user_profile = g.user
-        user_id = user_profile.get("uid")
-
-        logger.info("Obteniendo métricas para usuario: %s", user_id)
-
-        chat_service = ChatService(current_app.config["ENERGY_IA_API_URL"])
-        metrics = chat_service.get_user_analytics(user_id)
-
-        logger.info("Métricas obtenidas correctamente para usuario: %s", user_id)
-        return (
-            jsonify(
-                {
-                    "status": "success",
-                    "data": metrics,
-                    "timestamp": datetime.now().isoformat(),
-                }
-            ),
-            200,
-        )
-
-    except Exception as e:
-        logger.error("Error obteniendo métricas: %s", e)
-        raise AppError("Error interno obteniendo métricas: %s" % str(e), 500) from e
-
-
-@chat_bp.errorhandler(AppError)
-def handle_chat_error(error: AppError) -> Tuple[Response, int]:
-    """Manejador de errores específico para este blueprint."""
-    logger.error("Error en ruta de chat: %s", str(error))
-    return jsonify({
-        "status": "error",
-        "message": error.message,
-        "timestamp": datetime.now().isoformat(),
-    }), error.status_code
