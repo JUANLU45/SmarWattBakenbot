@@ -1,3 +1,4 @@
+# .github/workflows/deploy-energy-ia-api.yml
 name: Deploy Energy IA API to Cloud Run
 
 on:
@@ -6,18 +7,22 @@ on:
       - master
     paths:
       - 'energy_ia_api_COPY/**'
+      - '.github/workflows/deploy-energy-ia-api.yml'
 
 jobs:
   deploy:
     name: Deploy Energy IA API
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Authenticate to Google Cloud
-      uses: 'google-github-actions/auth@v1'
+      uses: 'google-github-actions/auth@v2'
       with:
         credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
@@ -33,5 +38,5 @@ jobs:
           --cpu="2" \\
           --max-instances="5" \\
           --timeout="900s" \\
-          --set-secrets='${{ secrets.ENERGY_IA_API_SECRETS }}' \\
-          --set-env-vars='${{ secrets.ENERGY_IA_API_ENV_VARS }}'
+          --set-secrets="${{ secrets.GCLOUD_RUN_SECRETS }}" \\
+          --set-env-vars="FLASK_CONFIG=production,GCP_PROJECT_ID=smatwatt,GCP_LOCATION=eu,EXPERT_BOT_API_URL=${{ secrets.EXPERT_BOT_API_URL }},BQ_DATASET_ID=smartwatt_data,TARIFF_RECOMMENDER_ENDPOINT_ID=1334169399375953920,BQ_MARKET_TARIFFS_TABLE_ID=market_electricity_tariffs,BQ_RECOMMENDATION_LOG_TABLE_ID=recommendation_log,BQ_USER_PROFILES_TABLE_ID=user_profiles_enriched,BQ_CONSUMPTION_LOG_TABLE_ID=consumption_log,BQ_UPLOADED_DOCS_TABLE_ID=uploaded_documents_log,BQ_CONVERSATIONS_TABLE_ID=conversations_log,BQ_FEEDBACK_TABLE_ID=feedback_log,PUBSUB_CONSUMPTION_TOPIC_ID=consumption-topic,GCS_INVOICE_BUCKET=smatwatt-model-exports-smatwatt-final,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},OPENWEATHER_API_KEY=${{ secrets.OPENWEATHER_API_KEY }},CORS_ORIGINS=https://smarwatt.com,SECRET_KEY_IA=${{ secrets.SECRET_KEY_IA }}"
