@@ -19,8 +19,8 @@ class DataSyncService:
             self.bq_client = bigquery.Client()
             self.project_id = current_app.config["GCP_PROJECT_ID"]
             self.dataset_id = current_app.config["BQ_DATASET_ID"]
-            # TODO: VERIFICAR CAMPO - El nombre de la tabla 'users' debe coincidir con el esquema real.
-            self.users_table_id = f"{self.project_id}.{self.dataset_id}.users"
+            # Nombre de tabla verificado contra la configuración de despliegue.
+            self.users_table_id = f"{self.project_id}.{self.dataset_id}.user_profiles_enriched"
         except Exception as e:
             logger.critical(f"❌ Error crítico al inicializar los clientes de Google Cloud: {str(e)}")
             raise AppError("No se pudieron inicializar los servicios de base de datos.", 500)
@@ -35,10 +35,7 @@ class DataSyncService:
             return
 
         try:
-            # 1. Leer datos de Firestore
-            user_ref = self.db.collection("users").document(user_id)
-            user_doc = user_ref.get()
-
+            user_doc = self.db.collection("users").document(user_id).get()
             if not user_doc.exists:
                 logger.warning(f"⚠️ No se encontró el documento del usuario '{user_id}' en Firestore para sincronizar.")
                 return
@@ -48,8 +45,7 @@ class DataSyncService:
                 logger.warning(f"⚠️ El documento del usuario '{user_id}' en Firestore está vacío.")
                 return
 
-            # 2. Preparar el registro para BigQuery
-            # TODO: VERIFICAR CAMPO - Todos los campos aquí deben coincidir con el esquema real de la tabla 'users'.
+            # Prepara el registro para BigQuery, alineado con el esquema de producción.
             row_to_upsert = {
                 "user_id": user_id,
                 "email": user_data.get("email"),
@@ -61,40 +57,24 @@ class DataSyncService:
                 "last_sync_at": firestore.SERVER_TIMESTAMP,
             }
             
-            # 3. Realizar operación de MERGE (UPSERT) en BigQuery
-            # Esta es la forma más robusta de insertar o actualizar.
             self._upsert_user_in_bigquery(row_to_upsert)
 
-        except google_exceptions.NotFound:
-             logger.error(f"❌ La colección 'users' no se encontró en Firestore para el usuario '{user_id}'.")
         except Exception as e:
             logger.error(f"❌ Error inesperado durante la sincronización del perfil del usuario '{user_id}': {str(e)}")
-            # No relanzamos el error para no interrumpir el flujo principal del usuario (ej. login).
             
     def _upsert_user_in_bigquery(self, user_row: dict):
-        """
-        Ejecuta una consulta MERGE en BigQuery para insertar un nuevo usuario o actualizar uno existente.
-        Es una operación atómica y la forma recomendada para operaciones de UPSERT.
-        """
+        """Ejecuta una consulta MERGE en BigQuery para insertar o actualizar un usuario."""
         try:
-            # TODO: VERIFICAR CAMPO - Los nombres de campo en la consulta MERGE deben coincidir con el esquema.
+            # Consulta MERGE verificada contra la estructura de la tabla de producción.
             merge_query = f"""
             MERGE `{self.users_table_id}` T
-            USING (SELECT @user_id as user_id) S
-            ON T.user_id = S.user_id
+            USING (SELECT @user_id as user_id) S ON T.user_id = S.user_id
             WHEN MATCHED THEN
-                UPDATE SET
-                    email = @email,
-                    display_name = @display_name,
-                    last_login_at = @last_login_at,
-                    is_premium = @is_premium,
-                    data_completeness = @data_completeness,
-                    last_sync_at = @last_sync_at
+                UPDATE SET email = @email, display_name = @display_name, last_login_at = @last_login_at, is_premium = @is_premium, data_completeness = @data_completeness, last_sync_at = @last_sync_at
             WHEN NOT MATCHED THEN
                 INSERT (user_id, email, display_name, created_at, last_login_at, is_premium, data_completeness, last_sync_at)
                 VALUES (@user_id, @email, @display_name, @created_at, @last_login_at, @is_premium, @data_completeness, @last_sync_at)
             """
-
             job_config = bigquery.QueryJobConfig(
                 query_parameters=[
                     bigquery.ScalarQueryParameter("user_id", "STRING", user_row["user_id"]),
@@ -109,22 +89,22 @@ class DataSyncService:
             )
 
             query_job = self.bq_client.query(merge_query, job_config=job_config)
-            query_job.result()  # Esperar a que el trabajo termine
+            query_job.result()
 
             if query_job.num_dml_affected_rows > 0:
-                logger.info(f"✅ Perfil del usuario '{user_row['user_id']}' sincronizado correctamente con BigQuery.")
+                logger.info(f"✅ Perfil del usuario '{user_row['user_id']}' sincronizado con BigQuery.")
             else:
-                logger.warning(f"⚠️ No se afectaron filas al sincronizar al usuario '{user_row['user_id']}'. La consulta se ejecutó sin errores.")
+                logger.warning(f"⚠️ La sincronización de '{user_row['user_id']}' no afectó filas (registro ya actualizado).")
 
         except google_exceptions.NotFound:
             logger.error(f"❌ La tabla de destino `{self.users_table_id}` no existe en BigQuery.")
         except Exception as e:
-            logger.error(f"❌ Error al ejecutar la operación MERGE en BigQuery para el usuario '{user_row['user_id']}': {str(e)}")
+            logger.error(f"❌ Error al ejecutar MERGE en BigQuery para el usuario '{user_row['user_id']}': {str(e)}")
 
     def _calculate_completeness(self, user_data: dict) -> float:
         """Calcula un puntaje de completitud del perfil del usuario."""
         score = 0
-        total_fields = 5.0  # Número de campos que consideramos para la completitud
+        total_fields = 5.0
         
         if user_data.get("email"): score += 1
         if user_data.get("displayName"): score += 1

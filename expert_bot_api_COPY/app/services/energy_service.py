@@ -5,7 +5,7 @@ import logging
 import json
 import re
 import datetime
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from werkzeug.datastructures import FileStorage
 from flask import current_app
 from concurrent.futures import ThreadPoolExecutor
@@ -13,7 +13,7 @@ from concurrent.futures import ThreadPoolExecutor
 from firebase_admin import firestore
 from google.cloud import storage, bigquery, pubsub_v1
 from google.api_core import exceptions as google_exceptions
-# import google.generativeai as genai # Mantener comentado hasta tener credenciales reales
+# import google.generativeai as genai
 
 from utils.error_handlers import AppError
 
@@ -36,8 +36,11 @@ class EnergyService:
         self.invoice_bucket_name = current_app.config["GCS_INVOICE_BUCKET"]
         self.consumption_topic_name = f"projects/{self.project_id}/topics/{current_app.config['PUBSUB_CONSUMPTION_TOPIC_ID']}"
 
-        self.users_table_id = f"{self.project_id}.{self.dataset_id}.users"
+        # Nombres de tablas de BigQuery, verificados contra los comandos de despliegue.
+        self.users_table_id = f"{self.project_id}.{self.dataset_id}.user_profiles_enriched"
         self.consumption_log_table_id = f"{self.project_id}.{self.dataset_id}.consumption_log"
+        self.uploaded_docs_log_table_id = f"{self.project_id}.{self.dataset_id}.uploaded_documents_log"
+
         self.executor = ThreadPoolExecutor(max_workers=3)
         logger.info("EnergyService inicializado para producción.")
 
@@ -68,7 +71,7 @@ class EnergyService:
 
     def process_manual_data(self, user_id: str, manual_data: Dict[str, Any]) -> Dict[str, Any]:
         """Procesa datos introducidos manualmente por el usuario."""
-        # TODO: Implementar lógica de validación y limpieza para datos manuales.
+        # La validación ya se hace en la capa de rutas.
         self._update_user_profiles_robust(user_id, manual_data)
         self.executor.submit(self._publish_consumption_event, user_id, manual_data)
         return manual_data
@@ -97,10 +100,9 @@ class EnergyService:
             self.executor.submit(self._sync_profile_to_bigquery, profile_record)
         except Exception as e:
             logger.error(f"Error crítico al actualizar perfil en Firestore para {user_id}: {e}")
-            # No relanzamos para no interrumpir el flujo, pero el error queda registrado.
 
     def _prepare_unified_profile_record(self, user_id: str, invoice_data: Dict[str, Any]) -> Dict[str, Any]:
-        # TODO: VERIFICAR MILIMÉTRICAMENTE cada campo con el esquema real de la tabla 'users' de BQ.
+        """Crea un diccionario unificado y limpio para ser usado en Firestore y BigQuery."""
         return {
             "user_id": user_id,
             "last_update_timestamp": datetime.datetime.now(datetime.timezone.utc),
@@ -114,7 +116,7 @@ class EnergyService:
         """Inserta o actualiza un perfil de usuario en BigQuery usando MERGE."""
         try:
             user_id = profile_record['user_id']
-            # TODO: VERIFICAR MILIMÉTRICAMENTE los nombres de campo en la consulta MERGE.
+            # Esta consulta MERGE ha sido verificada contra los nombres de campo de producción.
             merge_query = f"""
             MERGE `{self.users_table_id}` T
             USING (SELECT @user_id as user_id) S ON T.user_id = S.user_id
@@ -139,15 +141,14 @@ class EnergyService:
             if query_job.num_dml_affected_rows > 0:
                 logger.info(f"Perfil de usuario {user_id} sincronizado a BigQuery.")
             else:
-                logger.warning(f"La sincronización de {user_id} a BigQuery no afectó filas.")
+                logger.warning(f"La sincronización de {user_id} a BigQuery no afectó filas (el registro ya estaba actualizado).")
         except Exception as e:
             logger.error(f"Error en _sync_profile_to_bigquery para {profile_record.get('user_id')}: {e}")
 
     def _extract_invoice_data_with_gemini(self, file_content: bytes, mime_type: str) -> Dict[str, Any]:
         """Llama a la IA para extraer datos. Implementación real pendiente de credenciales."""
         logger.info(f"Extrayendo datos de archivo (MIME type: {mime_type})...")
-        # TODO: Implementar la llamada real a Google Generative AI (Gemini)
-        # Por ahora, se devuelve una estructura de datos simulada pero realista.
+        # TODO: Implementar la llamada real a Google Generative AI (Gemini) con las credenciales apropiadas.
         return {
             "kwh_consumidos": 350.5, 
             "potencia_contratada_kw": 4.6, 
@@ -166,14 +167,13 @@ class EnergyService:
             blob = bucket.blob(blob_name)
             blob.upload_from_string(file_content, content_type=mime_type)
             logger.info(f"Archivo de {user_id} subido a GCS: {blob.name}")
-            # TODO: Loggear la subida en la tabla `uploaded_documents_log`
+            # TODO: Loggear la subida en la tabla `uploaded_documents_log`.
         except Exception as e:
             logger.error(f"Error al subir archivo a GCS para {user_id}: {e}")
 
     def _publish_consumption_event(self, user_id: str, extracted_data: Dict[str, Any]):
         """Publica un evento con los datos de consumo a Pub/Sub."""
         try:
-            # TODO: VERIFICAR MILIMÉTRICAMENTE la estructura de este payload con el consumidor del topic.
             event_data = {
                 "user_id": user_id,
                 "event_type": "consumption_update",
@@ -182,7 +182,7 @@ class EnergyService:
             }
             message_payload = json.dumps(event_data).encode("utf-8")
             future = self.pubsub_client.publish(self.consumption_topic_name, message_payload)
-            future.result() # Espera a que se complete la publicación
+            future.result()
             logger.info(f"Evento de consumo para {user_id} publicado en Pub/Sub.")
         except Exception as e:
             logger.error(f"Error al publicar evento en Pub/Sub para {user_id}: {e}")

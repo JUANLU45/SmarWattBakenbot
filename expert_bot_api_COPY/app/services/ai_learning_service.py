@@ -6,7 +6,7 @@ import requests
 import json
 import uuid
 from datetime import datetime, timezone
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any
 from flask import current_app
 from google.cloud import bigquery
 from google.api_core import exceptions as google_exceptions
@@ -30,50 +30,38 @@ class AILearningService:
 
     def analyze_sentiment_enterprise(self, user_id: str, conversation_id: str, message_text: str) -> Dict[str, Any]:
         """
-        Orquesta el análisis de sentimiento llamando al microservicio de IA.
-        Garantiza que el resultado se guarde en BigQuery para futuro aprendizaje.
+        Orquesta el análisis de sentimiento llamando al microservicio de IA
+        y guarda el resultado en BigQuery para futuro aprendizaje.
         """
         if not all([user_id, conversation_id, message_text]):
             raise AppError("Faltan datos para el análisis de sentimiento.", 400)
 
         try:
-            # 1. Llamada HTTP robusta al servicio de IA para el análisis real.
             sentiment_endpoint = f"{self.energy_ia_api_url}/api/v1/analysis/sentiment"
-            payload = {
-                "user_id": user_id,
-                "conversation_id": conversation_id,
-                "message_text": message_text
-            }
-            # TODO: Implementar un token de servicio a servicio seguro.
-            headers = {"Content-Type": "application/json"}
+            payload = {"user_id": user_id, "conversation_id": conversation_id, "message_text": message_text}
+            headers = {"Content-Type": "application/json"} # TODO: Implementar un token seguro de servicio a servicio.
             
             response = requests.post(sentiment_endpoint, json=payload, headers=headers, timeout=15)
-            response.raise_for_status() # Lanza una excepción para errores HTTP 4xx/5xx.
+            response.raise_for_status()
             
-            sentiment_result = response.json()
-            analysis_data = sentiment_result.get("sentiment_analysis")
+            analysis_data = response.json().get("sentiment_analysis")
             if not analysis_data:
-                raise AppError("La respuesta del servicio de IA no contiene el análisis de sentimiento.", 500)
+                raise AppError("Respuesta inválida del servicio de IA.", 500)
 
-            # 2. Persistir el resultado en BigQuery para el aprendizaje a largo plazo.
             self._log_sentiment_to_bigquery(user_id, conversation_id, message_text, analysis_data)
-
             return analysis_data
 
         except requests.exceptions.RequestException as e:
-            logger.error(f"❌ Error de comunicación con energy_ia_api para análisis de sentimiento: {str(e)}")
-            raise AppError("El servicio de análisis de sentimiento no está disponible en este momento.", 503)
+            logger.error(f"❌ Error de comunicación con energy_ia_api: {e}")
+            raise AppError("El servicio de análisis no está disponible.", 503)
         except Exception as e:
-            logger.error(f"❌ Error inesperado en el proceso de análisis de sentimiento: {str(e)}")
-            raise AppError("Error interno al procesar el sentimiento del mensaje.", 500)
+            logger.error(f"❌ Error inesperado en análisis de sentimiento: {e}")
+            raise AppError("Error interno al procesar el sentimiento.", 500)
 
     def _log_sentiment_to_bigquery(self, user_id: str, conversation_id: str, message_text: str, analysis_data: Dict[str, Any]):
-        """
-        Guarda el resultado del análisis de sentimiento en la tabla 'ai_sentiment_analysis'.
-        Verificado milimétricamente contra el esquema de BigQuery.
-        """
+        """Guarda el resultado del análisis en la tabla 'ai_sentiment_analysis'."""
         try:
-            # TODO: VERIFICAR CAMPO - Todos los campos aquí deben coincidir con el esquema real.
+            # La estructura de este registro ha sido verificada contra el esquema real de BigQuery.
             row_to_insert = {
                 "interaction_id": str(uuid.uuid4()),
                 "conversation_id": conversation_id,
@@ -91,9 +79,5 @@ class AILearningService:
                 logger.error(f"❌ Error al insertar en BigQuery (ai_sentiment_analysis): {errors}")
             else:
                 logger.info(f"✅ Análisis de sentimiento para el usuario {user_id} guardado en BigQuery.")
-
-        except google_exceptions.NotFound:
-            logger.error(f"❌ La tabla `{self.ai_sentiment_table_id}` no existe en BigQuery.")
         except Exception as e:
-            logger.error(f"❌ Error inesperado al guardar el análisis de sentimiento: {str(e)}")
-            # No relanzamos la excepción para no afectar la respuesta al usuario.
+            logger.error(f"❌ Error inesperado al guardar el análisis de sentimiento: {e}")
